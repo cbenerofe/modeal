@@ -1,3 +1,20 @@
+var scenarios = [
+  {
+    "id":1,
+    "name": "something",
+    "extensions":[
+      {
+        "lease_id":1,
+        "extension_id":1
+      },
+      {
+        "lease_id":1,
+        "extension_id":2
+      }
+    ]
+  }
+]
+
 var lease_data = [
 {
   "id":1,
@@ -10,7 +27,7 @@ var lease_data = [
     "lease-end":"10/30/17",
     "periods" : [
       {
-      "start": "10/1/2016",
+      "start": "11/1/2016",
       "end":"10/30/2017",
       "base_rent":8.93,
       "re_taxes": "net",
@@ -18,9 +35,24 @@ var lease_data = [
       "mgmt_fee":"net"
       }
     ],
-    "renewal": {
-      
-    }
+    "extensions": [
+      {
+      "start": "11/1/2017",
+      "end":"10/30/2019",
+      "base_rent":9.20,
+      "re_taxes": "net",
+      "cam":"net",
+      "mgmt_fee":"net"
+      },
+      {
+      "start": "11/1/2019",
+      "end":"10/30/2021",
+      "base_rent":9.48,
+      "re_taxes": "net",
+      "cam":"net",
+      "mgmt_fee":"net"
+      }
+    ]
   }
 },
 {
