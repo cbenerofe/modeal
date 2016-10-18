@@ -1,0 +1,21 @@
+doctype html
+html(ng-app="myApp")
+  head
+    title modeal
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js")
+    link(href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css", rel="stylesheet")
+    link(href="css/style.css", rel="stylesheet")
+    link(href="css/media.css", rel="stylesheet")
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js')
+    script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js')
+    script(src="js/data.json")
+    script(src="js/tenants.js")
+
+  body
+    .block(ng-controller="myController")
+      .block(ng-repeat="lease in leases")
+        .block
+          | {{lease.tenant}}
+          | {{get_rent(lease,"6/16")}}
+
+
