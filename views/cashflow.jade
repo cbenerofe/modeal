@@ -28,11 +28,11 @@ html(ng-app="myApp")
             td(ng-repeat="year in years" ng-class="{white: ($index % 2) }")
               .row
                 .col-xs-4
-                  {{ get_tenants_rent($parent.lease.id, year.start_date.getFullYear(),'base') }}
+                  | {{ get_tenants_rent($parent.lease.id, year.start_date.getFullYear(),'base') }}
                 .col-xs-4
-                  {{ get_tenants_rent($parent.lease.id, year.start_date.getFullYear(),'retax') }}
+                  | {{ get_tenants_rent($parent.lease.id, year.start_date.getFullYear(),'retax') }}
                 .col-xs-4
-                  {{ get_tenants_rent($parent.lease.id, year.start_date.getFullYear(),'cam') }}
+                  | {{ get_tenants_rent($parent.lease.id, year.start_date.getFullYear(),'cam') }}
         tfoot
           tr
             th total
