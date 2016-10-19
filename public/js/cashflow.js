@@ -29,48 +29,59 @@ myApp.controller('myController', ['$scope',function($scope) {
     return period
   }
 
+  get_charge = function(space,periods,month,charge) {
+    
+    if (periods == undefined){
+      return 0
+    }
+    
+    period = get_period(periods,month)
+    amount = 0
+    switch (charge) {
+      case 'base':
+        //console.log(period.base_rent)
+        if (period.base_rent != undefined) {
+          //console.log(period.base_rent)
+          amount += Math.round(space.sqft * (period.base_rent/12))
+        }
+        break;
+      case 'retax':
+        if (period.re_taxes == 'net') {
+          //console.log(lease.space.pro_rata * retaxes)
+          amount += Math.round((space.pro_rata * retaxes)/12)
+        }
+        break;
+      case 'cam':
+        if (period.cam == 'net') {
+          amount += Math.round((space.pro_rata * cam)/12)
+        }
+        break;
+    }
+    return amount
+  }
+
   $scope.get_tenants_rent = function(lease_id,year,charge) {
     // charge = base, retax, cam, mgt,
     //find lease
     //console.log(JSON.stringify(lease_id) + " " + year)
     lease = $scope.leases.filter(function(v) { return v.id === lease_id; })[0];
     //console.log(JSON.stringify(lease))
-    yearly_charge = 0;
+    yearly = 0;
     
     for (m=1;m<=12;m++) {
       month = new Date(year,m,1)
-      monthly_charge = 0;
-      period = get_period(lease.space.periods,month)
-      
-      switch (charge) {
-        case 'base':
-          //console.log(period.base_rent)
-          if (period.base_rent != undefined) {
-            //console.log(period.base_rent)
-            monthly_charge = Math.round(lease.space.sqft * (period.base_rent/12))
-            yearly_charge += monthly_charge
-          }
-          break;
-        case 'retax':
-          if (period.re_taxes == 'net') {
-            //console.log(lease.space.pro_rata * retaxes)
-            monthly_charge = Math.round((lease.space.pro_rata * retaxes)/12)
-            yearly_charge += monthly_charge
-          }
-          break;
-        case 'cam':
-          if (period.cam == 'net') {
-            monthly_charge = Math.round((lease.space.pro_rata * cam)/12)
-            yearly_charge += monthly_charge
-          }
-          break;
-      }
-      
+      monthly = 0;
+      monthly += get_charge(lease.space,lease.space.periods,month,charge)
+      monthly += get_charge(lease.space,lease.space.extensions,month,charge)
+      yearly += monthly
     }
     
-    return yearly_charge
+    return yearly
     //console.log(JSON.stringify(period))
   }   
+  
+  
+  
   
   $scope.get_years_rent = function(year,charge) {
     //find all leases
@@ -78,7 +89,6 @@ myApp.controller('myController', ['$scope',function($scope) {
     $scope.leases.forEach(function(l) {
       //console.log(JSON.stringify(l.id) + " " + year)
       rent = $scope.get_tenants_rent(l.id,year.getFullYear(),charge)
-      //console.log(rent)
       total += rent
     })
 

@@ -82,8 +82,24 @@ var lease_data = [
       "mgmt_fee":"net"
       }
     ],
-    "renewal": {
-    }
+    "extensions": [
+      {
+      "start": "1/1/2019",
+      "end":"12/31/2023",
+      "base_rent":9.50,
+      "re_taxes": "net",
+      "cam":"net",
+      "mgmt_fee":"net"
+      },
+      {
+      "start": "1/1/2024",
+      "end":"12/31/2028",
+      "base_rent":10.50,
+      "re_taxes": "net",
+      "cam":"net",
+      "mgmt_fee":"net"
+      }
+    ]
   }
 },
 {
@@ -181,6 +197,9 @@ var lease_data = [
       "cam":"21% of untilities",
       "mgmt_fee":"none"
       }
+    ],
+    "extensions": [
+      
     ]
   }
 },
@@ -303,6 +322,16 @@ var lease_data = [
       "cam":"net",
       "mgmt_fee":"net"
       }
+    ],
+    "extensions": [
+      {
+      "start": "4/30/2019",
+      "end":"3/31/2024",
+      "base_rent":14.72,
+      "re_taxes": "net",
+      "cam":"net",
+      "mgmt_fee":"net"
+      }
     ]
   }
 },
@@ -356,6 +385,16 @@ var lease_data = [
       "cam":"net",
       "mgmt_fee":"net"
       }
+    ],
+    "extensions": [
+      {
+      "start": "11/01/2019",
+      "end":"10/31/2023",
+      "base_rent":12.00,
+      "re_taxes": "net",
+      "cam":"net",
+      "mgmt_fee":"net"
+      }
     ]
   }
 },
@@ -364,7 +403,7 @@ var lease_data = [
   "tenant":"content critical",
   "space": {
     "id":"227-105/106",
-    "sqft": 20786,
+    "sqft": 10000,
     "pro_rata": .0403,
     "lease-start":"6/01/2010",
     "lease-end":"5/31/2020",
@@ -404,6 +443,16 @@ var lease_data = [
       {
       "start": "6/01/2019",
       "end":"5/31/2020",
+      "base_rent":12.49,
+      "re_taxes": "net",
+      "cam":"net",
+      "mgmt_fee":"net"
+      }
+    ],
+    "extensions": [
+      {
+      "start": "6/01/2020",
+      "end":"5/31/2025",
       "base_rent":12.49,
       "re_taxes": "net",
       "cam":"net",
@@ -481,6 +530,16 @@ var lease_data = [
       {
       "start": "11/01/2023",
       "end":"10/31/2024",
+      "base_rent":11.68,
+      "re_taxes": "net",
+      "cam":"net",
+      "mgmt_fee":"net"
+      }
+    ],
+    "extensions": [
+      {
+      "start": "11/01/2024",
+      "end":"10/31/2031",
       "base_rent":11.68,
       "re_taxes": "net",
       "cam":"net",
@@ -584,6 +643,16 @@ var lease_data = [
       "cam":"net",
       "mgmt_fee":"net"
       }
+    ],
+    "extensions": [
+      {
+      "start": "07/01/2018",
+      "end":"6/30/2022",
+      "base_rent":10.75,
+      "re_taxes": "net",
+      "cam":"net",
+      "mgmt_fee":"net"
+      }
     ]
   }
 },
@@ -637,6 +706,16 @@ var lease_data = [
       "cam":"net",
       "mgmt_fee":"net"
       }
+    ],
+    "extensions":[
+      {
+      "start": "09/01/2021",
+      "end":"8/30/2026",
+      "base_rent":11.66,
+      "re_taxes": "net",
+      "cam":"net",
+      "mgmt_fee":"net"
+      }
     ]
   }
 },
@@ -682,6 +761,16 @@ var lease_data = [
       {
       "start": "10/01/2017",
       "end":"9/30/2018",
+      "base_rent":10.15,
+      "re_taxes": "net",
+      "cam":"net",
+      "mgmt_fee":"net"
+      }
+    ],
+    "extensions": [
+      {
+      "start": "10/01/2018",
+      "end":"9/30/2023",
       "base_rent":10.15,
       "re_taxes": "net",
       "cam":"net",
