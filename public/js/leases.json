@@ -1,19 +1,3 @@
-var scenarios = [
-  {
-    "id":1,
-    "name": "something",
-    "extensions":[
-      {
-        "lease_id":1,
-        "extension_id":1
-      },
-      {
-        "lease_id":1,
-        "extension_id":2
-      }
-    ]
-  }
-]
 
 var lease_data = [
 {

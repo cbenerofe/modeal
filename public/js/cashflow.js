@@ -12,6 +12,16 @@ myApp.controller('myController', ['$scope',function($scope) {
   
   $scope.leases = lease_data;
   
+  $scope.show_nets = false
+  $scope.toggle_nets = function() {
+    $scope.show_nets = !$scope.show_nets
+  }
+  
+  $scope.show_tenants = true
+  $scope.toggle_tenants = function() {
+    $scope.show_tenants = !$scope.show_tenants
+  }
+  
   get_period = function(periods,month) {
     var period = {}
     periods.forEach(function(p) {
@@ -71,17 +81,23 @@ myApp.controller('myController', ['$scope',function($scope) {
     for (m=1;m<=12;m++) {
       month = new Date(year,m,1)
       monthly = 0;
-      monthly += get_charge(lease.space,lease.space.periods,month,charge)
-      monthly += get_charge(lease.space,lease.space.extensions,month,charge)
+      if (charge == 'all') {
+        monthly += get_charge(lease.space,lease.space.periods,month,'base')
+        monthly += get_charge(lease.space,lease.space.periods,month,'retax')
+        monthly += get_charge(lease.space,lease.space.periods,month,'cam')
+        monthly += get_charge(lease.space,lease.space.extensions,month,'base')
+        monthly += get_charge(lease.space,lease.space.extensions,month,'retax')
+        monthly += get_charge(lease.space,lease.space.extensions,month,'cam')
+      } else {
+        monthly += get_charge(lease.space,lease.space.periods,month,charge)
+        monthly += get_charge(lease.space,lease.space.extensions,month,charge)
+      }
       yearly += monthly
     }
     
     return yearly
     //console.log(JSON.stringify(period))
   }   
-  
-  
-  
   
   $scope.get_years_rent = function(year,charge) {
     //find all leases
