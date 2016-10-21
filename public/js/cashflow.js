@@ -4,15 +4,16 @@ var myApp = angular.module('myApp', []);
 
 leases = lease_data;
 expenses = expense_data;
-
+retaxes = 633873
+cam = 188802
+sqft = 248007
 
 myApp.controller('myController', ['$scope',function($scope) {
   
   var start_date = new Date (2017,1,1)
   var hold_period = 5
   $scope.years = []
-  retaxes = 633873
-  cam = 188802
+
   
   $scope.leases = leases
   $scope.expenses = expenses
@@ -32,21 +33,38 @@ myApp.controller('myController', ['$scope',function($scope) {
     $scope.show_expenses = !$scope.show_expenses
   }
   
+  $scope.show_psf = false
+  $scope.toggle_psf = function() {
+    $scope.show_psf = !$scope.show_psf
+  }
   
   $scope.get_tenants_rent = function(lease_id,year,charge) {
-    x = get_tenants_rent(lease_id,year,charge)
+    x = get_tenants_rent(lease_id,year,charge,$scope.show_psf)
     return x
   }   
   
   $scope.get_years_rent = function(year,charge) {
-    x = get_years_rent(year,charge)
+    x = get_years_rent(year,charge,$scope.show_psf)
     return x
   }   
   
   $scope.get_years_expense = function(expense_id,year) {
-    x = get_years_expense(expense_id,year)
+    x = get_years_expense(expense_id,year,$scope.show_psf)
     return x
-  }  
+  } 
+
+  $scope.get_noi = function (year,psf) {
+    i = get_years_rent(year,'all')
+    //console.log ("i=" + i)
+    x = get_years_expense('all',year)
+    //console.log ("x=" + x)
+    noi = i - x
+    if (psf == true) {
+      return Math.round(noi / sqft * 100) / 100
+    } else {
+      return noi
+    }
+  } 
 
   $scope.init = function() {
     year = {}

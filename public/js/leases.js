@@ -46,7 +46,7 @@
     return amount
   }
 
-  get_tenants_rent = function(lease_id,year,charge) {
+  get_tenants_rent = function(lease_id,year,charge,psf=false) {
     // charge = base, retax, cam, mgt,
     //find lease
     //console.log(JSON.stringify(lease_id) + " " + year)
@@ -71,21 +71,27 @@
       yearly += monthly
     }
     
-    return yearly
-    //console.log(JSON.stringify(period))
+    if (psf == true) {
+      return Math.round(yearly / lease.space.sqft * 100) / 100
+    } else {
+      return yearly
+    }
   }   
   
-  get_years_rent = function(year,charge) {
+  get_years_rent = function(year,charge,psf=false) {
     //find all leases
     total = 0
     leases.forEach(function(l) {
       //console.log(JSON.stringify(l.id) + " " + year)
-      rent = get_tenants_rent(l.id,year.getFullYear(),charge)
+      rent = get_tenants_rent(l.id,year,charge)
       total += rent
     })
 
-    return total
-    //console.log(JSON.stringify(period))
+    if (psf == true) {
+      return Math.round(total / sqft * 100) / 100
+    } else {
+      return total
+    }
   }   
   
   

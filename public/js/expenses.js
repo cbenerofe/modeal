@@ -26,7 +26,7 @@
   }
 
 
-  get_years_expense = function(expense_id,year) {
+  get_years_expense = function(expense_id,year,psf=false) {
     // if in the past, check for actual 
     //  if can't find, worry about later...
 
@@ -46,6 +46,7 @@
           tmp = period.amount
         } else {
           period = get_latest_expense_period(e.estimates,year)
+          //console.log("latest:" + JSON.stringify(period))
           if (period != undefined ) {
             diff = year - period.year 
             increase = diff * .02 * period.amount
@@ -78,8 +79,13 @@
 
     }
     
-    return amount
-
+    
+    if (psf == true) {
+      return Math.round(amount / sqft * 100) / 100
+    } else {
+      return amount
+    }
+    
 
   }
 

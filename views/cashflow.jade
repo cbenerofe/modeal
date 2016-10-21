@@ -30,6 +30,10 @@ html(ng-app="myApp")
           .btn(ng-click="toggle_expenses()" )
             span(ng-if="show_expenses") hide expenses
             span(ng-if="!show_expenses") show expenses
+        .col-xs-3
+          .btn(ng-click="toggle_psf()" )
+            span(ng-if="show_psf") hide psf
+            span(ng-if="!show_psf") show psf
 
       table.table
         thead
@@ -62,31 +66,31 @@ html(ng-app="myApp")
             th total income
             th(ng-repeat="year in years") 
               .row(ng-if="show_nets")
-                .col-xs-4 {{ get_years_rent(year.start_date,'base') }}
-                .col-xs-4 {{ get_years_rent(year.start_date,'retax') }}
-                .col-xs-4 {{ get_years_rent(year.start_date,'cam') }}
+                .col-xs-4 {{ get_years_rent(year.start_date.getFullYear(),'base') }}
+                .col-xs-4 {{ get_years_rent(year.start_date.getFullYear(),'retax') }}
+                .col-xs-4 {{ get_years_rent(year.start_date.getFullYear(),'cam') }}
               .block(ng-if="!show_nets")
-                | {{ get_years_rent(year.start_date,'all') }}
+                | {{ get_years_rent(year.start_date.getFullYear(),'all') }}
 
         tbody(ng-if="!show_tenants")
           tr(ng-if="show_nets")
             th base rent
               td(ng-repeat="year in years" ng-class="{white: ($index % 2) }")
-                | {{ get_years_rent(year.start_date,'base') }}
+                | {{ get_years_rent(year.start_date.getFullYear(),'base') }}
           tr(ng-if="show_nets")
             th re taxes
               td(ng-repeat="year in years" ng-class="{white: ($index % 2) }")
-                | {{ get_years_rent(year.start_date,'retax') }}
+                | {{ get_years_rent(year.start_date.getFullYear(),'retax') }}
           tr(ng-if="show_nets")
             th cam 
               td(ng-repeat="year in years" ng-class="{white: ($index % 2) }")
-                | {{ get_years_rent(year.start_date,'cam') }}
+                | {{ get_years_rent(year.start_date.getFullYear(),'cam') }}
 
           tr
             th total income
             th(ng-repeat="year in years" ng-class="{white: ($index % 2) }") 
               .block()
-                | {{ get_years_rent(year.start_date,'all') }}
+                | {{ get_years_rent(year.start_date.getFullYear(),'all') }}
 
 
         tbody(ng-if="show_expenses")
@@ -101,3 +105,16 @@ html(ng-app="myApp")
             th total expense
             th(ng-repeat="year in years" ng-class="{white: ($index % 2) }") 
               | {{ get_years_expense('all',year.start_date.getFullYear()) }}
+
+
+        tbody(ng-if="show_psf")
+          tr
+            th net operating income
+            th(ng-repeat="year in years" ng-class="{white: ($index % 2) }") 
+              | {{ get_noi(year.start_date.getFullYear(),show_psf) }}
+
+        tbody
+          tr
+            th net operating income
+            th(ng-repeat="year in years" ng-class="{white: ($index % 2) }") 
+              | {{ get_noi(year.start_date.getFullYear()) }}
