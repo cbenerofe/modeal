@@ -8,29 +8,43 @@ html(ng-app="myApp")
     link(href="css/media.css", rel="stylesheet")
     script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js')
     script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js')
-    script(src="js/data.json")
+    script(src="js/leases.json")
+    script(src="js/expenses.json")
+    script(src="js/scenarios.json")
+    script(src="js/expenses.js")
+    script(src="js/leases.js")
     script(src="js/cashflow.js")
 
   body
     .block(ng-controller="myController")
-      .block
-        .btn(ng-click="toggle_nets()" )
-          span(ng-if="show_nets") hide nets
-          span(ng-if="!show_nets") show nets
-    
+      .row
+        .col-xs-3
+          .btn(ng-click="toggle_tenants()" )
+            span(ng-if="show_tenants") hide tenants
+            span(ng-if="!show_tenants") show tenants
+        .col-xs-3
+          .btn(ng-click="toggle_nets()" )
+            span(ng-if="show_nets") hide nets
+            span(ng-if="!show_nets") show nets
+        .col-xs-3
+          .btn(ng-click="toggle_expenses()" )
+            span(ng-if="show_expenses") hide expenses
+            span(ng-if="!show_expenses") show expenses
+
       table.table
         thead
           tr
             th 
-              .btn(ng-click="toggle_tenants()")
-                | tenants
+
             th(ng-repeat="year in years" ) 
               .btn
                 | {{year.start_date.getFullYear()}}
-              .row(ng-if="show_nets")
+              .row(ng-if="show_nets && show_tenants")
                 .col-xs-4 base
                 .col-xs-4 retax
                 .col-xs-4 cam
+
+
         tbody(ng-if="show_tenants")
           tr(ng-repeat="lease in leases")
             th {{lease.tenant}}
@@ -44,9 +58,8 @@ html(ng-app="myApp")
                   | {{ get_tenants_rent($parent.lease.id, year.start_date.getFullYear(),'cam') }}
               .block(ng-if="!show_nets")
                 | {{ get_tenants_rent($parent.lease.id, year.start_date.getFullYear(),'all') }}
-        tfoot
           tr
-            th total
+            th total income
             th(ng-repeat="year in years") 
               .row(ng-if="show_nets")
                 .col-xs-4 {{ get_years_rent(year.start_date,'base') }}
@@ -55,3 +68,36 @@ html(ng-app="myApp")
               .block(ng-if="!show_nets")
                 | {{ get_years_rent(year.start_date,'all') }}
 
+        tbody(ng-if="!show_tenants")
+          tr(ng-if="show_nets")
+            th base rent
+              td(ng-repeat="year in years" ng-class="{white: ($index % 2) }")
+                | {{ get_years_rent(year.start_date,'base') }}
+          tr(ng-if="show_nets")
+            th re taxes
+              td(ng-repeat="year in years" ng-class="{white: ($index % 2) }")
+                | {{ get_years_rent(year.start_date,'retax') }}
+          tr(ng-if="show_nets")
+            th cam 
+              td(ng-repeat="year in years" ng-class="{white: ($index % 2) }")
+                | {{ get_years_rent(year.start_date,'cam') }}
+
+          tr
+            th total income
+            th(ng-repeat="year in years" ng-class="{white: ($index % 2) }") 
+              .block()
+                | {{ get_years_rent(year.start_date,'all') }}
+
+
+        tbody(ng-if="show_expenses")
+          tr(ng-repeat="expense in expenses")
+            th {{ expense.name }}
+            td(ng-repeat="year in years" ng-class="{white: ($index % 2) }")
+              .block()
+                | {{ get_years_expense($parent.expense.id, year.start_date.getFullYear()) }}
+
+        tbody
+          tr
+            th total expense
+            th(ng-repeat="year in years" ng-class="{white: ($index % 2) }") 
+              | {{ get_years_expense('all',year.start_date.getFullYear()) }}

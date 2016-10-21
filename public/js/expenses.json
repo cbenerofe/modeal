@@ -2,7 +2,7 @@ var expense_data = [
   {
     "id":1,
     "name": "real estate taxes",
-    "chargeback": "retax"
+    "chargeback": "retax",
     "actuals": [
       {
         "year": "2014",
@@ -12,7 +12,7 @@ var expense_data = [
         "year": "2015",
         "amount":596412
       }
-    ]
+    ],
     "estimates":[
       {
         "year":"2016",
@@ -27,7 +27,7 @@ var expense_data = [
   {
     "id":2,
     "name": "building electric",
-    "chargeback": "cam"
+    "chargeback": "cam",
     "actuals": [
       {
         "year": "2014",
@@ -37,7 +37,7 @@ var expense_data = [
         "year": "2015",
         "amount":10609
       }
-    ]
+    ],
     "estimates":[
       {
         "year":"2016",
@@ -52,7 +52,7 @@ var expense_data = [
   {
     "id":3,
     "name": "landscaping",
-    "chargeback": "cam"
+    "chargeback": "cam",
     "actuals": [
       {
         "year": "2014",
@@ -62,7 +62,7 @@ var expense_data = [
         "year": "2015",
         "amount":72879
       }
-    ]
+    ],
     "estimates":[
       {
         "year":"2016",
@@ -77,7 +77,7 @@ var expense_data = [
   {
     "id":4,
     "name": "maintenance",
-    "chargeback": "cam"
+    "chargeback": "cam",
     "actuals": [
       {
         "year": "2014",
@@ -87,7 +87,7 @@ var expense_data = [
         "year": "2015",
         "amount":38863
       }
-    ]
+    ],
     "estimates":[
       {
         "year":"2016",
@@ -102,7 +102,7 @@ var expense_data = [
   {
     "id":5,
     "name": "insurance",
-    "chargeback": "cam"
+    "chargeback": "cam",
     "actuals": [
       {
         "year": "2014",
@@ -112,7 +112,7 @@ var expense_data = [
         "year": "2015",
         "amount":46680
       }
-    ]
+    ],
     "estimates":[
       {
         "year":"2016",
@@ -127,7 +127,7 @@ var expense_data = [
   {
     "id":6,
     "name": "sprinklers",
-    "chargeback": "cam"
+    "chargeback": "cam",
     "actuals": [
       {
         "year": "2014",
@@ -137,7 +137,7 @@ var expense_data = [
         "year": "2015",
         "amount":29713
       }
-    ]
+    ],
     "estimates":[
       {
         "year":"2016",
@@ -152,7 +152,7 @@ var expense_data = [
   {
     "id":7,
     "name": "alarm",
-    "chargeback": "cam"
+    "chargeback": "cam",
     "actuals": [
       {
         "year": "2014",
@@ -162,7 +162,7 @@ var expense_data = [
         "year": "2015",
         "amount":4162
       }
-    ]
+    ],
     "estimates":[
       {
         "year":"2016",
@@ -177,7 +177,7 @@ var expense_data = [
   {
     "id":8,
     "name": "mgmt fee",
-    "chargeback": "mgmt"
+    "chargeback": "mgmt",
     "actuals": [
       {
         "year": "2014",
@@ -187,7 +187,7 @@ var expense_data = [
         "year": "2015",
         "amount":0
       }
-    ]
+    ],
     "estimates":[
       {
         "year":"2016",
