@@ -21,6 +21,7 @@ var lease_data = [
     ],
     "extensions": [
       {
+      "id":1,
       "start": "11/1/2017",
       "end":"10/30/2019",
       "base_rent":9.20,
@@ -29,6 +30,7 @@ var lease_data = [
       "mgmt_fee":"net"
       },
       {
+      "id":2,
       "start": "11/1/2019",
       "end":"10/30/2021",
       "base_rent":9.48,
@@ -68,6 +70,7 @@ var lease_data = [
     ],
     "extensions": [
       {
+      "id":1,
       "start": "1/1/2019",
       "end":"12/31/2023",
       "base_rent":9.50,
@@ -76,6 +79,7 @@ var lease_data = [
       "mgmt_fee":"net"
       },
       {
+      "id":2,
       "start": "1/1/2024",
       "end":"12/31/2028",
       "base_rent":10.50,
@@ -309,6 +313,7 @@ var lease_data = [
     ],
     "extensions": [
       {
+      "id" :1,
       "start": "4/30/2019",
       "end":"3/31/2024",
       "base_rent":14.72,
@@ -372,6 +377,7 @@ var lease_data = [
     ],
     "extensions": [
       {
+        "id":1,
       "start": "11/01/2019",
       "end":"10/31/2023",
       "base_rent":12.00,
@@ -435,6 +441,7 @@ var lease_data = [
     ],
     "extensions": [
       {
+        "id":1,
       "start": "6/01/2020",
       "end":"5/31/2025",
       "base_rent":12.49,
@@ -630,6 +637,7 @@ var lease_data = [
     ],
     "extensions": [
       {
+        "id":1,
       "start": "07/01/2018",
       "end":"6/30/2022",
       "base_rent":10.75,
@@ -693,6 +701,7 @@ var lease_data = [
     ],
     "extensions":[
       {
+      "id":1,
       "start": "09/01/2021",
       "end":"8/30/2026",
       "base_rent":11.66,
@@ -753,6 +762,7 @@ var lease_data = [
     ],
     "extensions": [
       {
+      "id":1,
       "start": "10/01/2018",
       "end":"9/30/2023",
       "base_rent":10.15,

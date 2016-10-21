@@ -1,30 +1,57 @@
 
-  get_lease_period = function(periods,month) {
+  get_lease_period = function(space,month,scenario) {
     var period = undefined
-    if (periods != undefined) {  
-      periods.forEach(function(p) {
-        pieces = p.start.split("/")
-        start = new Date(pieces[2],pieces[0],pieces[1])
-        //console.log("p="+JSON.stringify(p))
-        pieces = p.end.split("/")
-        end = new Date(pieces[2],pieces[0],pieces[1])
-        //console.log("year="+year + " start=" + start.getFullYear() + " end=" + end.getFullYear() )
-        if (( month >= start) && ( month <= end)) {
-          period = p
-        }
-      })
+    if (space != undefined) {
+      var periods = space.periods;
+      if (periods != undefined) {  
+        periods.forEach(function(p) {
+          pieces = p.start.split("/")
+          start = new Date(pieces[2],pieces[0],pieces[1])
+          //console.log("p="+JSON.stringify(p))
+          pieces = p.end.split("/")
+          end = new Date(pieces[2],pieces[0],pieces[1])
+          //console.log("year="+year + " start=" + start.getFullYear() + " end=" + end.getFullYear() )
+          if (( month >= start) && ( month <= end)) {
+            period = p
+          }
+        })
+      }
     }
     return period
   }
 
-  get_charge = function(space,periods,month,charge) {
+  get_extension_period = function(space,month,scenario) {
+    var period = undefined
+    if (space != undefined) {
+      var periods = space.extensions;
+      if (periods != undefined) {  
+        periods.forEach(function(p) {
+          pieces = p.start.split("/")
+          start = new Date(pieces[2],pieces[0],pieces[1])
+          //console.log("p="+JSON.stringify(p))
+          pieces = p.end.split("/")
+          end = new Date(pieces[2],pieces[0],pieces[1])
+          //console.log("year="+year + " start=" + start.getFullYear() + " end=" + end.getFullYear() )
+          if (( month >= start) && ( month <= end)) {
+            period = p
+          }
+        })
+      }
+    }
+    return period
+  }
+
+  get_charge = function(space,month,charge,scenario) {
     
-    if (periods == undefined){
+    if (space == undefined) {
       return 0
     }
     
-    period = get_lease_period(periods,month)
-    if (period == undefined){
+    period = get_lease_period(space,month)
+    if (period == undefined) {
+      period = get_extension_period(space,month,scenario)
+    }
+    if (period == undefined) {
       return 0
     }
     amount = 0
@@ -63,15 +90,11 @@
       month = new Date(year,m,1)
       monthly = 0;
       if (charge == 'all') {
-        monthly += get_charge(lease.space,lease.space.periods,month,'base')
-        monthly += get_charge(lease.space,lease.space.periods,month,'retax')
-        monthly += get_charge(lease.space,lease.space.periods,month,'cam')
-        monthly += get_charge(lease.space,lease.space.extensions,month,'base')
-        monthly += get_charge(lease.space,lease.space.extensions,month,'retax')
-        monthly += get_charge(lease.space,lease.space.extensions,month,'cam')
+        monthly += get_charge(lease.space,month,'base')
+        monthly += get_charge(lease.space,month,'retax')
+        monthly += get_charge(lease.space,month,'cam')
       } else {
-        monthly += get_charge(lease.space,lease.space.periods,month,charge)
-        monthly += get_charge(lease.space,lease.space.extensions,month,charge)
+        monthly += get_charge(lease.space,month,charge)
       }
       yearly += monthly
     }
@@ -108,9 +131,9 @@
       count = 0
       for (m=1;m<=12;m++) {
         month = new Date(year,m,1)
-        p = get_lease_period(l.space.periods,month)
+        p = get_lease_period(l.space,month)
         if (p == undefined) {
-          p = get_lease_period(l.space.extensions,month)
+          p = get_extension_period(l.space,month)
         }
         if (p != undefined) {
           count += 1
@@ -133,9 +156,9 @@
       count = 0
       for (m=1;m<=12;m++) {
         month = new Date(year,m,1)
-        p = get_lease_period(l.space.periods,month)
+        p = get_lease_period(l.space,month)
         if (p == undefined) {
-          p = get_lease_period(l.space.extensions,month)
+          p = get_extension_period(l.space,month)
         }
         if (p != undefined) {
           count += 1

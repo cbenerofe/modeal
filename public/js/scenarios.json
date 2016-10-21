@@ -6,10 +6,6 @@ var scenario_data = [
       {
         "lease_id":1,
         "extension_id":1
-      },
-      {
-        "lease_id":1,
-        "extension_id":2
       }
     ]
   }

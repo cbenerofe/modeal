@@ -19,10 +19,6 @@ html(ng-app="myApp")
     .block(ng-controller="myController")
       .row
         .col-xs-3
-          .btn(ng-click="toggle_tenants()" )
-            span(ng-if="show_tenants") hide tenants
-            span(ng-if="!show_tenants") show tenants
-        .col-xs-3
           .btn(ng-click="toggle_nets()" )
             span(ng-if="show_nets") hide nets
             span(ng-if="!show_nets") show nets
@@ -51,14 +47,10 @@ html(ng-app="myApp")
 
         tbody
           tr
-            th occupied
+            th 
+              .btn(ng-click="toggle_tenants()" ) occupied
             td(ng-repeat="year in years" ng-class="{white: ($index % 2) }")
               | {{ get_years_occupancy(year.start_date.getFullYear()) }}
-
-          tr
-            th vacant
-            td(ng-repeat="year in years" ng-class="{white: ($index % 2) }")
-              | {{ get_years_vacancy(year.start_date.getFullYear()) }}
 
         tbody(ng-if="show_tenants")
           tr(ng-repeat="lease in leases")
@@ -73,15 +65,7 @@ html(ng-app="myApp")
                   | {{ get_tenants_rent($parent.lease.id, year.start_date.getFullYear(),'cam') }}
               .block(ng-if="!show_nets")
                 | {{ get_tenants_rent($parent.lease.id, year.start_date.getFullYear(),'all') }}
-          tr
-            th total income
-            th(ng-repeat="year in years") 
-              .row(ng-if="show_nets")
-                .col-xs-4 {{ get_years_rent(year.start_date.getFullYear(),'base') }}
-                .col-xs-4 {{ get_years_rent(year.start_date.getFullYear(),'retax') }}
-                .col-xs-4 {{ get_years_rent(year.start_date.getFullYear(),'cam') }}
-              .block(ng-if="!show_nets")
-                | {{ get_years_rent(year.start_date.getFullYear(),'all') }}
+
 
         tbody(ng-if="!show_tenants")
           tr(ng-if="show_nets")
@@ -97,6 +81,25 @@ html(ng-app="myApp")
               td(ng-repeat="year in years" ng-class="{white: ($index % 2) }")
                 | {{ get_years_rent(year.start_date.getFullYear(),'cam') }}
 
+        tbody
+          tr
+            th vacant
+            td(ng-repeat="year in years" ng-class="{white: ($index % 2) }")
+              | {{ get_years_vacancy(year.start_date.getFullYear()) }}
+
+
+        tbody(ng-if="show_tenants")
+          tr
+            th total income
+            th(ng-repeat="year in years") 
+              .row(ng-if="show_nets")
+                .col-xs-4 {{ get_years_rent(year.start_date.getFullYear(),'base') }}
+                .col-xs-4 {{ get_years_rent(year.start_date.getFullYear(),'retax') }}
+                .col-xs-4 {{ get_years_rent(year.start_date.getFullYear(),'cam') }}
+              .block(ng-if="!show_nets")
+                | {{ get_years_rent(year.start_date.getFullYear(),'all') }}
+
+        tbody(ng-if="!show_tenants")
           tr
             th total income
             th(ng-repeat="year in years" ng-class="{white: ($index % 2) }") 
