@@ -49,6 +49,17 @@ html(ng-app="myApp")
                 .col-xs-4 cam
 
 
+        tbody
+          tr
+            th occupied
+            td(ng-repeat="year in years" ng-class="{white: ($index % 2) }")
+              | {{ get_years_occupancy(year.start_date.getFullYear()) }}
+
+          tr
+            th vacant
+            td(ng-repeat="year in years" ng-class="{white: ($index % 2) }")
+              | {{ get_years_vacancy(year.start_date.getFullYear()) }}
+
         tbody(ng-if="show_tenants")
           tr(ng-repeat="lease in leases")
             th {{lease.tenant}}

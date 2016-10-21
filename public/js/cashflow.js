@@ -53,6 +53,16 @@ myApp.controller('myController', ['$scope',function($scope) {
     return x
   } 
 
+  $scope.get_years_occupancy = function(year) {
+    x = get_years_occupancy(year)
+    return x
+  } 
+
+  $scope.get_years_vacancy = function(year) {
+    x = get_years_vacancy(year)
+    return x
+  } 
+
   $scope.get_noi = function (year,psf) {
     i = get_years_rent(year,'all')
     //console.log ("i=" + i)
