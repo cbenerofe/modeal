@@ -22,10 +22,12 @@ var scenario_data = [
     "down_months": 6,
     "new_lease" : {
       "years" : 3,
-      "base_rent":10,
+      "base_rent":9.5,
       "re_taxes": "net",
       "cam":"net",
-      "mgmt_fee":"net"
+      "mgmt":"net",
+      "ti_psf":5,
+      "commision":.05
     }
   }
 ]

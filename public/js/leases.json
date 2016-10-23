@@ -57,15 +57,15 @@ var lease_data = [
       "base_rent":9.76,
       "re_taxes": "none",
       "cam":"net",
-      "mgmt_fee":"net"
+      "mgmt":"net"
       },
       {
       "start": "1/1/2018",
       "end":"12/31/2018",
       "base_rent":10.15,
-      "re_taxes": "none",
+      "re_taxes": "net",
       "cam":"net",
-      "mgmt_fee":"net"
+      "mgmt":"net"
       }
     ],
     "extensions": [
@@ -73,10 +73,10 @@ var lease_data = [
       "id":1,
       "start": "1/1/2019",
       "end":"12/31/2023",
-      "base_rent":9.50,
+      "base_rent":10.50,
       "re_taxes": "net",
       "cam":"net",
-      "mgmt_fee":"net"
+      "mgmt":"net"
       },
       {
       "id":2,
@@ -85,7 +85,7 @@ var lease_data = [
       "base_rent":10.50,
       "re_taxes": "net",
       "cam":"net",
-      "mgmt_fee":"net"
+      "mgmt":"net"
       }
     ]
   }
@@ -106,7 +106,7 @@ var lease_data = [
       "base_rent":23,
       "re_taxes": "none",
       "cam":"79% of untilities",
-      "mgmt_fee":"none"
+      "mgmt":"none"
       },
       {
       "start": "11/1/2017",
@@ -114,7 +114,7 @@ var lease_data = [
       "base_rent":23.69,
       "re_taxes": "none",
       "cam":"79% of untilities",
-      "mgmt_fee":"none"
+      "mgmt":"none"
       },
       {
       "start": "11/1/2018",
@@ -122,7 +122,7 @@ var lease_data = [
       "base_rent":24.40,
       "re_taxes": "none",
       "cam":"79% of untilities",
-      "mgmt_fee":"none"
+      "mgmt":"none"
       },
       {
       "start": "11/1/2019",
@@ -130,7 +130,7 @@ var lease_data = [
       "base_rent":25.13,
       "re_taxes": "none",
       "cam":"79% of untilities",
-      "mgmt_fee":"none"
+      "mgmt":"none"
       },
       {
       "start": "11/1/2020",
@@ -138,7 +138,7 @@ var lease_data = [
       "base_rent":25.89,
       "re_taxes": "none",
       "cam":"79% of untilities",
-      "mgmt_fee":"none"
+      "mgmt":"none"
       },
       {
       "start": "11/1/2021",
@@ -146,7 +146,7 @@ var lease_data = [
       "base_rent":26.66,
       "re_taxes": "none",
       "cam":"79% of untilities",
-      "mgmt_fee":"none"
+      "mgmt":"none"
       },
       {
       "start": "11/1/2022",
@@ -154,7 +154,7 @@ var lease_data = [
       "base_rent":27.46,
       "re_taxes": "none",
       "cam":"79% of untilities",
-      "mgmt_fee":"none"
+      "mgmt":"none"
       }
     ]
   }
@@ -175,7 +175,7 @@ var lease_data = [
       "base_rent":25.86,
       "re_taxes": "none",
       "cam":"21% of untilities",
-      "mgmt_fee":"none"
+      "mgmt":"none"
       },
       {
       "start": "7/18/2017",
@@ -183,7 +183,7 @@ var lease_data = [
       "base_rent":26.64,
       "re_taxes": "none",
       "cam":"21% of untilities",
-      "mgmt_fee":"none"
+      "mgmt":"none"
       }
     ],
     "extensions": [
@@ -207,7 +207,7 @@ var lease_data = [
       "base_rent":15.16,
       "re_taxes": "none",
       "cam":"net",
-      "mgmt_fee":"net"
+      "mgmt":"net"
       },
       {
       "start": "4/01/2017",
@@ -215,7 +215,7 @@ var lease_data = [
       "base_rent":15.62,
       "re_taxes": "none",
       "cam":"net",
-      "mgmt_fee":"net"
+      "mgmt":"net"
       },
       {
       "start": "1/01/2018",
@@ -223,7 +223,7 @@ var lease_data = [
       "base_rent":15.62,
       "re_taxes": "net",
       "cam":"net",
-      "mgmt_fee":"net"
+      "mgmt":"net"
       },
       {
       "start": "4/01/2018",
@@ -231,7 +231,7 @@ var lease_data = [
       "base_rent":16.08,
       "re_taxes": "net",
       "cam":"net",
-      "mgmt_fee":"net"
+      "mgmt":"net"
       },
       {
       "start": "4/01/2019",
@@ -239,7 +239,7 @@ var lease_data = [
       "base_rent":16.57,
       "re_taxes": "net",
       "cam":"net",
-      "mgmt_fee":"net"
+      "mgmt":"net"
       },
       {
       "start": "4/01/2020",
@@ -247,7 +247,7 @@ var lease_data = [
       "base_rent":17.06,
       "re_taxes": "net",
       "cam":"net",
-      "mgmt_fee":"net"
+      "mgmt":"net"
       },
       {
       "start": "4/01/2021",
@@ -255,7 +255,7 @@ var lease_data = [
       "base_rent":17.58,
       "re_taxes": "net",
       "cam":"net",
-      "mgmt_fee":"net"
+      "mgmt":"net"
       },
       {
       "start": "4/01/2022",
@@ -263,7 +263,7 @@ var lease_data = [
       "base_rent":18.10,
       "re_taxes": "net",
       "cam":"net",
-      "mgmt_fee":"net"
+      "mgmt":"net"
       },
       {
       "start": "4/01/2023",
@@ -271,7 +271,7 @@ var lease_data = [
       "base_rent":18.65,
       "re_taxes": "net",
       "cam":"net",
-      "mgmt_fee":"net"
+      "mgmt":"net"
       }
     ]
   }
@@ -292,7 +292,7 @@ var lease_data = [
       "base_rent":13.47,
       "re_taxes": "none",
       "cam":"net",
-      "mgmt_fee":"net"
+      "mgmt":"net"
       },
       {
       "start": "4/30/2017",
@@ -300,7 +300,7 @@ var lease_data = [
       "base_rent":13.87,
       "re_taxes": "none",
       "cam":"net",
-      "mgmt_fee":"net"
+      "mgmt":"net"
       },
       {
       "start": "4/30/2018",
@@ -308,7 +308,7 @@ var lease_data = [
       "base_rent":14.29,
       "re_taxes": "none",
       "cam":"net",
-      "mgmt_fee":"net"
+      "mgmt":"net"
       }
     ],
     "extensions": [
@@ -319,7 +319,7 @@ var lease_data = [
       "base_rent":14.72,
       "re_taxes": "net",
       "cam":"net",
-      "mgmt_fee":"net"
+      "mgmt":"net"
       }
     ]
   }
@@ -340,7 +340,7 @@ var lease_data = [
       "base_rent":10.75,
       "re_taxes": "none",
       "cam":"net",
-      "mgmt_fee":"net"
+      "mgmt":"net"
       },
       {
       "start": "11/01/2017",
@@ -348,7 +348,7 @@ var lease_data = [
       "base_rent":11.07,
       "re_taxes": "none",
       "cam":"net",
-      "mgmt_fee":"net"
+      "mgmt":"net"
       },
       {
       "start": "1/01/2018",
@@ -356,7 +356,7 @@ var lease_data = [
       "base_rent":11.07,
       "re_taxes": "net",
       "cam":"net",
-      "mgmt_fee":"net"
+      "mgmt":"net"
       },
       {
       "start": "11/01/2018",
@@ -364,7 +364,7 @@ var lease_data = [
       "base_rent":11.40,
       "re_taxes": "net",
       "cam":"net",
-      "mgmt_fee":"net"
+      "mgmt":"net"
       },
       {
       "start": "11/01/2019",
@@ -372,7 +372,7 @@ var lease_data = [
       "base_rent":11.74,
       "re_taxes": "net",
       "cam":"net",
-      "mgmt_fee":"net"
+      "mgmt":"net"
       }
     ],
     "extensions": [
@@ -383,7 +383,7 @@ var lease_data = [
       "base_rent":12.00,
       "re_taxes": "net",
       "cam":"net",
-      "mgmt_fee":"net"
+      "mgmt":"net"
       }
     ]
   }
@@ -404,7 +404,7 @@ var lease_data = [
       "base_rent":11.43,
       "re_taxes": "none",
       "cam":"net",
-      "mgmt_fee":"net"
+      "mgmt":"net"
       },
       {
       "start": "6/01/2017",
@@ -412,7 +412,7 @@ var lease_data = [
       "base_rent":11.78,
       "re_taxes": "none",
       "cam":"net",
-      "mgmt_fee":"net"
+      "mgmt":"net"
       },
       {
       "start": "1/01/2018",
@@ -420,7 +420,7 @@ var lease_data = [
       "base_rent":11.78,
       "re_taxes": "net",
       "cam":"net",
-      "mgmt_fee":"net"
+      "mgmt":"net"
       },
       {
       "start": "6/01/2018",
@@ -428,7 +428,7 @@ var lease_data = [
       "base_rent":12.13,
       "re_taxes": "net",
       "cam":"net",
-      "mgmt_fee":"net"
+      "mgmt":"net"
       },
       {
       "start": "6/01/2019",
@@ -436,7 +436,7 @@ var lease_data = [
       "base_rent":12.49,
       "re_taxes": "net",
       "cam":"net",
-      "mgmt_fee":"net"
+      "mgmt":"net"
       }
     ],
     "extensions": [
@@ -447,7 +447,7 @@ var lease_data = [
       "base_rent":12.49,
       "re_taxes": "net",
       "cam":"net",
-      "mgmt_fee":"net"
+      "mgmt":"net"
       }
     ]
   }
@@ -468,7 +468,7 @@ var lease_data = [
       "base_rent":9.5,
       "re_taxes": "net",
       "cam":"net",
-      "mgmt_fee":"net"
+      "mgmt":"net"
       },
       {
       "start": "11/01/2017",
@@ -476,7 +476,7 @@ var lease_data = [
       "base_rent":9.79,
       "re_taxes": "net",
       "cam":"net",
-      "mgmt_fee":"net"
+      "mgmt":"net"
       },
       {
       "start": "11/01/2018",
@@ -484,7 +484,7 @@ var lease_data = [
       "base_rent":10.08,
       "re_taxes": "net",
       "cam":"net",
-      "mgmt_fee":"net"
+      "mgmt":"net"
       },
       {
       "start": "11/01/2019",
@@ -492,7 +492,7 @@ var lease_data = [
       "base_rent":10.38,
       "re_taxes": "net",
       "cam":"net",
-      "mgmt_fee":"net"
+      "mgmt":"net"
       },
       {
       "start": "11/01/2020",
@@ -500,7 +500,7 @@ var lease_data = [
       "base_rent":10.69,
       "re_taxes": "net",
       "cam":"net",
-      "mgmt_fee":"net"
+      "mgmt":"net"
       },
       {
       "start": "11/01/2021",
@@ -508,7 +508,7 @@ var lease_data = [
       "base_rent":11.01,
       "re_taxes": "net",
       "cam":"net",
-      "mgmt_fee":"net"
+      "mgmt":"net"
       },
       {
       "start": "11/01/2022",
@@ -516,7 +516,7 @@ var lease_data = [
       "base_rent":11.34,
       "re_taxes": "net",
       "cam":"net",
-      "mgmt_fee":"net"
+      "mgmt":"net"
       },
       {
       "start": "11/01/2023",
@@ -524,7 +524,7 @@ var lease_data = [
       "base_rent":11.68,
       "re_taxes": "net",
       "cam":"net",
-      "mgmt_fee":"net"
+      "mgmt":"net"
       }
     ],
     "extensions": [
@@ -534,7 +534,7 @@ var lease_data = [
       "base_rent":11.68,
       "re_taxes": "net",
       "cam":"net",
-      "mgmt_fee":"net"
+      "mgmt":"net"
       }
     ]
   }
@@ -555,7 +555,7 @@ var lease_data = [
       "base_rent":11.03,
       "re_taxes": "none",
       "cam":"net",
-      "mgmt_fee":"net"
+      "mgmt":"net"
       },
       {
       "start": "11/01/2017",
@@ -563,7 +563,7 @@ var lease_data = [
       "base_rent":11.36,
       "re_taxes": "none",
       "cam":"net",
-      "mgmt_fee":"net"
+      "mgmt":"net"
       },
       {
       "start": "1/01/2018",
@@ -571,7 +571,7 @@ var lease_data = [
       "base_rent":11.36,
       "re_taxes": "net",
       "cam":"net",
-      "mgmt_fee":"net"
+      "mgmt":"net"
       },
       {
       "start": "11/01/2018",
@@ -579,7 +579,7 @@ var lease_data = [
       "base_rent":11.70,
       "re_taxes": "net",
       "cam":"net",
-      "mgmt_fee":"net"
+      "mgmt":"net"
       },
       {
       "start": "11/01/2019",
@@ -587,7 +587,7 @@ var lease_data = [
       "base_rent":12.05,
       "re_taxes": "net",
       "cam":"net",
-      "mgmt_fee":"net"
+      "mgmt":"net"
       },
       {
       "start": "11/01/2020",
@@ -595,7 +595,7 @@ var lease_data = [
       "base_rent":12.41,
       "re_taxes": "net",
       "cam":"net",
-      "mgmt_fee":"net"
+      "mgmt":"net"
       }
     ]
   }
@@ -616,7 +616,7 @@ var lease_data = [
       "base_rent":10.43,
       "re_taxes": "none",
       "cam":"net",
-      "mgmt_fee":"net"
+      "mgmt":"net"
       },
       {
       "start": "07/01/2017",
@@ -624,7 +624,7 @@ var lease_data = [
       "base_rent":10.75,
       "re_taxes": "none",
       "cam":"net",
-      "mgmt_fee":"net"
+      "mgmt":"net"
       },
       {
       "start": "01/01/2018",
@@ -632,18 +632,18 @@ var lease_data = [
       "base_rent":10.75,
       "re_taxes": "net",
       "cam":"net",
-      "mgmt_fee":"net"
+      "mgmt":"net"
       }
     ],
     "extensions": [
       {
-        "id":1,
+      "id":1,
       "start": "07/01/2018",
       "end":"6/30/2022",
       "base_rent":10.75,
       "re_taxes": "net",
       "cam":"net",
-      "mgmt_fee":"net"
+      "mgmt":"net"
       }
     ]
   }
@@ -664,7 +664,7 @@ var lease_data = [
       "base_rent":10.36,
       "re_taxes": "net",
       "cam":"net",
-      "mgmt_fee":"net"
+      "mgmt":"net"
       },
       {
       "start": "09/01/2017",
@@ -672,7 +672,7 @@ var lease_data = [
       "base_rent":10.67,
       "re_taxes": "net",
       "cam":"net",
-      "mgmt_fee":"net"
+      "mgmt":"net"
       },
       {
       "start": "09/01/2018",
@@ -680,7 +680,7 @@ var lease_data = [
       "base_rent":10.99,
       "re_taxes": "net",
       "cam":"net",
-      "mgmt_fee":"net"
+      "mgmt":"net"
       },
       {
       "start": "09/01/2019",
@@ -688,7 +688,7 @@ var lease_data = [
       "base_rent":11.32,
       "re_taxes": "net",
       "cam":"net",
-      "mgmt_fee":"net"
+      "mgmt":"net"
       },
       {
       "start": "09/01/2020",
@@ -696,7 +696,7 @@ var lease_data = [
       "base_rent":11.66,
       "re_taxes": "net",
       "cam":"net",
-      "mgmt_fee":"net"
+      "mgmt":"net"
       }
     ],
     "extensions":[
@@ -707,7 +707,7 @@ var lease_data = [
       "base_rent":11.66,
       "re_taxes": "net",
       "cam":"net",
-      "mgmt_fee":"net"
+      "mgmt":"net"
       }
     ]
   }
@@ -728,7 +728,7 @@ var lease_data = [
       "base_rent":7.53,
       "re_taxes": "net",
       "cam":"net",
-      "mgmt_fee":"net"
+      "mgmt":"net"
       }
     ]
   }
@@ -749,7 +749,7 @@ var lease_data = [
       "base_rent":9.85,
       "re_taxes": "net",
       "cam":"net",
-      "mgmt_fee":"net"
+      "mgmt":"net"
       },
       {
       "start": "10/01/2017",
@@ -757,7 +757,7 @@ var lease_data = [
       "base_rent":10.15,
       "re_taxes": "net",
       "cam":"net",
-      "mgmt_fee":"net"
+      "mgmt":"net"
       }
     ],
     "extensions": [
@@ -768,7 +768,29 @@ var lease_data = [
       "base_rent":10.15,
       "re_taxes": "net",
       "cam":"net",
-      "mgmt_fee":"net"
+      "mgmt":"net"
+      }
+    ]
+  }
+},
+{
+  "id":15,
+  "tenant":"solar panels",
+  "space": {
+    "id":"roof",
+    "sqft": 0,
+    "pro_rata": 0,
+    "lease-start":"01/01/2017",
+    "lease-end":"12/31/2025",
+    "periods" : [
+      {
+      "start": "01/01/2017",
+      "end":"12/31/2025",
+      "fixed_rent":100000,
+      "base_rent":undefined,
+      "re_taxes": "none",
+      "cam":"none",
+      "mgmt":"none"
       }
     ]
   }

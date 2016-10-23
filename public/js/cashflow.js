@@ -6,9 +6,12 @@ leases = lease_data;
 expenses = expense_data;
 scenarios = scenario_data;
 //vacancies = vacancy_data;
+new_leases = []
+
 retaxes = 633873
 cam = 188802
 sqft = 248007
+mgmt = 60000
 
 start_date = new Date (2017,1,1)
 hold_period = 5
@@ -25,7 +28,7 @@ myApp.controller('myController', ['$scope',function($scope) {
   $scope.scenario = undefined
   $scope.scenario_id = 1
   $scope.expirations = {}
-  $scope.new_leases = []
+  $scope.new_leases = {}
 
   $scope.show_nets = false
   $scope.toggle_nets = function() {
@@ -40,6 +43,16 @@ myApp.controller('myController', ['$scope',function($scope) {
   $scope.show_vacancies = false
   $scope.toggle_vacancies = function() {
     $scope.show_vacancies = !$scope.show_vacancies
+  }
+
+  $scope.show_expirations = false
+  $scope.toggle_expirations = function() {
+    $scope.show_expirations = !$scope.show_expirations
+  }
+
+  $scope.show_new_leases = false
+  $scope.toggle_new_leases = function() {
+    $scope.show_new_leases = !$scope.show_new_leases
   }
 
   $scope.show_expenses = false
@@ -60,7 +73,17 @@ myApp.controller('myController', ['$scope',function($scope) {
   $scope.get_years_rent = function(year,charge) {
     x = get_years_rent(year,charge,$scope.show_psf,$scope.scenario)
     return x
-  }   
+  }  
+  
+  $scope.get_years_new_rent = function(year,charge) {
+    x = get_years_new_rent(year,charge,$scope.show_psf)
+    return x
+  }  
+  
+  $scope.get_years_total_rent = function(year,charge) {
+    x = get_years_total_rent(year,charge,$scope.show_psf,$scope.scenario)
+    return x
+  }    
   
   $scope.get_years_expense = function(expense_id,year) {
     x = get_years_expense(expense_id,year,$scope.show_psf)
@@ -82,32 +105,67 @@ myApp.controller('myController', ['$scope',function($scope) {
     return x
   } 
   
-  $scope.get_years_expirations = function(year) {
+  $scope.get_new_leases = function(year) {
     x = get_expirations(year,$scope.scenario)
     return x
   } 
   
-  $scope.get_noi = function (year) {
-    i = get_years_rent(year,'all',false,$scope.scenario)
+  $scope.get_tenant_improvements = function(year) {
+    x = get_tenant_improvements(year,$scope.scenario)
+    return x
+  } 
+  
+  $scope.get_leasing_commissions = function(year) {
+    x = get_leasing_commissions(year,$scope.scenario)
+    return x
+  } 
+  
+  
+  /*
+  $scope.get_years_expirations = function(year) {
+    x = get_expirations(year,$scope.scenario)
+    return x
+  } 
+  */
+  
+  $scope.get_noi = function (year,psf) {
+    i = get_years_total_rent(year,'all',false,$scope.scenario)
     //console.log ("i=" + i)
     x = get_years_expense('all',year)
     //console.log ("x=" + x)
     noi = i - x
-    if ($scope.show_psf == true) {
+    if (psf == true) {
       return Math.round(noi / sqft * 100) / 100
     } else {
       return noi
     }
   } 
 
+
+  $scope.get_cash_flow = function (year,psf) {
+    i = $scope.get_noi(year,'all',false)
+    //console.log ("i=" + i)
+    x = get_tenant_improvements(year,$scope.scenario)
+    
+    x += get_leasing_commissions(year,$scope.scenario)
+    //console.log ("x=" + x)
+    cash_flow = i - x
+    if (psf == true) {
+      return Math.round(cash_flow / sqft * 100) / 100
+    } else {
+      return cash_flow
+    }
+  } 
+
   $scope.init = function() {
+    
     year = {}
     year.start_date = new Date(start_date)
     $scope.years.push(year)
     $scope.scenario = $scope.scenarios.filter(function(s) { return s.id === $scope.scenario_id; })[0];
     $scope.expirations[year.start_date.getFullYear()] = get_expirations(year.start_date.getFullYear(),$scope.scenario)
 
-    for (i=1; i<hold_period;i++){
+    for (i=1; i<hold_period;i++) {
       year = {}
       year.start_date = new Date(start_date)
       yearnum = year.start_date.getFullYear() + i
@@ -117,9 +175,9 @@ myApp.controller('myController', ['$scope',function($scope) {
       $scope.expirations[yearnum] = get_expirations(yearnum,$scope.scenario)
     }
     //console.log($scope.scenario)
-    $scope.new_leases = get_new_leases($scope.scenario)
+    new_leases = get_new_leases($scope.scenario)
+    $scope.new_leases = new_leases
     //console.log($scope.expirations)
-    
     
   } 
   

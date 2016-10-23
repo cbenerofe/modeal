@@ -18,7 +18,27 @@ get_years_occupancy = function(year,scenario) {
     percent = count/12
     sqft_rented += l.space.sqft * percent
   })
-
+  
+  Object.keys(new_leases).forEach(function (key) { 
+    if (new_leases[key] != undefined) {
+      new_leases[key].forEach(function(l) {
+        //console.log(JSON.stringify(l.id) + " " + year)
+        count = 0
+        for (m=1;m<=12;m++) {
+          month = new Date(year,m,1)
+          p = l.space.periods[0]
+          if (p != undefined) {
+            if (p.start_date <= month && p.end_date >= month)
+            count += 1
+          }
+        }
+        //console.log(JSON.stringify(l.id) + " " + year + " " + count)
+        percent = count/12
+        sqft_rented += l.space.sqft * percent
+      })
+    }
+  })
+  
   return Math.round(sqft_rented / sqft * 100) / 100
 
 }   
@@ -219,10 +239,10 @@ get_expirations = function(year,scenario) {
         v.space_id = l.space.id
         v.sqft = l.space.sqft
         v.pro_rata = l.space.pro_rata
-        v.available = p.end
+        v.available = end
         v.old_tenant = l.tenant
-        pieces = p.end.split("/")
-        v.month = pieces[0] + "/" + pieces[1]
+        //pieces = p.end.split("/")
+        //v.month = pieces[0] + "/" + pieces[1]
         expirations.push(v)
       }
     }
@@ -236,7 +256,7 @@ get_new_leases = function(scenario) {
   // for each expiration 
   // create a new lease
   // after waiting period
-  new_leases = []
+  new_leases = {}
   expirations = get_all_expirations(scenario)
   expirations.forEach(function(e) {
     l = {}
@@ -248,18 +268,25 @@ get_new_leases = function(scenario) {
     pieces = e.available.split("/")
     start = new Date(pieces[2],pieces[0],pieces[1])
     start.setMonth(start.getMonth() + scenario.down_months)
-    p.start = start
-    end = new Date(pieces[2],pieces[0],pieces[1])
-    end.setFullYear(start.getFullYear() + scenario.new_lease.years)
-    p.end = end
+    p.start_date = start
+    p.start = start.getMonth() + "/" + start.getDate() + "/" + start.getFullYear()
+    end = new Date(start.valueOf())
+    end.setFullYear(end.getFullYear() + scenario.new_lease.years)
+    p.end_date = end
+    p.end = end.getMonth() + "/" + end.getDate() + "/" + end.getFullYear()
     p.base_rent = scenario.new_lease.base_rent
     p.re_taxes = scenario.new_lease.re_taxes
     p.cam = scenario.new_lease.cam
     p.mgmt_fee = scenario.new_lease.mgmt_fee
-    l.periods = []
-    l.periods.push(p)
-    new_leases.push(l)
-    //console.log(p)
+    l.space.periods = []
+    l.space.periods.push(p)
+    if (new_leases[start.getFullYear()] == undefined) {
+      new_leases[start.getFullYear()] =[]
+    }
+    l.ti = scenario.new_lease.ti_psf * e.sqft
+    l.lc = Math.round(scenario.new_lease.commision * e.sqft * scenario.new_lease.base_rent * scenario.new_lease.years)
+    new_leases[start.getFullYear()].push(l)
+    //console.log(l)
   })
   // console.log(new_leases)
   return new_leases
