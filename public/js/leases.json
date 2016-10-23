@@ -21,7 +21,7 @@ var lease_data = [
     ],
     "extensions": [
       {
-      "id":1,
+      "id": 1,
       "start": "11/1/2017",
       "end":"10/30/2019",
       "base_rent":9.20,
@@ -30,7 +30,7 @@ var lease_data = [
       "mgmt_fee":"net"
       },
       {
-      "id":2,
+      "id": 2,
       "start": "11/1/2019",
       "end":"10/30/2021",
       "base_rent":9.48,

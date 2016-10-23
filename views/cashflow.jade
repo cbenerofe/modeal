@@ -11,6 +11,8 @@ html(ng-app="myApp")
     script(src="js/leases.json")
     script(src="js/expenses.json")
     script(src="js/scenarios.json")
+    script(src="js/vacancies.json")
+    script(src="js/vacancy.js")
     script(src="js/expenses.js")
     script(src="js/leases.js")
     script(src="js/cashflow.js")
@@ -23,10 +25,6 @@ html(ng-app="myApp")
             span(ng-if="show_nets") hide nets
             span(ng-if="!show_nets") show nets
         .col-xs-3
-          .btn(ng-click="toggle_expenses()" )
-            span(ng-if="show_expenses") hide expenses
-            span(ng-if="!show_expenses") show expenses
-        .col-xs-3
           .btn(ng-click="toggle_psf()" )
             span(ng-if="show_psf") hide psf
             span(ng-if="!show_psf") show psf
@@ -34,7 +32,7 @@ html(ng-app="myApp")
       table.table
         thead
           tr
-            th 
+            th
 
             th(ng-repeat="year in years" ) 
               .btn
@@ -44,17 +42,20 @@ html(ng-app="myApp")
                 .col-xs-4 retax
                 .col-xs-4 cam
 
-
         tbody
           tr
-            th 
-              .btn(ng-click="toggle_tenants()" ) occupied
+            th.white
+              .btn(ng-click="toggle_tenants()" ) occupancy
             td(ng-repeat="year in years" ng-class="{white: ($index % 2) }")
               | {{ get_years_occupancy(year.start_date.getFullYear()) }}
 
         tbody(ng-if="show_tenants")
           tr(ng-repeat="lease in leases")
-            th {{lease.tenant}}
+            th.white 
+              .row
+                .col-xs-12.col-sm-6 {{lease.tenant}} 
+                .col-xs-12.col-sm-6 {{lease.space.sqft}}
+                
             td(ng-repeat="year in years" ng-class="{white: ($index % 2) }")
               .row(ng-if="show_nets")
                 .col-xs-4
@@ -69,29 +70,45 @@ html(ng-app="myApp")
 
         tbody(ng-if="!show_tenants")
           tr(ng-if="show_nets")
-            th base rent
+            th.white base rent
               td(ng-repeat="year in years" ng-class="{white: ($index % 2) }")
                 | {{ get_years_rent(year.start_date.getFullYear(),'base') }}
           tr(ng-if="show_nets")
-            th re taxes
+            th.white re taxes
               td(ng-repeat="year in years" ng-class="{white: ($index % 2) }")
                 | {{ get_years_rent(year.start_date.getFullYear(),'retax') }}
           tr(ng-if="show_nets")
-            th cam 
+            th.white cam 
               td(ng-repeat="year in years" ng-class="{white: ($index % 2) }")
                 | {{ get_years_rent(year.start_date.getFullYear(),'cam') }}
 
         tbody
           tr
-            th vacant
+            th.white 
+              .btn(ng-click="toggle_vacancies()" ) vacancy
             td(ng-repeat="year in years" ng-class="{white: ($index % 2) }")
-              | {{ get_years_vacancy(year.start_date.getFullYear()) }}
+              .row
+                .col-xs-12 {{ get_years_vacancy(year.start_date.getFullYear()) }}
 
-
+        tbody(ng-if="show_vacancies")
+          tr
+            th.white expirations
+            td(ng-repeat="year in years" ng-class="{white: ($index % 2) }")
+              .row(ng-repeat="space in expirations[year.start_date.getFullYear()]")
+                .col-xs-6 {{ space.sqft }} 
+                .col-xs-6 {{ space.month }} 
+                .col-xs-12 {{ space.old_tenant}}
+              
+        tbody(ng-if="false")
+          tr(ng-repeat="lease in new_leases")
+            th.white new leases
+            td(ng-repeat="year in years" ng-class="{white: ($index % 2) }")
+              
+              
         tbody(ng-if="show_tenants")
           tr
-            th total income
-            th(ng-repeat="year in years") 
+            th.white total income
+            th(ng-repeat="year in years"  ng-class="{white: ($index % 2) }" ) 
               .row(ng-if="show_nets")
                 .col-xs-4 {{ get_years_rent(year.start_date.getFullYear(),'base') }}
                 .col-xs-4 {{ get_years_rent(year.start_date.getFullYear(),'retax') }}
@@ -101,7 +118,7 @@ html(ng-app="myApp")
 
         tbody(ng-if="!show_tenants")
           tr
-            th total income
+            th.white total income
             th(ng-repeat="year in years" ng-class="{white: ($index % 2) }") 
               .block()
                 | {{ get_years_rent(year.start_date.getFullYear(),'all') }}
@@ -109,26 +126,21 @@ html(ng-app="myApp")
 
         tbody(ng-if="show_expenses")
           tr(ng-repeat="expense in expenses")
-            th {{ expense.name }}
+            th.white {{ expense.name }}
             td(ng-repeat="year in years" ng-class="{white: ($index % 2) }")
               .block()
                 | {{ get_years_expense($parent.expense.id, year.start_date.getFullYear()) }}
 
         tbody
           tr
-            th total expense
+            th.white 
+              .btn(ng-click="toggle_expenses()" ) total expense
             th(ng-repeat="year in years" ng-class="{white: ($index % 2) }") 
               | {{ get_years_expense('all',year.start_date.getFullYear()) }}
 
 
-        tbody(ng-if="show_psf")
+        tbody()
           tr
-            th net operating income
-            th(ng-repeat="year in years" ng-class="{white: ($index % 2) }") 
-              | {{ get_noi(year.start_date.getFullYear(),show_psf) }}
-
-        tbody
-          tr
-            th net operating income
+            th.white net operating income
             th(ng-repeat="year in years" ng-class="{white: ($index % 2) }") 
               | {{ get_noi(year.start_date.getFullYear()) }}

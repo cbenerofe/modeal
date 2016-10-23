@@ -22,22 +22,40 @@
 
   get_extension_period = function(space,month,scenario) {
     var period = undefined
-    if (space != undefined) {
-      var periods = space.extensions;
-      if (periods != undefined) {  
-        periods.forEach(function(p) {
-          pieces = p.start.split("/")
-          start = new Date(pieces[2],pieces[0],pieces[1])
-          //console.log("p="+JSON.stringify(p))
-          pieces = p.end.split("/")
-          end = new Date(pieces[2],pieces[0],pieces[1])
-          //console.log("year="+year + " start=" + start.getFullYear() + " end=" + end.getFullYear() )
-          if (( month >= start) && ( month <= end)) {
-            period = p
-          }
-        })
-      }
-    }
+    if (space == undefined || scenario == undefined) {
+      //console.log("space=" + space.id + " scenario=" + scenario)
+    } else {
+      //console.log("space=" + space.id + "scenario=" + scenario)
+      var periods = []
+      // loop through scenarios
+      // find ones for this lease_id and space_id
+      // then loop through extensions
+      // assemble those relevant periods
+      scenario.extensions.forEach(function(se) {  
+        if (se.space_id == space.id) {
+          //console.log(se)
+          space.extensions.forEach(function(e) {
+            if (se.extension_id == e.id) {
+              //console.log(e)
+              periods.push(e)
+            }
+          })
+        }
+      })
+      
+      periods.forEach(function(p) {
+        pieces = p.start.split("/")
+        start = new Date(pieces[2],pieces[0],pieces[1])
+        //console.log("p="+JSON.stringify(p))
+        pieces = p.end.split("/")
+        end = new Date(pieces[2],pieces[0],pieces[1])
+        //console.log("year="+year + " start=" + start.getFullYear() + " end=" + end.getFullYear() )
+        if (( month >= start) && ( month <= end)) {
+          period = p
+        }
+      })
+      
+    } 
     return period
   }
 
@@ -78,7 +96,7 @@
     return amount
   }
 
-  get_tenants_rent = function(lease_id,year,charge,psf=false) {
+  get_tenants_rent = function(lease_id,year,charge,psf,scenario) {
     // charge = base, retax, cam, mgt,
     //find lease
     //console.log(JSON.stringify(lease_id) + " " + year)
@@ -90,11 +108,11 @@
       month = new Date(year,m,1)
       monthly = 0;
       if (charge == 'all') {
-        monthly += get_charge(lease.space,month,'base')
-        monthly += get_charge(lease.space,month,'retax')
-        monthly += get_charge(lease.space,month,'cam')
+        monthly += get_charge(lease.space,month,'base',scenario)
+        monthly += get_charge(lease.space,month,'retax',scenario)
+        monthly += get_charge(lease.space,month,'cam',scenario)
       } else {
-        monthly += get_charge(lease.space,month,charge)
+        monthly += get_charge(lease.space,month,charge,scenario)
       }
       yearly += monthly
     }
@@ -106,12 +124,12 @@
     }
   }   
   
-  get_years_rent = function(year,charge,psf=false) {
+  get_years_rent = function(year,charge,psf,scenario) {
     //find all leases
     total = 0
     leases.forEach(function(l) {
       //console.log(JSON.stringify(l.id) + " " + year)
-      rent = get_tenants_rent(l.id,year,charge)
+      rent = get_tenants_rent(l.id,year,charge,false,scenario)
       total += rent
     })
 
@@ -124,57 +142,6 @@
   
   
 
-  get_years_occupancy = function(year) {
-    //find all leases
-    sqft_rented = 0
-    leases.forEach(function(l) {
-      count = 0
-      for (m=1;m<=12;m++) {
-        month = new Date(year,m,1)
-        p = get_lease_period(l.space,month)
-        if (p == undefined) {
-          p = get_extension_period(l.space,month)
-        }
-        if (p != undefined) {
-          count += 1
-        }
-      }
-      //console.log(JSON.stringify(l.id) + " " + year + " " + count)
-      percent = count/12
-      sqft_rented += l.space.sqft * percent
-    })
-
-    return Math.round(sqft_rented / sqft * 100) / 100
-  
-  }   
-  
-  
-  get_years_vacancy = function(year) {
-    //find all leases
-    sqft_rented = 0
-    leases.forEach(function(l) {
-      count = 0
-      for (m=1;m<=12;m++) {
-        month = new Date(year,m,1)
-        p = get_lease_period(l.space,month)
-        if (p == undefined) {
-          p = get_extension_period(l.space,month)
-        }
-        if (p != undefined) {
-          count += 1
-        }
-      }
-      //console.log(JSON.stringify(l.id) + " " + year + " " + count)
-      percent = count/12
-      sqft_rented += l.space.sqft * percent
-    })
-
-    occupancy = sqft_rented / sqft
-    vacancy = 1 - occupancy
-
-    return Math.round(vacancy * 100) / 100
-  
-  }   
 
 
 

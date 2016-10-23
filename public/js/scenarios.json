@@ -5,8 +5,27 @@ var scenario_data = [
     "extensions":[
       {
         "lease_id":1,
+        "space_id":"225-108",
+        "extension_id":1
+      },
+      {
+        "lease_id":1,
+        "space_id":"225-108",
+        "extension_id":2
+      },
+      {
+        "lease_id":2,
+        "space_id":"225-106",
         "extension_id":1
       }
-    ]
+    ],
+    "down_months": 6,
+    "new_lease" : {
+      "years" : 3,
+      "base_rent":10,
+      "re_taxes": "net",
+      "cam":"net",
+      "mgmt_fee":"net"
+    }
   }
 ]
