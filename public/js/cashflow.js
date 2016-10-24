@@ -31,7 +31,7 @@ myApp.controller('myController', ['$scope',function($scope) {
   $scope.new_leases = {}
   
   $scope.$watch('scenario_id', function() {
-      //$scope.init()
+      $scope.init()
    //  $scope.scenario = $scope.scenarios.filter(function(s) { return s.id === $scope.scenario_id; })[0];
       //$scope.apply();
   });
