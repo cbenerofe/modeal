@@ -126,6 +126,31 @@ var expense_data = [
   },
   {
     "id":6,
+    "name": "snow removal",
+    "chargeback": "cam",
+    "actuals": [
+      {
+        "year": "2014",
+        "amount":56158
+      },
+      {
+        "year": "2015",
+        "amount":57697
+      }
+    ],
+    "estimates":[
+      {
+        "year":"2016",
+        "amount":35000
+      },
+      {
+        "year":"2017",
+        "amount":35000
+      }
+    ]
+  },
+  {
+    "id":7,
     "name": "sprinklers",
     "chargeback": "cam",
     "actuals": [
@@ -150,7 +175,7 @@ var expense_data = [
     ]
   },
   {
-    "id":7,
+    "id":8,
     "name": "alarm",
     "chargeback": "cam",
     "actuals": [
@@ -175,7 +200,7 @@ var expense_data = [
     ]
   },
   {
-    "id":8,
+    "id":9,
     "name": "mgmt fee",
     "chargeback": "mgmt",
     "actuals": [
@@ -191,11 +216,11 @@ var expense_data = [
     "estimates":[
       {
         "year":"2016",
-        "amount":50959
+        "amount":110000
       },
       {
         "year":"2017",
-        "amount":52232
+        "amount":110000
       }
     ]
   }

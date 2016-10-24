@@ -1,7 +1,7 @@
 var scenario_data = [
   {
     "id":1,
-    "name": "something",
+    "name": "best",
     "extensions":[
       {
         "lease_id":1,
@@ -17,17 +17,71 @@ var scenario_data = [
         "lease_id":2,
         "space_id":"225-106",
         "extension_id":1
+      },
+      {
+        "lease_id":2,
+        "space_id":"225-106",
+        "extension_id":2
+      },
+      {
+        "lease_id":6,
+        "space_id":"225-109",
+        "extension_id":1
+      },
+      {
+        "lease_id":7,
+        "space_id":"227-103/103",
+        "extension_id":1
+      },
+      {
+        "lease_id":8,
+        "space_id":"227-105/106",
+        "extension_id":1
+      },
+      {
+        "lease_id":11,
+        "space_id":"229-104/105",
+        "extension_id":1
+      },
+      {
+        "lease_id":12,
+        "space_id":"229-102/103",
+        "extension_id":1
+      },
+      {
+        "lease_id":14,
+        "space_id":"229-101",
+        "extension_id":1
       }
+      
     ],
     "down_months": 6,
     "new_lease" : {
-      "years" : 3,
+      "years" : 5,
       "base_rent":9.5,
       "re_taxes": "net",
       "cam":"net",
       "mgmt":"net",
       "ti_psf":5,
       "commision":.05
-    }
+    },
+    "capex":68000
+  },
+  {
+    "id":2,
+    "name": "worst",
+    "extensions":[
+    ],
+    "down_months": 6,
+    "new_lease" : {
+      "years" : 5,
+      "base_rent":9.5,
+      "re_taxes": "net",
+      "cam":"net",
+      "mgmt":"net",
+      "ti_psf":5,
+      "commision":.05
+    },
+    "capex":68000
   }
 ]

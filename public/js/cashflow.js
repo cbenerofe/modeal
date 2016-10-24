@@ -15,7 +15,7 @@ mgmt = 60000
 
 start_date = new Date (2017,1,1)
 hold_period = 5
-end_date = new Date (2021,12,31)
+end_date = new Date (2022,12,31)
 
 myApp.controller('myController', ['$scope',function($scope) {
   
@@ -29,6 +29,12 @@ myApp.controller('myController', ['$scope',function($scope) {
   $scope.scenario_id = 1
   $scope.expirations = {}
   $scope.new_leases = {}
+  
+  $scope.$watch('scenario_id', function() {
+      //$scope.init()
+   //  $scope.scenario = $scope.scenarios.filter(function(s) { return s.id === $scope.scenario_id; })[0];
+      //$scope.apply();
+  });
 
   $scope.show_nets = false
   $scope.toggle_nets = function() {
@@ -120,7 +126,10 @@ myApp.controller('myController', ['$scope',function($scope) {
     return x
   } 
   
-  
+  $scope.get_capex = function(year) {
+    x = get_capex(year,$scope.scenario)
+    return x
+  } 
   /*
   $scope.get_years_expirations = function(year) {
     x = get_expirations(year,$scope.scenario)
@@ -148,6 +157,8 @@ myApp.controller('myController', ['$scope',function($scope) {
     x = get_tenant_improvements(year,$scope.scenario)
     
     x += get_leasing_commissions(year,$scope.scenario)
+    
+    x += get_capex(year,$scope.scenario)
     //console.log ("x=" + x)
     cash_flow = i - x
     if (psf == true) {
@@ -160,6 +171,7 @@ myApp.controller('myController', ['$scope',function($scope) {
   $scope.init = function() {
     
     year = {}
+    $scope.years = []
     year.start_date = new Date(start_date)
     $scope.years.push(year)
     $scope.scenario = $scope.scenarios.filter(function(s) { return s.id === $scope.scenario_id; })[0];

@@ -28,7 +28,12 @@ html(ng-app="myApp")
           .btn(ng-click="toggle_psf()" )
             span(ng-if="show_psf") hide psf
             span(ng-if="!show_psf") show psf
-
+        .col-xs-3
+          select(ng-model="scenario_id")
+            option(ng-repeat="scenario in scenarios" value="{{scenario.id}} ")
+              {{ scenario.name }}
+        .col-xs-3
+          {{ scenario_id }}
       table.table
         thead
           tr
@@ -223,6 +228,12 @@ html(ng-app="myApp")
             th.white.key leasing commisions
             th(ng-repeat="year in years" ng-class="{white: ($index % 2) }") 
               | {{ get_leasing_commissions(year.start_date.getFullYear()) }}
+
+        tbody()
+          tr
+            th.white.key capex reserve
+            th(ng-repeat="year in years" ng-class="{white: ($index % 2) }") 
+              | {{ get_capex(year.start_date.getFullYear()) }}
 
         tbody()
           tr
