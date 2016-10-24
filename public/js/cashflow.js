@@ -9,7 +9,7 @@ scenarios = scenario_data;
 new_leases = []
 
 retaxes = 633873
-cam = 188802
+cam = 203456
 sqft = 248007
 mgmt = 60000
 

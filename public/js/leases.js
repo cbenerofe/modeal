@@ -73,6 +73,7 @@
       return 0
     }
     amount = 0
+    yeardiff = month.getFullYear() - start_date.getFullYear()
     switch (charge) {
       case 'base':
         //console.log(period.base_rent)
@@ -84,12 +85,17 @@
       case 'retax':
         if (period.re_taxes == 'net') {
           //console.log(lease.space.pro_rata * retaxes)
-          amount += Math.round((space.pro_rata * retaxes)/12)
+          taxinc = yeardiff * .02 * retaxes
+          curtaxes = retaxes + taxinc
+          //console.log(month.getFullYear() + " " + curtaxes)
+          amount += Math.round((space.pro_rata * curtaxes)/12)
         }
         break;
       case 'cam':
         if (period.cam == 'net') {
-          amount += Math.round((space.pro_rata * cam)/12)
+          caminc = yeardiff * .02 * cam
+          curcam = cam + caminc
+          amount += Math.round((space.pro_rata * curcam)/12)
         }
         break;
       case 'mgmt':
