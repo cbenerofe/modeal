@@ -27,13 +27,12 @@ myApp.controller('myController', ['$scope',function($scope) {
   $scope.scenarios = scenarios
   $scope.scenario = undefined
   $scope.scenario_id = 1
+  //$scope.scenario_id = $scope.scenarios[0].id
   $scope.expirations = {}
   $scope.new_leases = {}
   
   $scope.$watch('scenario_id', function() {
-      $scope.init()
-   //  $scope.scenario = $scope.scenarios.filter(function(s) { return s.id === $scope.scenario_id; })[0];
-      //$scope.apply();
+    $scope.init()
   });
 
   $scope.show_nets = false
@@ -169,12 +168,12 @@ myApp.controller('myController', ['$scope',function($scope) {
   } 
 
   $scope.init = function() {
-    
     year = {}
     $scope.years = []
     year.start_date = new Date(start_date)
     $scope.years.push(year)
-    $scope.scenario = $scope.scenarios.filter(function(s) { return s.id === $scope.scenario_id; })[0];
+
+    $scope.scenario = $scope.scenarios.filter(function(s) { return s.id == $scope.scenario_id; })[0];
     $scope.expirations[year.start_date.getFullYear()] = get_expirations(year.start_date.getFullYear(),$scope.scenario)
 
     for (i=1; i<hold_period;i++) {

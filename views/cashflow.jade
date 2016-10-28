@@ -30,8 +30,8 @@ html(ng-app="myApp")
             span(ng-if="!show_psf") show psf
         .col-xs-3
           select(ng-model="scenario_id")
-            option(ng-repeat="scenario in scenarios" value="{{scenario.id}} ")
-              | {{ scenario.name }}
+            option(ng-repeat="s in scenarios" value="{{s.id}} ")
+              | {{ s.name }}
         .col-xs-3
           | {{ scenario_id }}
       table.table
