@@ -259,6 +259,7 @@ get_new_leases = function(scenario) {
   new_leases = {}
   expirations = get_all_expirations(scenario)
   expirations.forEach(function(e) {
+    //console.log("exp=" + JSON.stringify(e))
     l = {}
     l.space = {}
     l.space.id = e.space_id
@@ -266,15 +267,21 @@ get_new_leases = function(scenario) {
     l.space.sqft = e.sqft
     p = {}
     pieces = e.available.split("/")
-    start = new Date(pieces[2],pieces[0],pieces[1])
-    start.setMonth(start.getMonth() + scenario.down_months)
+    //console.log(pieces)
+    start = new Date(parseInt(pieces[2]),parseInt(pieces[0]),parseInt(pieces[1]))
+    start.setMonth(start.getMonth() + parseInt(scenario.down_months) -1)
     p.start_date = start
     p.start = start.getMonth() + "/" + start.getDate() + "/" + start.getFullYear()
     end = new Date(start.valueOf())
-    end.setFullYear(end.getFullYear() + scenario.new_lease.years)
+    end.setFullYear(end.getFullYear() + parseInt(scenario.new_lease.years))
     p.end_date = end
     p.end = end.getMonth() + "/" + end.getDate() + "/" + end.getFullYear()
-    p.base_rent = scenario.new_lease.base_rent
+    
+    diff = p.start_date.getFullYear() - 2017
+    increase = diff * .035 * scenario.new_lease.base_rent
+    
+    p.base_rent = parseInt(scenario.new_lease.base_rent) + increase
+    //console.log("diff=" + diff + " increase=" + increase + " new_rent=" + p.base_rent)
     p.re_taxes = scenario.new_lease.re_taxes
     p.cam = scenario.new_lease.cam
     p.mgmt_fee = scenario.new_lease.mgmt_fee
@@ -285,6 +292,7 @@ get_new_leases = function(scenario) {
     }
     l.ti = scenario.new_lease.ti_psf * e.sqft
     l.lc = Math.round(scenario.new_lease.commision * e.sqft * scenario.new_lease.base_rent * scenario.new_lease.years)
+    console.log("newl=" + JSON.stringify(l))
     new_leases[start.getFullYear()].push(l)
     //console.log(l)
   })

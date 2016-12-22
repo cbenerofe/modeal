@@ -22,8 +22,8 @@ sqft = 643000
 mgmt = 100000
 
 start_date = new Date (2017,1,1)
-hold_period = 5
-end_date = new Date (2022,12,31)
+hold_period = 7
+end_date = new Date (2023,12,31)
 
 myApp.controller('myController', ['$scope',function($scope) {
   
