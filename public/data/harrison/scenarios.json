@@ -1,8 +1,27 @@
 var scenario_data = [
   {
     "id":"1",
-    "name": "best",
+    "name": "no renew",
     "extensions":[
+    ],
+    "down_months": "3",
+    "new_lease" : {
+      "years" : "10",
+      "base_rent":"6.5",
+      "re_taxes": "net",
+      "cam":"net",
+      "mgmt":"net",
+      "ti_psf":"2",
+      "commision":".05"
+    },
+    "capex":"75000"
+  },
+
+  {
+    "id":"2",
+    "name": "some renew",
+    "extensions":[
+      
     ],
     "down_months": "3",
     "new_lease" : {

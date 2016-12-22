@@ -8,11 +8,11 @@ var expense_data = [
     "estimates":[
       {
         "year":"2016",
-        "amount":600000
+        "amount":635686
       },
       {
         "year":"2017",
-        "amount":600000
+        "amount":635686
       }
     ]
   },
@@ -25,11 +25,11 @@ var expense_data = [
     "estimates":[
       {
         "year":"2016",
-        "amount":500000
+        "amount":780669
       },
       {
         "year":"2017",
-        "amount":500000
+        "amount":780669
       }
     ]
   },
