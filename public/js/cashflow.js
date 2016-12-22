@@ -16,10 +16,10 @@ vacancies = vacancy_data
 
 new_leases = []
 
-retaxes = 633873
-cam = 203456
-sqft = 248007
-mgmt = 60000
+retaxes = 600000
+cam = 300000
+sqft = 643000
+mgmt = 100000
 
 start_date = new Date (2017,1,1)
 hold_period = 5

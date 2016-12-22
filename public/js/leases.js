@@ -74,6 +74,7 @@
     }
     amount = 0
     yeardiff = month.getFullYear() - start_date.getFullYear()
+    
     switch (charge) {
       case 'base':
         //console.log(period.base_rent)
@@ -86,9 +87,11 @@
         if (period.re_taxes == 'net') {
           //console.log(lease.space.pro_rata * retaxes)
           taxinc = yeardiff * .02 * retaxes
+          
           curtaxes = retaxes + taxinc
           //console.log(month.getFullYear() + " " + curtaxes)
           amount += Math.round((space.pro_rata * curtaxes)/12)
+                    
         }
         break;
       case 'cam':

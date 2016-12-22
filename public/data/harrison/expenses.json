@@ -1,0 +1,53 @@
+var expense_data = [
+  {
+    "id":1,
+    "name": "re taxes",
+    "chargeback": "retax",
+    "actuals": [
+    ],
+    "estimates":[
+      {
+        "year":"2016",
+        "amount":600000
+      },
+      {
+        "year":"2017",
+        "amount":600000
+      }
+    ]
+  },
+  {
+    "id":2,
+    "name": "opex",
+    "chargeback": "cam",
+    "actuals": [
+    ],
+    "estimates":[
+      {
+        "year":"2016",
+        "amount":500000
+      },
+      {
+        "year":"2017",
+        "amount":500000
+      }
+    ]
+  },
+  {
+    "id":9,
+    "name": "mgmt fee",
+    "chargeback": "mgmt",
+    "actuals": [
+    ],
+    "estimates":[
+      {
+        "year":"2016",
+        "amount":110000
+      },
+      {
+        "year":"2017",
+        "amount":110000
+      }
+    ]
+  }
+]

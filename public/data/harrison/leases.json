@@ -1,0 +1,313 @@
+
+var lease_data = [
+{
+  "id":"1",
+  "tenant":"g&s-1",
+  "space": {
+    "id":"1",
+    "sqft": "187902",
+    "pro_rata": ".2985",
+    "lease-start":"7/1/06",
+    "lease-end":"6/30/21",
+    "periods" : [
+      {
+      "start": "7/1/2015",
+      "end":"6/30/2021",
+      "base_rent": "5.00",
+      "re_taxes": "net",
+      "cam":"net",
+      "mgmt_fee":"none"
+      }
+    ],
+    "extensions": [
+    ]
+  }
+},
+{
+  "id":"2",
+  "tenant":"g&s-2",
+  "space": {
+    "id":"2",
+    "sqft": "67200",
+    "pro_rata": ".1067",
+    "lease-start":"3/1/2008",
+    "lease-end":"7/31/2022",
+    "periods" : [
+      {
+      "start": "3/1/2016",
+      "end":"7/31/2022",
+      "base_rent": "5.6",
+      "re_taxes": "net",
+      "cam":"net",
+      "mgmt":"none"
+      }
+    ],
+    "extensions": [
+    ]
+  }
+},
+{
+  "id":"3",
+  "tenant":"g&s-3",
+  "space": {
+    "id":"3",
+    "sqft": "122253",
+    "pro_rata": ".1942",
+    "lease-start":"8/1/2012",
+    "lease-end":"7/31/2022",
+    "periods" : [
+      {
+      "start": "8/1/2016",
+      "end":"7/31/2017",
+      "base_rent": "4.3",
+      "re_taxes": "net",
+      "cam":"net",
+      "mgmt":"none"
+      },
+      {
+      "start": "8/1/2017",
+      "end":"7/31/2022",
+      "base_rent": "4.75",
+      "re_taxes": "net",
+      "cam":"net",
+      "mgmt":"none"
+      }
+    ]
+  }
+},
+{
+  "id":"4",
+  "tenant":"irby",
+  "space": {
+    "id":"4",
+    "sqft": "30122",
+    "pro_rata": ".0478",
+    "lease-start":"11/17/2014",
+    "lease-end":"11/16/2019",
+    "periods" : [
+      {
+      "start": "11/17/2014",
+      "end":"11/16/2019",
+      "base_rent": "4.78",
+      "re_taxes": "net",
+      "cam":"net",
+      "mgmt":"none"
+      }
+    ],
+    "extensions": [
+      
+    ]
+  }
+},
+{
+  "id": "5",
+  "tenant":"precise",
+  "space": {
+    "id":"5",
+    "sqft": "32538",
+    "pro_rata": ".0517",
+    "lease-start":"5/01/2011",
+    "lease-end":"4/30/2021",
+    "periods" : [
+      {
+      "start": "5/01/2016",
+      "end":"4/30/2017",
+      "base_rent": "4.59",
+      "re_taxes": "net",
+      "cam":"net",
+      "mgmt":"none"
+      },
+      {
+      "start": "5/01/2017",
+      "end":"4/30/2018",
+      "base_rent": "4.69",
+      "re_taxes": "net",
+      "cam":"net",
+      "mgmt":"none"
+      },
+      {
+      "start": "5/01/2018",
+      "end":"4/30/2019",
+      "base_rent": "4.78",
+      "re_taxes": "net",
+      "cam":"net",
+      "mgmt":"none"
+      },
+      {
+      "start": "5/01/2019",
+      "end":"4/30/2020",
+      "base_rent": "4.87",
+      "re_taxes": "net",
+      "cam":"net",
+      "mgmt":"none"
+      },
+      {
+      "start": "5/01/2020",
+      "end":"4/30/2021",
+      "base_rent": "4.97",
+      "re_taxes": "net",
+      "cam":"net",
+      "mgmt":"none"
+      }
+    ]
+  }
+},
+{
+  "id": "6",
+  "tenant":"bng",
+  "space": {
+    "id":"6",
+    "sqft": "20758",
+    "pro_rata": ".0330",
+    "lease-start":"11/01/2013",
+    "lease-end":"10/31/2018",
+    "periods" : [
+      {
+      "start": "11/01/2013",
+      "end":"10/31/2018",
+      "base_rent": "4.25",
+      "re_taxes": "net",
+      "cam":"net",
+      "mgmt":"none"
+      }
+    ],
+    "extensions": [
+    ]
+  }
+},
+{
+  "id": "7",
+  "tenant":"interstate",
+  "space": {
+    "id":"7",
+    "sqft": "17844",
+    "pro_rata": ".0283",
+    "lease-start":"11/01/2010",
+    "lease-end":"10/31/2020",
+    "periods" : [
+      {
+      "start": "4/01/2010",
+      "end":"3/31/2021",
+      "base_rent": "5.66",
+      "re_taxes": "net",
+      "cam":"net",
+      "mgmt":"net"
+      }
+    ],
+    "extensions": [
+    ]
+  }
+},
+{
+  "id": "8",
+  "tenant":"goto",
+  "space": {
+    "id":"8",
+    "sqft": "12410",
+    "pro_rata": ".0197",
+    "lease-start":"12/01/2014",
+    "lease-end":"11/30/2017",
+    "periods" : [
+      {
+      "start": "12/01/2014",
+      "end":"11/30/2017",
+      "base_rent": "7.50",
+      "re_taxes": "net",
+      "cam":"net",
+      "mgmt":"none"
+      }
+    ],
+    "extensions": [
+    ]
+  }
+},
+{
+  "id": "9",
+  "tenant":"rogue",
+  "space": {
+    "id":"9",
+    "sqft": "7278",
+    "pro_rata": ".0116",
+    "lease-start":"10/01/2014",
+    "lease-end":"9/30/2019",
+    "periods" : [
+      {
+      "start": "10/01/2016",
+      "end":"9/30/2017",
+      "base_rent": "7.8",
+      "re_taxes": "net",
+      "cam":"net",
+      "mgmt":"none"
+      },
+      {
+      "start": "10/01/2017",
+      "end":"9/30/2018",
+      "base_rent": "7.95",
+      "re_taxes": "net",
+      "cam":"net",
+      "mgmt":"none"
+      },
+      {
+      "start": "10/01/2018",
+      "end":"9/30/2019",
+      "base_rent": "8.10",
+      "re_taxes": "net",
+      "cam":"net",
+      "mgmt":"none"
+      }
+    ],
+    "extensions": [
+    ]
+  }
+},
+{
+  "id": "10",
+  "tenant":"nature",
+  "space": {
+    "id":"10",
+    "sqft": "12557",
+    "pro_rata": ".0199",
+    "lease-start":"2/01/2014",
+    "lease-end":"1/31/2021",
+    "periods" : [
+      {
+      "start": "2/01/2014",
+      "end":"1/31/2019",
+      "base_rent": "4.6",
+      "re_taxes": "net",
+      "cam":"net",
+      "mgmt":"none"
+      },
+      {
+      "start": "2/01/2019",
+      "end":"1/31/2021",
+      "base_rent": "5",
+      "re_taxes": "net",
+      "cam":"net",
+      "mgmt":"none"
+      }
+    ]
+  }
+},
+{
+  "id":"11",
+  "tenant":"easement",
+  "space": {
+    "id":"11",
+    "sqft": "0",
+    "pro_rata": "0",
+    "lease-start":"01/01/2017",
+    "lease-end":"12/31/2025",
+    "periods" : [
+      {
+      "start": "01/01/2017",
+      "end":"12/31/2025",
+      "fixed_rent":"7500",
+      "re_taxes": "none",
+      "cam":"none",
+      "mgmt":"none"
+      }
+    ]
+  }
+}
+]
