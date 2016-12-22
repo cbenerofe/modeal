@@ -1,19 +1,19 @@
 
-var lease_data = [
+var leases_harrison = [
 {
-  "id":1,
+  "id":"1",
   "tenant":"powerpak",
   "space": {
     "id":"225-108",
-    "sqft": 19825,
-    "pro_rata": .0799,
+    "sqft": "19825",
+    "pro_rata": ".0799",
     "lease-start":"11/1/13",
     "lease-end":"10/30/17",
     "periods" : [
       {
       "start": "11/1/2016",
       "end":"10/30/2017",
-      "base_rent":8.93,
+      "base_rent": "8.93",
       "re_taxes": "net",
       "cam":"net",
       "mgmt_fee":"net"
@@ -21,19 +21,19 @@ var lease_data = [
     ],
     "extensions": [
       {
-      "id": 1,
+      "id": "1",
       "start": "11/1/2017",
       "end":"10/30/2019",
-      "base_rent":9.20,
+      "base_rent": "9.20",
       "re_taxes": "net",
       "cam":"net",
       "mgmt_fee":"net"
       },
       {
-      "id": 2,
+      "id": "2",
       "start": "11/1/2019",
       "end":"10/30/2021",
-      "base_rent":9.48,
+      "base_rent": "9.48",
       "re_taxes": "net",
       "cam":"net",
       "mgmt_fee":"net"
@@ -42,19 +42,19 @@ var lease_data = [
   }
 },
 {
-  "id":2,
+  "id":"2",
   "tenant":"casabella",
   "space": {
     "id":"225-106",
-    "sqft": 100000,
-    "pro_rata": .432,
+    "sqft": "100000",
+    "pro_rata": ".432",
     "lease-start":"1/1/2009",
     "lease-end":"12/31/2018",
     "periods" : [
       {
       "start": "1/1/2017",
       "end":"12/31/2017",
-      "base_rent":9.76,
+      "base_rent": "9.76",
       "re_taxes": "none",
       "cam":"net",
       "mgmt":"net"
@@ -62,7 +62,7 @@ var lease_data = [
       {
       "start": "1/1/2018",
       "end":"12/31/2018",
-      "base_rent":10.15,
+      "base_rent": "10.15",
       "re_taxes": "net",
       "cam":"net",
       "mgmt":"net"
@@ -70,19 +70,19 @@ var lease_data = [
     ],
     "extensions": [
       {
-      "id":1,
+      "id": "1",
       "start": "1/1/2019",
       "end":"12/31/2023",
-      "base_rent":10.50,
+      "base_rent": "10.50",
       "re_taxes": "net",
       "cam":"net",
       "mgmt":"net"
       },
       {
-      "id":2,
+      "id": "2",
       "start": "1/1/2024",
       "end":"12/31/2028",
-      "base_rent":10.50,
+      "base_rent": "10.50",
       "re_taxes": "net",
       "cam":"net",
       "mgmt":"net"
@@ -91,19 +91,19 @@ var lease_data = [
   }
 },
 {
-  "id":3,
+  "id":"3",
   "tenant":"sunrun",
   "space": {
     "id":"225-101",
-    "sqft": 8990,
-    "pro_rata": .0362,
+    "sqft": "8990",
+    "pro_rata": ".0362",
     "lease-start":"11/1/2016",
     "lease-end":"10/31/2023",
     "periods" : [
       {
       "start": "11/1/2016",
       "end":"10/31/2017",
-      "base_rent":23,
+      "base_rent": "23",
       "re_taxes": "none",
       "cam":"79% of untilities",
       "mgmt":"none"
@@ -111,7 +111,7 @@ var lease_data = [
       {
       "start": "11/1/2017",
       "end":"10/31/2018",
-      "base_rent":23.69,
+      "base_rent": "23.69",
       "re_taxes": "none",
       "cam":"79% of untilities",
       "mgmt":"none"
@@ -119,7 +119,7 @@ var lease_data = [
       {
       "start": "11/1/2018",
       "end":"10/31/2019",
-      "base_rent":24.40,
+      "base_rent": "24.40",
       "re_taxes": "none",
       "cam":"79% of untilities",
       "mgmt":"none"
@@ -127,7 +127,7 @@ var lease_data = [
       {
       "start": "11/1/2019",
       "end":"10/31/2020",
-      "base_rent":25.13,
+      "base_rent": "25.13",
       "re_taxes": "none",
       "cam":"79% of untilities",
       "mgmt":"none"
@@ -135,7 +135,7 @@ var lease_data = [
       {
       "start": "11/1/2020",
       "end":"10/31/2021",
-      "base_rent":25.89,
+      "base_rent": "25.89",
       "re_taxes": "none",
       "cam":"79% of untilities",
       "mgmt":"none"
@@ -143,7 +143,7 @@ var lease_data = [
       {
       "start": "11/1/2021",
       "end":"10/31/2022",
-      "base_rent":26.66,
+      "base_rent": "26.66",
       "re_taxes": "none",
       "cam":"79% of untilities",
       "mgmt":"none"
@@ -151,7 +151,7 @@ var lease_data = [
       {
       "start": "11/1/2022",
       "end":"10/31/2023",
-      "base_rent":27.46,
+      "base_rent": "27.46",
       "re_taxes": "none",
       "cam":"79% of untilities",
       "mgmt":"none"
@@ -160,19 +160,19 @@ var lease_data = [
   }
 },
 {
-  "id":4,
+  "id":"4",
   "tenant":"kcg",
   "space": {
     "id":"225-201",
-    "sqft": 2100,
-    "pro_rata": .0085,
+    "sqft": "2100",
+    "pro_rata": ".0085",
     "lease-start":"7/18/2013",
     "lease-end":"6/30/2018",
     "periods" : [
       {
       "start": "7/18/2016",
       "end":"6/30/2017",
-      "base_rent":25.86,
+      "base_rent": "25.86",
       "re_taxes": "none",
       "cam":"21% of untilities",
       "mgmt":"none"
@@ -180,7 +180,7 @@ var lease_data = [
       {
       "start": "7/18/2017",
       "end":"6/30/2018",
-      "base_rent":26.64,
+      "base_rent": "26.64",
       "re_taxes": "none",
       "cam":"21% of untilities",
       "mgmt":"none"
@@ -192,19 +192,19 @@ var lease_data = [
   }
 },
 {
-  "id":5,
+  "id": "5",
   "tenant":"naeva",
   "space": {
     "id":"225-102",
-    "sqft": 9649,
-    "pro_rata": .0389,
+    "sqft": "9649",
+    "pro_rata": ".0389",
     "lease-start":"4/01/2009",
     "lease-end":"3/31/2024",
     "periods" : [
       {
       "start": "4/01/2016",
       "end":"3/31/2017",
-      "base_rent":15.16,
+      "base_rent": "15.16",
       "re_taxes": "none",
       "cam":"net",
       "mgmt":"net"
@@ -212,7 +212,7 @@ var lease_data = [
       {
       "start": "4/01/2017",
       "end":"12/31/2017",
-      "base_rent":15.62,
+      "base_rent": "15.62",
       "re_taxes": "none",
       "cam":"net",
       "mgmt":"net"
@@ -220,7 +220,7 @@ var lease_data = [
       {
       "start": "1/01/2018",
       "end":"3/31/2018",
-      "base_rent":15.62,
+      "base_rent": "15.62",
       "re_taxes": "net",
       "cam":"net",
       "mgmt":"net"
@@ -228,7 +228,7 @@ var lease_data = [
       {
       "start": "4/01/2018",
       "end":"3/31/2019",
-      "base_rent":16.08,
+      "base_rent": "16.08",
       "re_taxes": "net",
       "cam":"net",
       "mgmt":"net"
@@ -236,7 +236,7 @@ var lease_data = [
       {
       "start": "4/01/2019",
       "end":"3/31/2020",
-      "base_rent":16.57,
+      "base_rent": "16.57",
       "re_taxes": "net",
       "cam":"net",
       "mgmt":"net"
@@ -244,7 +244,7 @@ var lease_data = [
       {
       "start": "4/01/2020",
       "end":"3/31/2021",
-      "base_rent":17.06,
+      "base_rent": "17.06",
       "re_taxes": "net",
       "cam":"net",
       "mgmt":"net"
@@ -252,7 +252,7 @@ var lease_data = [
       {
       "start": "4/01/2021",
       "end":"3/31/2022",
-      "base_rent":17.58,
+      "base_rent": "17.58",
       "re_taxes": "net",
       "cam":"net",
       "mgmt":"net"
@@ -260,7 +260,7 @@ var lease_data = [
       {
       "start": "4/01/2022",
       "end":"3/31/2023",
-      "base_rent":18.10,
+      "base_rent": "18.10",
       "re_taxes": "net",
       "cam":"net",
       "mgmt":"net"
@@ -268,7 +268,7 @@ var lease_data = [
       {
       "start": "4/01/2023",
       "end":"3/31/2024",
-      "base_rent":18.65,
+      "base_rent": "18.65",
       "re_taxes": "net",
       "cam":"net",
       "mgmt":"net"
@@ -277,19 +277,19 @@ var lease_data = [
   }
 },
 {
-  "id":6,
+  "id": "6",
   "tenant":"mastertaste",
   "space": {
     "id":"225-109",
-    "sqft": 39083,
-    "pro_rata": .1576,
+    "sqft": "39083",
+    "pro_rata": ".1576",
     "lease-start":"4/30/2009",
     "lease-end":"3/31/2019",
     "periods" : [
       {
       "start": "4/30/2016",
       "end":"3/31/2017",
-      "base_rent":13.47,
+      "base_rent": "13.47",
       "re_taxes": "none",
       "cam":"net",
       "mgmt":"net"
@@ -297,7 +297,7 @@ var lease_data = [
       {
       "start": "4/30/2017",
       "end":"3/31/2018",
-      "base_rent":13.87,
+      "base_rent": "13.87",
       "re_taxes": "none",
       "cam":"net",
       "mgmt":"net"
@@ -305,7 +305,7 @@ var lease_data = [
       {
       "start": "4/30/2018",
       "end":"3/31/2019",
-      "base_rent":14.29,
+      "base_rent": "14.29",
       "re_taxes": "none",
       "cam":"net",
       "mgmt":"net"
@@ -313,10 +313,10 @@ var lease_data = [
     ],
     "extensions": [
       {
-      "id" :1,
+      "id" : "1",
       "start": "4/30/2019",
       "end":"3/31/2024",
-      "base_rent":14.72,
+      "base_rent": "14.72",
       "re_taxes": "net",
       "cam":"net",
       "mgmt":"net"
@@ -325,19 +325,19 @@ var lease_data = [
   }
 },
 {
-  "id":7,
+  "id": "7",
   "tenant":"artwill",
   "space": {
     "id":"227-105/106",
-    "sqft": 6000,
-    "pro_rata": .0242,
+    "sqft": "6000",
+    "pro_rata": ".0242",
     "lease-start":"11/01/2010",
     "lease-end":"10/31/2020",
     "periods" : [
       {
       "start": "11/01/2016",
       "end":"10/31/2017",
-      "base_rent":10.75,
+      "base_rent": "10.75",
       "re_taxes": "none",
       "cam":"net",
       "mgmt":"net"
@@ -345,7 +345,7 @@ var lease_data = [
       {
       "start": "11/01/2017",
       "end":"12/31/2017",
-      "base_rent":11.07,
+      "base_rent": "11.07",
       "re_taxes": "none",
       "cam":"net",
       "mgmt":"net"
@@ -353,7 +353,7 @@ var lease_data = [
       {
       "start": "1/01/2018",
       "end":"10/31/2018",
-      "base_rent":11.07,
+      "base_rent": "11.07",
       "re_taxes": "net",
       "cam":"net",
       "mgmt":"net"
@@ -361,7 +361,7 @@ var lease_data = [
       {
       "start": "11/01/2018",
       "end":"10/31/2019",
-      "base_rent":11.40,
+      "base_rent": "11.40",
       "re_taxes": "net",
       "cam":"net",
       "mgmt":"net"
@@ -369,7 +369,7 @@ var lease_data = [
       {
       "start": "11/01/2019",
       "end":"10/31/2020",
-      "base_rent":11.74,
+      "base_rent": "11.74",
       "re_taxes": "net",
       "cam":"net",
       "mgmt":"net"
@@ -377,10 +377,10 @@ var lease_data = [
     ],
     "extensions": [
       {
-      "id":1,
+      "id": "1",
       "start": "11/01/2019",
       "end":"10/31/2023",
-      "base_rent":12.00,
+      "base_rent": "12.00",
       "re_taxes": "net",
       "cam":"net",
       "mgmt":"net"
@@ -389,19 +389,19 @@ var lease_data = [
   }
 },
 {
-  "id":8,
+  "id": "8",
   "tenant":"content critical",
   "space": {
     "id":"227-105/106",
-    "sqft": 10000,
-    "pro_rata": .0403,
+    "sqft": "10000",
+    "pro_rata": ".0403",
     "lease-start":"6/01/2010",
     "lease-end":"5/31/2020",
     "periods" : [
       {
       "start": "6/01/2016",
       "end":"5/31/2017",
-      "base_rent":11.43,
+      "base_rent": "11.43",
       "re_taxes": "none",
       "cam":"net",
       "mgmt":"net"
@@ -409,7 +409,7 @@ var lease_data = [
       {
       "start": "6/01/2017",
       "end":"12/31/2017",
-      "base_rent":11.78,
+      "base_rent": "11.78",
       "re_taxes": "none",
       "cam":"net",
       "mgmt":"net"
@@ -417,7 +417,7 @@ var lease_data = [
       {
       "start": "1/01/2018",
       "end":"5/31/2018",
-      "base_rent":11.78,
+      "base_rent": "11.78",
       "re_taxes": "net",
       "cam":"net",
       "mgmt":"net"
@@ -425,7 +425,7 @@ var lease_data = [
       {
       "start": "6/01/2018",
       "end":"5/31/2019",
-      "base_rent":12.13,
+      "base_rent": "12.13",
       "re_taxes": "net",
       "cam":"net",
       "mgmt":"net"
@@ -433,7 +433,7 @@ var lease_data = [
       {
       "start": "6/01/2019",
       "end":"5/31/2020",
-      "base_rent":12.49,
+      "base_rent": "12.49",
       "re_taxes": "net",
       "cam":"net",
       "mgmt":"net"
@@ -441,10 +441,10 @@ var lease_data = [
     ],
     "extensions": [
       {
-      "id":1,
+      "id": "1",
       "start": "6/01/2020",
       "end":"5/31/2025",
-      "base_rent":12.49,
+      "base_rent": "12.49",
       "re_taxes": "net",
       "cam":"net",
       "mgmt":"net"
@@ -453,19 +453,19 @@ var lease_data = [
   }
 },
 {
-  "id":9,
+  "id": "9",
   "tenant":"sunrun",
   "space": {
     "id":"227-101/102",
-    "sqft": 13300,
-    "pro_rata": .0536,
+    "sqft": "13300",
+    "pro_rata": ".0536",
     "lease-start":"11/01/2016",
     "lease-end":"10/31/2023",
     "periods" : [
       {
       "start": "11/01/2016",
       "end":"10/31/2017",
-      "base_rent":9.5,
+      "base_rent": "9.5",
       "re_taxes": "net",
       "cam":"net",
       "mgmt":"net"
@@ -473,7 +473,7 @@ var lease_data = [
       {
       "start": "11/01/2017",
       "end":"10/31/2018",
-      "base_rent":9.79,
+      "base_rent": "9.79",
       "re_taxes": "net",
       "cam":"net",
       "mgmt":"net"
@@ -481,7 +481,7 @@ var lease_data = [
       {
       "start": "11/01/2018",
       "end":"10/31/2019",
-      "base_rent":10.08,
+      "base_rent": "10.08",
       "re_taxes": "net",
       "cam":"net",
       "mgmt":"net"
@@ -489,7 +489,7 @@ var lease_data = [
       {
       "start": "11/01/2019",
       "end":"10/31/2020",
-      "base_rent":10.38,
+      "base_rent": "10.38",
       "re_taxes": "net",
       "cam":"net",
       "mgmt":"net"
@@ -497,7 +497,7 @@ var lease_data = [
       {
       "start": "11/01/2020",
       "end":"10/31/2021",
-      "base_rent":10.69,
+      "base_rent": "10.69",
       "re_taxes": "net",
       "cam":"net",
       "mgmt":"net"
@@ -505,7 +505,7 @@ var lease_data = [
       {
       "start": "11/01/2021",
       "end":"10/31/2022",
-      "base_rent":11.01,
+      "base_rent": "11.01",
       "re_taxes": "net",
       "cam":"net",
       "mgmt":"net"
@@ -513,7 +513,7 @@ var lease_data = [
       {
       "start": "11/01/2022",
       "end":"10/31/2023",
-      "base_rent":11.34,
+      "base_rent": "11.34",
       "re_taxes": "net",
       "cam":"net",
       "mgmt":"net"
@@ -521,7 +521,7 @@ var lease_data = [
       {
       "start": "11/01/2023",
       "end":"10/31/2024",
-      "base_rent":11.68,
+      "base_rent": "11.68",
       "re_taxes": "net",
       "cam":"net",
       "mgmt":"net"
@@ -531,7 +531,7 @@ var lease_data = [
       {
       "start": "11/01/2024",
       "end":"10/31/2031",
-      "base_rent":11.68,
+      "base_rent": "11.68",
       "re_taxes": "net",
       "cam":"net",
       "mgmt":"net"
@@ -540,19 +540,19 @@ var lease_data = [
   }
 },
 {
-  "id":10,
+  "id": "10",
   "tenant":"streamline",
   "space": {
     "id":"229-106/107",
-    "sqft": 12000,
-    "pro_rata": .0484,
+    "sqft": "12000",
+    "pro_rata": ".0484",
     "lease-start":"11/01/2011",
     "lease-end":"10/31/2021",
     "periods" : [
       {
       "start": "11/01/2016",
       "end":"10/31/2017",
-      "base_rent":11.03,
+      "base_rent": "11.03",
       "re_taxes": "none",
       "cam":"net",
       "mgmt":"net"
@@ -560,7 +560,7 @@ var lease_data = [
       {
       "start": "11/01/2017",
       "end":"12/31/2017",
-      "base_rent":11.36,
+      "base_rent": "11.36",
       "re_taxes": "none",
       "cam":"net",
       "mgmt":"net"
@@ -568,7 +568,7 @@ var lease_data = [
       {
       "start": "1/01/2018",
       "end":"10/31/2018",
-      "base_rent":11.36,
+      "base_rent": "11.36",
       "re_taxes": "net",
       "cam":"net",
       "mgmt":"net"
@@ -576,7 +576,7 @@ var lease_data = [
       {
       "start": "11/01/2018",
       "end":"10/31/2019",
-      "base_rent":11.70,
+      "base_rent": "11.70",
       "re_taxes": "net",
       "cam":"net",
       "mgmt":"net"
@@ -584,7 +584,7 @@ var lease_data = [
       {
       "start": "11/01/2019",
       "end":"10/31/2020",
-      "base_rent":12.05,
+      "base_rent": "12.05",
       "re_taxes": "net",
       "cam":"net",
       "mgmt":"net"
@@ -592,7 +592,7 @@ var lease_data = [
       {
       "start": "11/01/2020",
       "end":"10/31/2021",
-      "base_rent":12.41,
+      "base_rent": "12.41",
       "re_taxes": "net",
       "cam":"net",
       "mgmt":"net"
@@ -601,19 +601,19 @@ var lease_data = [
   }
 },
 {
-  "id":11,
+  "id": "11",
   "tenant":"enterprise",
   "space": {
     "id":"229-104/105",
-    "sqft": 10160,
-    "pro_rata": .0410,
+    "sqft": "10160",
+    "pro_rata": ".0410",
     "lease-start":"07/08/2011",
     "lease-end":"06/30/2018",
     "periods" : [
       {
       "start": "07/01/2016",
       "end":"6/30/2017",
-      "base_rent":10.43,
+      "base_rent": "10.43",
       "re_taxes": "none",
       "cam":"net",
       "mgmt":"net"
@@ -621,7 +621,7 @@ var lease_data = [
       {
       "start": "07/01/2017",
       "end":"12/31/2017",
-      "base_rent":10.75,
+      "base_rent": "10.75",
       "re_taxes": "none",
       "cam":"net",
       "mgmt":"net"
@@ -629,7 +629,7 @@ var lease_data = [
       {
       "start": "01/01/2018",
       "end":"6/30/2018",
-      "base_rent":10.75,
+      "base_rent": "10.75",
       "re_taxes": "net",
       "cam":"net",
       "mgmt":"net"
@@ -637,10 +637,10 @@ var lease_data = [
     ],
     "extensions": [
       {
-      "id":1,
+      "id": "1",
       "start": "07/01/2018",
       "end":"6/30/2022",
-      "base_rent":10.75,
+      "base_rent": "10.75",
       "re_taxes": "net",
       "cam":"net",
       "mgmt":"net"
@@ -649,19 +649,19 @@ var lease_data = [
   }
 },
 {
-  "id":12,
+  "id": "12",
   "tenant":"bashier",
   "space": {
     "id":"229-102/103",
-    "sqft": 10200,
-    "pro_rata": .0411,
+    "sqft": "10200",
+    "pro_rata": ".0411",
     "lease-start":"09/01/2011",
     "lease-end":"08/30/2021",
     "periods" : [
       {
       "start": "09/01/2016",
       "end":"8/30/2017",
-      "base_rent":10.36,
+      "base_rent": "10.36",
       "re_taxes": "net",
       "cam":"net",
       "mgmt":"net"
@@ -669,7 +669,7 @@ var lease_data = [
       {
       "start": "09/01/2017",
       "end":"8/30/2018",
-      "base_rent":10.67,
+      "base_rent": "10.67",
       "re_taxes": "net",
       "cam":"net",
       "mgmt":"net"
@@ -677,7 +677,7 @@ var lease_data = [
       {
       "start": "09/01/2018",
       "end":"8/30/2019",
-      "base_rent":10.99,
+      "base_rent": "10.99",
       "re_taxes": "net",
       "cam":"net",
       "mgmt":"net"
@@ -685,7 +685,7 @@ var lease_data = [
       {
       "start": "09/01/2019",
       "end":"8/30/2020",
-      "base_rent":11.32,
+      "base_rent": "11.32",
       "re_taxes": "net",
       "cam":"net",
       "mgmt":"net"
@@ -693,7 +693,7 @@ var lease_data = [
       {
       "start": "09/01/2020",
       "end":"8/30/2021",
-      "base_rent":11.66,
+      "base_rent": "11.66",
       "re_taxes": "net",
       "cam":"net",
       "mgmt":"net"
@@ -701,10 +701,10 @@ var lease_data = [
     ],
     "extensions":[
       {
-      "id":1,
+      "id": "1",
       "start": "09/01/2021",
       "end":"8/30/2026",
-      "base_rent":11.66,
+      "base_rent": "11.66",
       "re_taxes": "net",
       "cam":"net",
       "mgmt":"net"
@@ -713,19 +713,19 @@ var lease_data = [
   }
 },
 {
-  "id":13,
+  "id": "13",
   "tenant":"crown staple",
   "space": {
     "id":"229-101B",
-    "sqft": 2700,
-    "pro_rata": .0109,
+    "sqft": "2700",
+    "pro_rata": ".0109",
     "lease-start":"08/01/2013",
     "lease-end":"07/31/2017",
     "periods" : [
       {
       "start": "08/01/2016",
       "end":"7/31/2017",
-      "base_rent":7.53,
+      "base_rent": "7.53",
       "re_taxes": "net",
       "cam":"net",
       "mgmt":"net"
@@ -734,19 +734,19 @@ var lease_data = [
   }
 },
 {
-  "id":14,
+  "id": "14",
   "tenant":"brickhouse",
   "space": {
     "id":"229-101",
-    "sqft": 4000,
-    "pro_rata": .0161,
+    "sqft": "4000",
+    "pro_rata": ".0161",
     "lease-start":"10/01/2011",
     "lease-end":"09/30/2018",
     "periods" : [
       {
       "start": "10/01/2016",
       "end":"9/30/2017",
-      "base_rent":9.85,
+      "base_rent": "9.85",
       "re_taxes": "net",
       "cam":"net",
       "mgmt":"net"
@@ -754,7 +754,7 @@ var lease_data = [
       {
       "start": "10/01/2017",
       "end":"9/30/2018",
-      "base_rent":10.15,
+      "base_rent": "10.15",
       "re_taxes": "net",
       "cam":"net",
       "mgmt":"net"
@@ -762,10 +762,10 @@ var lease_data = [
     ],
     "extensions": [
       {
-      "id":1,
+      "id": "1",
       "start": "10/01/2018",
       "end":"9/30/2023",
-      "base_rent":10.15,
+      "base_rent": "10.15",
       "re_taxes": "net",
       "cam":"net",
       "mgmt":"net"
@@ -774,20 +774,19 @@ var lease_data = [
   }
 },
 {
-  "id":15,
+  "id":"15",
   "tenant":"solar panels",
   "space": {
     "id":"roof",
-    "sqft": 0,
-    "pro_rata": 0,
+    "sqft": "0",
+    "pro_rata": "0",
     "lease-start":"01/01/2017",
     "lease-end":"12/31/2025",
     "periods" : [
       {
       "start": "01/01/2017",
       "end":"12/31/2025",
-      "fixed_rent":100000,
-      "base_rent":undefined,
+      "fixed_rent":"100000",
       "re_taxes": "none",
       "cam":"none",
       "mgmt":"none"

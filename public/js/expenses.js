@@ -90,6 +90,7 @@
   }
 
   get_capex = function(year,scenario) {
+    if (scenario == undefined ) { return 0 }
     //find all leases
     total = 0
     if (scenario.capex != undefined) {

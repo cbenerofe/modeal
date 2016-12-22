@@ -8,13 +8,13 @@ html(ng-app="myApp")
     link(href="css/media.css", rel="stylesheet")
     script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js')
     script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js')
-    script(src="js/data.json")
-    script(src="js/controllers.js")
+    script(src="js/deals.js")
+
 
   body
-    p 
-      a(href="/cashflow") cash flow
-    p 
-      a(href="/tenants") tenants
+    .block(ng-controller="dealsController")
+      div(ng-repeat="d in deals")
+        {{ d }}
+
 
 

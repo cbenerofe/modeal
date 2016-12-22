@@ -1,0 +1,227 @@
+var expenses_harrison = [
+  {
+    "id":1,
+    "name": "real estate taxes",
+    "chargeback": "retax",
+    "actuals": [
+      {
+        "year": "2014",
+        "amount":572135
+      },
+      {
+        "year": "2015",
+        "amount":596412
+      }
+    ],
+    "estimates":[
+      {
+        "year":"2016",
+        "amount":621444
+      },
+      {
+        "year":"2017",
+        "amount":633873
+      }
+    ]
+  },
+  {
+    "id":2,
+    "name": "building electric",
+    "chargeback": "cam",
+    "actuals": [
+      {
+        "year": "2014",
+        "amount":11462
+      },
+      {
+        "year": "2015",
+        "amount":10609
+      }
+    ],
+    "estimates":[
+      {
+        "year":"2016",
+        "amount":9453
+      },
+      {
+        "year":"2017",
+        "amount":11147
+      }
+    ]
+  },
+  {
+    "id":3,
+    "name": "landscaping",
+    "chargeback": "cam",
+    "actuals": [
+      {
+        "year": "2014",
+        "amount":40162
+      },
+      {
+        "year": "2015",
+        "amount":72879
+      }
+    ],
+    "estimates":[
+      {
+        "year":"2016",
+        "amount":33353
+      },
+      {
+        "year":"2017",
+        "amount":33353
+      }
+    ]
+  },
+  {
+    "id":4,
+    "name": "maintenance",
+    "chargeback": "cam",
+    "actuals": [
+      {
+        "year": "2014",
+        "amount":26570
+      },
+      {
+        "year": "2015",
+        "amount":38863
+      }
+    ],
+    "estimates":[
+      {
+        "year":"2016",
+        "amount":16930
+      },
+      {
+        "year":"2017",
+        "amount":34372
+      }
+    ]
+  },
+  {
+    "id":5,
+    "name": "insurance",
+    "chargeback": "cam",
+    "actuals": [
+      {
+        "year": "2014",
+        "amount":46463
+      },
+      {
+        "year": "2015",
+        "amount":46680
+      }
+    ],
+    "estimates":[
+      {
+        "year":"2016",
+        "amount":50959
+      },
+      {
+        "year":"2017",
+        "amount":52232
+      }
+    ]
+  },
+  {
+    "id":6,
+    "name": "snow removal",
+    "chargeback": "cam",
+    "actuals": [
+      {
+        "year": "2014",
+        "amount":56158
+      },
+      {
+        "year": "2015",
+        "amount":57697
+      }
+    ],
+    "estimates":[
+      {
+        "year":"2016",
+        "amount":35000
+      },
+      {
+        "year":"2017",
+        "amount":35000
+      }
+    ]
+  },
+  {
+    "id":7,
+    "name": "sprinklers",
+    "chargeback": "cam",
+    "actuals": [
+      {
+        "year": "2014",
+        "amount":22356
+      },
+      {
+        "year": "2015",
+        "amount":29713
+      }
+    ],
+    "estimates":[
+      {
+        "year":"2016",
+        "amount":23283
+      },
+      {
+        "year":"2017",
+        "amount":27352
+      }
+    ]
+  },
+  {
+    "id":8,
+    "name": "alarm",
+    "chargeback": "cam",
+    "actuals": [
+      {
+        "year": "2014",
+        "amount":3681
+      },
+      {
+        "year": "2015",
+        "amount":4162
+      }
+    ],
+    "estimates":[
+      {
+        "year":"2016",
+        "amount":3626
+      },
+      {
+        "year":"2017",
+        "amount":4335
+      }
+    ]
+  },
+  {
+    "id":9,
+    "name": "mgmt fee",
+    "chargeback": "mgmt",
+    "actuals": [
+      {
+        "year": "2014",
+        "amount":0
+      },
+      {
+        "year": "2015",
+        "amount":0
+      }
+    ],
+    "estimates":[
+      {
+        "year":"2016",
+        "amount":110000
+      },
+      {
+        "year":"2017",
+        "amount":110000
+      }
+    ]
+  }
+]

@@ -108,6 +108,7 @@
   }
 
   get_tenants_rent = function(lease_id,year,charge,psf,scenario) {
+    if (scenario == undefined ) { return 0 }
     // charge = base, retax, cam, mgt,
     //find lease
     //console.log(JSON.stringify(lease_id) + " " + year)
@@ -168,6 +169,7 @@
   }   
   
   get_years_rent = function(year,charge,psf,scenario) {
+    if (scenario == undefined ) { return 0 }
     //find all leases
     total = 0
     leases.forEach(function(l) {
@@ -206,6 +208,7 @@
   
   
   get_years_total_rent = function(year,charge,psf,scenario) {
+    if (scenario == undefined ) { return 0 }
     //find all leases
     total = 0
     orig = get_years_rent(year,charge,false,scenario)
@@ -234,7 +237,7 @@
         })
       }
     })
-    return total
+    return parseInt(total)
   }   
   
   get_leasing_commissions = function(year) {
@@ -250,7 +253,7 @@
         })
       }
     })
-    return total
+    return parseInt(total)
   }  
 
 

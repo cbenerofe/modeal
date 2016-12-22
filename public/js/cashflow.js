@@ -2,10 +2,18 @@
 
 var myApp = angular.module('myApp', []);
 
-leases = lease_data;
-expenses = expense_data;
-scenarios = scenario_data;
-//vacancies = vacancy_data;
+
+leases = []
+expenses = []
+scenarios = []
+
+
+leases = lease_data
+expenses = expense_data
+scenarios = scenario_data
+
+vacancies = vacancy_data
+
 new_leases = []
 
 retaxes = 633873
@@ -152,14 +160,19 @@ myApp.controller('myController', ['$scope',function($scope) {
 
   $scope.get_cash_flow = function (year,psf) {
     i = $scope.get_noi(year,'all',false)
-    //console.log ("i=" + i)
-    x = get_tenant_improvements(year,$scope.scenario)
+
+    ti = get_tenant_improvements(year,$scope.scenario)
     
-    x += get_leasing_commissions(year,$scope.scenario)
+    x = parseInt(ti)
     
-    x += get_capex(year,$scope.scenario)
-    //console.log ("x=" + x)
-    cash_flow = i - x
+    lc = get_leasing_commissions(year,$scope.scenario)
+    x += parseInt(lc)
+
+    capex = get_capex(year,$scope.scenario)    
+    x += parseInt(capex)
+    
+    cash_flow = parseInt(i) - parseInt(x)
+
     if (psf == true) {
       return Math.round(cash_flow / sqft * 100) / 100
     } else {
@@ -168,12 +181,63 @@ myApp.controller('myController', ['$scope',function($scope) {
   } 
 
   $scope.init = function() {
+    
+    /*
+    $.ajax({context: this, url: "http://localhost:3000/api/leases", 
+       success: function(result) { 
+         //console.log(JSON.stringify(result))
+         leases = result
+         $scope.leases = result
+         //console.log(JSON.stringify($scope.leases))
+         //alert("hey")
+         $scope.$apply();
+       }, 
+       error: function(result) {
+         //console.log(JSON.stringify(result));
+         alert("error on leases")
+       }
+    }); 
+    
+    $.ajax({context: this, url: "http://localhost:3000/api/expenses", 
+       success: function(result) { 
+         //console.log(JSON.stringify(result))
+         expenses = result
+         $scope.expenses = result
+         //console.log(JSON.stringify($scope.leases))
+         //alert("hey")
+         $scope.$apply();
+       }, 
+       error: function(result) {
+         //console.log(JSON.stringify(result));
+         alert("error on expenses")
+       }
+    }); 
+    
+    $.ajax({context: this, url: "http://localhost:3000/api/scenarios", 
+       success: function(result) { 
+         //console.log(JSON.stringify(result))
+         scenarios = result
+         $scope.scenarios = result
+         //console.log(JSON.stringify($scope.leases))
+         //alert("hey")
+         $scope.scenario = $scope.scenarios.filter(function(s) { return s.id == $scope.scenario_id; })[0];
+         $scope.$apply();
+       }, 
+       error: function(result) {
+         //console.log(JSON.stringify(result));
+         alert("error on scenarios")
+       }
+    });     
+    */
+    
+    $scope.scenario = $scope.scenarios.filter(function(s) { return s.id == $scope.scenario_id; })[0];
+    
     year = {}
     $scope.years = []
     year.start_date = new Date(start_date)
     $scope.years.push(year)
 
-    $scope.scenario = $scope.scenarios.filter(function(s) { return s.id == $scope.scenario_id; })[0];
+    
     $scope.expirations[year.start_date.getFullYear()] = get_expirations(year.start_date.getFullYear(),$scope.scenario)
 
     for (i=1; i<hold_period;i++) {
