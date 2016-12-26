@@ -23,7 +23,7 @@ var scenario_data = [
     "extensions":[
       
     ],
-    "down_months": "3",
+    "down_months": "2",
     "new_lease" : {
       "years" : "10",
       "base_rent":"6.5",

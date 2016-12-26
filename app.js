@@ -26,8 +26,9 @@ app.get('/', function(req, res) {
   res.render('index');
 });
 
-app.get('/tenants', function(req, res) {
-  res.render('tenants');
+
+app.get('/income', function(req, res) {
+  res.render('income');
 });
 
 app.get('/cashflow', function(req, res) {

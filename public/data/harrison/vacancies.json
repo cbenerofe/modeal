@@ -1,3 +1,16 @@
 var vacancy_data = [
-
+{
+  "space_id":"12",
+  "sqft": "105000",
+  "pro_rata": ".1668",
+  "available":"1/1/2017",
+  "month":"1/1"
+},
+{
+  "space_id":"13",
+  "sqft": "12000",
+  "pro_rata": ".0191",
+  "available":"1/1/2017",
+  "month":"1/1" 
+}
 ]

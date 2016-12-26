@@ -12,17 +12,21 @@ html(ng-app="myApp")
     script(src='js/jquery.js')
     script(src='js/bootstrap.min.js')
     script(src='js/angular.js')
+    script(src="data/harrison/spaces.json")
     script(src="data/harrison/leases.json")
     script(src="data/harrison/expenses.json")
     script(src="data/harrison/scenarios.json")
     script(src="data/harrison/vacancies.json")
-    script(src="js/vacancy.js")
+    script(src="js/modeal.js")
+    script(src="js/scenarios.js")
+    script(src="js/tenants.js")
     script(src="js/expenses.js")
-    script(src="js/leases.js")
+    script(src="js/income.js")
+    script(src="js/capital.js")
     script(src="js/cashflow.js")
 
-  body
-    .block(ng-controller="myController")
+  body(ng-controller="modealController")
+    .block
       .row
         .col-xs-3
           .btn(ng-click="toggle_nets()" )
@@ -38,6 +42,8 @@ html(ng-app="myApp")
               | {{ s.name }}
         .col-xs-3
           | {{ scenario_id }}
+
+    .block(ng-controller="cashflowController")          
       table.table
         thead
           tr
@@ -46,159 +52,31 @@ html(ng-app="myApp")
             th(ng-repeat="year in years" ) 
               .btn
                 | {{year.start_date.getFullYear()}}
-              .row(ng-if="show_nets && show_tenants")
-                .col-xs-4 base
-                .col-xs-4 retax
-                .col-xs-4 cam
 
-        tbody(ng-if="false")
-          tr
-            th.white.key
-              .btn(ng-click="toggle_tenants()" ) occupancy
-            td(ng-repeat="year in years" ng-class="{white: ($index % 2) }")
-              | {{ get_years_occupancy(year.start_date.getFullYear()) }}
 
-        tbody(ng-if="!show_tenants && !show_nets")
+        tbody()
           tr
-            th.white.key(ng-click="toggle_tenants()" )
-              | current tenants
+            th.white.key()
+              | base rent
               
             td(ng-repeat="year in years" ng-class="{white: ($index % 2) }")
-              .row(ng-if="show_nets")
-                .col-xs-3 {{ get_years_rent(year.start_date.getFullYear(),'base') }}
-                .col-xs-3 {{ get_years_rent(year.start_date.getFullYear(),'retax') }}
-                .col-xs-3 {{ get_years_rent(year.start_date.getFullYear(),'cam') }}
-                .col-xs-3 {{ get_years_rent(year.start_date.getFullYear(),'mgmt') }}
               .block(ng-if="!show_nets")
-                | {{ get_years_rent(year.start_date.getFullYear(),'all') }}
+                | {{ get_years_total_rent(year.start_date.getFullYear(),'base') }}
 
-        tbody(ng-if="!show_tenants && show_nets")
-          tr
-            th.white.key(ng-click="toggle_tenants()" )
-              | current tenants
-        
-          tr()
-            th.white.key base rent
-              td(ng-repeat="year in years" ng-class="{white: ($index % 2) }")
-                | {{ get_years_rent(year.start_date.getFullYear(),'base') }}
           tr()
             th.white.key re taxes
               td(ng-repeat="year in years" ng-class="{white: ($index % 2) }")
-                | {{ get_years_rent(year.start_date.getFullYear(),'retax') }}
+                | {{ get_years_total_rent(year.start_date.getFullYear(),'retax') }}
           tr()
             th.white.key cam 
               td(ng-repeat="year in years" ng-class="{white: ($index % 2) }")
-                | {{ get_years_rent(year.start_date.getFullYear(),'cam') }}
+                | {{ get_years_total_rent(year.start_date.getFullYear(),'cam') }}
+
           tr()
-            th.white.key mgmt 
+            th.white.key gross rent
               td(ng-repeat="year in years" ng-class="{white: ($index % 2) }")
-                | {{ get_years_rent(year.start_date.getFullYear(),'mgmt') }}
-          tr()
-            th.white.key total
-              td(ng-repeat="year in years" ng-class="{white: ($index % 2) }")
-                | {{ get_years_rent(year.start_date.getFullYear(),'all') }}
-
-        tbody(ng-if="show_tenants")
-          tr
-            th.white.key(ng-click="toggle_tenants()" )
-              | current tenants
-        
-          tr(ng-repeat="lease in leases")
-            th.white.key
-              .row
-                .col-xs-12.col-sm-6 {{lease.tenant}} 
-                .col-xs-12.col-sm-6 {{lease.space.sqft}}
-                
-            td(ng-repeat="year in years" ng-class="{white: ($index % 2) }")
-              .row(ng-if="show_nets")
-                .col-xs-3
-                  | {{ get_tenants_rent($parent.lease.id, year.start_date.getFullYear(),'base') }}
-                .col-xs-3
-                  | {{ get_tenants_rent($parent.lease.id, year.start_date.getFullYear(),'retax') }}
-                .col-xs-3
-                  | {{ get_tenants_rent($parent.lease.id, year.start_date.getFullYear(),'cam') }}
-                .col-xs-3
-                  | {{ get_tenants_rent($parent.lease.id, year.start_date.getFullYear(),'mgmt') }}
-                  
-              .block(ng-if="!show_nets")
-                | {{ get_tenants_rent($parent.lease.id, year.start_date.getFullYear(),'all') }}
-
-          tr
-            th.white.key(ng-click="toggle_tenants()" )
-              | total
-            td(ng-repeat="year in years" ng-class="{white: ($index % 2) }")
-              .row(ng-if="show_nets")
-                .col-xs-3 {{ get_years_rent(year.start_date.getFullYear(),'base') }}
-                .col-xs-3 {{ get_years_rent(year.start_date.getFullYear(),'retax') }}
-                .col-xs-3 {{ get_years_rent(year.start_date.getFullYear(),'cam') }}
-                .col-xs-3 {{ get_years_rent(year.start_date.getFullYear(),'mgmt') }}
-              .block(ng-if="!show_nets")
-                | {{ get_years_rent(year.start_date.getFullYear(),'all') }}
-
-
-        tbody
-          tr(ng-if="show_expirations")
-            th.white.key(ng-click="toggle_expirations()") expirations
-            td(ng-repeat="year in years" ng-class="{white: ($index % 2) }")
-              .row(ng-repeat="space in expirations[year.start_date.getFullYear()]" )
-                .col-xs-6 {{ space.sqft }} 
-                .col-xs-6 {{ space.available |date:'MMM'}} 
-                .col-xs-12 {{ space.old_tenant}}
-                
-          tr(ng-if="!show_expirations")
-            th.white.key(ng-click="toggle_expirations()") expirations
-            td(ng-repeat="year in years" ng-class="{white: ($index % 2) }")
-
-                
-        tbody()
-
-          tr(ng-if="show_new_leases")
-            th.white.key(ng-click="toggle_new_leases()") new leases
-            td(ng-repeat="year in years" ng-class="{white: ($index % 2) }")
-              .row(ng-repeat="lease in new_leases[year.start_date.getFullYear()]")
-                .col-xs-6 {{ lease.space.sqft }} 
-                .col-xs-6 {{ lease.space.periods[0].start_date |date:'MMM'}} 
-                //.col-xs-12 {{ lease.space.id}}
-                
-          tr()
-            th.white.key(ng-click="toggle_new_leases()") new income
-            th(ng-repeat="year in years" ng-class="{white: ($index % 2) }")
-              .row(ng-if="show_nets && show_tenants")
-                .col-xs-3 {{ get_years_new_rent(year.start_date.getFullYear(),'base') }}
-                .col-xs-3 {{ get_years_new_rent(year.start_date.getFullYear(),'retax') }}
-                .col-xs-3 {{ get_years_new_rent(year.start_date.getFullYear(),'cam') }} 
-                .col-xs-3 {{ get_years_new_rent(year.start_date.getFullYear(),'mgmt') }} 
-              .block(ng-if="!show_nets || !show_tenants")
-                | {{ get_years_new_rent(year.start_date.getFullYear(),'all') }}
-
-
-        tbody(ng-if="show_tenants")
-          tr
-            th.white.key total income
-            th(ng-repeat="year in years"  ng-class="{white: ($index % 2) }" ) 
-              .row(ng-if="show_nets")
-                .col-xs-3 {{ get_years_rent(year.start_date.getFullYear(),'base') }}
-                .col-xs-3 {{ get_years_rent(year.start_date.getFullYear(),'retax') }}
-                .col-xs-3 {{ get_years_rent(year.start_date.getFullYear(),'cam') }}
-                .col-xs-3 {{ get_years_rent(year.start_date.getFullYear(),'mgmt') }}
-              .block(ng-if="!show_nets")
-                | {{ get_years_rent(year.start_date.getFullYear(),'all') }}
-
-        tbody(ng-if="!show_tenants")
-          tr
-            th.white.key total income
-            th(ng-repeat="year in years" ng-class="{white: ($index % 2) }") 
-              .block()
                 | {{ get_years_total_rent(year.start_date.getFullYear(),'all') }}
 
-
-        tbody()
-          tr
-            th.white.key
-              | occupancy
-            td(ng-repeat="year in years" ng-class="{white: ($index % 2) }")
-              .row
-                .col-xs-12 {{ get_years_occupancy(year.start_date.getFullYear()) }}
 
         tbody(ng-if="show_expenses")
           tr(ng-repeat="expense in expenses")
