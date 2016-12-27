@@ -65,23 +65,30 @@ get_new_leases = function(scenario) {
   expirations.forEach(function(e) {
     //console.log("exp=" + JSON.stringify(e))
     l = {}
+    l.tenant = "new-" + e.space_id
     l.space = {}
     l.space.id = e.space_id
     l.space.pro_rata = e.pro_rata
     l.space.sqft = e.sqft
-    p = {}
+
     pieces = e.available.split("/")
     //console.log(pieces)
     start = new Date(parseInt(pieces[2]),parseInt(pieces[0]),parseInt(pieces[1]))
     start.setMonth(start.getMonth() + parseInt(scenario.down_months) -1)
-    p.start_date = start
-    p.start = start.getMonth() + "/" + start.getDate() + "/" + start.getFullYear()
+    l.space['lease-start'] = start.getMonth() + "/" + start.getDate() + "/" + start.getFullYear()
+    
     end = new Date(start.valueOf())
     end.setFullYear(end.getFullYear() + parseInt(scenario.new_lease.years))
-    p.end_date = end
+    l.space['lease-end'] = end.getMonth() + "/" + end.getDate() + "/" + end.getFullYear()
+    
+    p = {}
+    //p.start_date = start
+    p.start = start.getMonth() + "/" + start.getDate() + "/" + start.getFullYear()
+
+    //p.end_date = end
     p.end = end.getMonth() + "/" + end.getDate() + "/" + end.getFullYear()
   
-    diff = p.start_date.getFullYear() - 2017
+    diff = start.getFullYear() - 2017
     increase = diff * .035 * scenario.new_lease.base_rent
   
     p.base_rent = parseInt(scenario.new_lease.base_rent) + increase
@@ -94,8 +101,8 @@ get_new_leases = function(scenario) {
     if (new_leases[start.getFullYear()] == undefined) {
       new_leases[start.getFullYear()] =[]
     }
-    l.ti = scenario.new_lease.ti_psf * e.sqft
-    l.lc = Math.round(scenario.new_lease.commision * e.sqft * scenario.new_lease.base_rent * scenario.new_lease.years)
+    l.space.ti = scenario.new_lease.ti_psf * e.sqft
+    l.space.lc = Math.round(scenario.new_lease.commision * e.sqft * scenario.new_lease.base_rent * scenario.new_lease.years)
     //console.log("newl=" + JSON.stringify(l))
     new_leases[start.getFullYear()].push(l)
     //console.log(l)

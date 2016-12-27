@@ -62,15 +62,17 @@ get_years_total_rent = function(year,charge,psf,scenario) {
 
 myApp.controller('incomeController', ['$scope',function($scope) {
   
-  $scope.get_space_rent = function(space_id, year, charge) {
-    x = get_space_rent(space_id,year,charge,$scope.show_psf, $scope.scenario_id)
-    return x
-  }  
   
-  $scope.get_space_tenant = function(space_id, year) {
-    x = get_space_tenant(space_id,year,$scope.scenario_id)
+  $scope.get_space_leases = function(space_id, year) {
+    x = get_space_leases(space_id,year)
     return x
-  }    
+  } 
+  
+  $scope.get_lease_rent = function(lease, year,charge) {
+    x = get_lease_rent(lease,year,charge,$scope.show_psf)
+    return x
+  } 
+  
   
 }]);
 

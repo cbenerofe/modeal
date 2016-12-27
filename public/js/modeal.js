@@ -8,11 +8,12 @@ expenses = []
 scenarios = []
 
 
-spaces = [space_data[10]]
+spaces = space_data
 leases = lease_data
 expenses = expense_data
 scenarios = scenario_data
 vacancies = vacancy_data
+scenario = undefined
 
 new_leases = {}
 
@@ -27,7 +28,6 @@ end_date = new Date (2023,12,31)
 
 myApp.controller('modealController', ['$scope',function($scope) {
   
-
   $scope.years = []
   $scope.spaces = spaces
   $scope.leases = leases
@@ -104,8 +104,9 @@ myApp.controller('modealController', ['$scope',function($scope) {
     });     
     */
     
-    $scope.scenario = $scope.scenarios.filter(function(s) { return s.id == $scope.scenario_id; })[0];
-    
+    scenario = $scope.scenarios.filter(function(s) { return s.id == $scope.scenario_id; })[0];
+    $scope.scenario = scenario
+     
     year = {}
     $scope.years = []
     year.start_date = new Date(start_date)
@@ -127,11 +128,13 @@ myApp.controller('modealController', ['$scope',function($scope) {
     new_leases = get_new_leases($scope.scenario)
     
     $scope.new_leases = new_leases
-    //console.log($scope.expirations)
+    
+    //console.log("leases:" + JSON.stringify(leases))
+    //console.log("new_leases:" + JSON.stringify(new_leases))
     
   } 
   
-  $scope.init()    
+  //$scope.init()    
     
     
 }]);

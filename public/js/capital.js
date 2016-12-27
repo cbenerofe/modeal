@@ -7,8 +7,10 @@
       if (new_leases[key] != undefined) {
         new_leases[key].forEach(function(l) {
           //console.log(JSON.stringify(l.id) + " " + year)
-          if (l.space.periods[0].start_date.getFullYear() == year) {
-            total += l.ti
+          pieces = l.space.periods[0].start.split("/")
+          start = new Date(pieces[2],pieces[0],pieces[1])
+          if (start.getFullYear() == year) {
+            total += l.space.ti
           }
         })
       }
@@ -22,9 +24,11 @@
     Object.keys(new_leases).forEach(function (key) { 
       if (new_leases[key] != undefined) {
         new_leases[key].forEach(function(l) {
-          //console.log(JSON.stringify(l.id) + " " + year)
-          if (l.space.periods[0].start_date.getFullYear() == year) {
-            total += l.lc
+          //console.log(JSON.stringify(l.space.periods[0]))
+          pieces = l.space.periods[0].start.split("/")
+          start = new Date(pieces[2],pieces[0],pieces[1])
+          if (start.getFullYear() == year) {
+            total += l.space.lc
           }
         })
       }

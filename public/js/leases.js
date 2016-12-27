@@ -1,63 +1,43 @@
 
-get_space_tenants = function(space_id,year,scenario) {
-  if (scenario == undefined ) { return 0 }
-  // charge = base, retax, cam, mgt,
-  //find lease
-  //console.log(JSON.stringify(lease_id) + " " + year)
-  //console.log(JSON.stringify(leases))
+get_space_leases = function(space_id,year) {  
+  // find original leases for the space active during the year
+  // find new leases for the space active during the year
+  
   found_leases = []
-  leases.forEach(function(v) { 
-    //console.log(space_id + " " + JSON.stringify(v.space))
-    return v.space.id === space_id; 
-  })[0];
-  //console.log(JSON.stringify(lease))
-  
-  if (lease == undefined ) {
-    //console.log("year=" + year + " " + JSON.stringify(new_leases))
-    if (new_leases[year] != undefined) {
-      lease = new_leases[year].filter(function(v) { 
-        //console.log(space_id + " " + JSON.stringify(v.space))
-        return v.space.id === space_id; 
-      })[0];
+  leases.forEach(function(l) { 
+    if (l.space.id == space_id) {
+      if (check_lease_in_year(l,year) == true ) {
+        found_leases.push(l)
+      }
     }
-  }
+  });
   
-  if (lease == undefined ) {
-    return "";
-  }
-    
-  return lease.tenant
+  Object.keys(new_leases).forEach(function (key) { 
+    if (new_leases[key] != undefined) {
+      new_leases[key].forEach(function(l) {
+        if (l.space.id == space_id) {
+          if (check_lease_in_year(l,year) == true ) {
+            found_leases.push(l)
+          }
+        }
+      })
+    }
+  })
+
+  return found_leases
   
 }   
 
 
 
-get_space_rent = function(space_id,year,charge,psf,scenario) {
-  if (scenario == undefined ) { return 0 }
+get_lease_rent = function(lease,year,charge,psf) {
+
   // charge = base, retax, cam, mgt,
-  //find lease
-  //console.log(JSON.stringify(lease_id) + " " + year)
-  //console.log(JSON.stringify(leases))
-  lease = leases.filter(function(v) { 
-    //console.log(space_id + " " + JSON.stringify(v.space))
-    return v.space.id === space_id; 
-  })[0];
-  //console.log(JSON.stringify(lease))
-  yearly = 0;
-  
-  if (lease == undefined ) {
-    console.log("year=" + year + " " + JSON.stringify(new_leases[year]))
-    if (new_leases[year] != undefined) {
-      lease = new_leases[year].filter(function(v) { 
-        //console.log(space_id + " " + JSON.stringify(v.space))
-        return v.space.id === space_id; 
-      })[0];
-    }
-  }
   
   if (lease == undefined ) {
     return 0
   }
+  yearly = 0
   
   for (m=1;m<=12;m++) {
     month = new Date(year,m,1)
@@ -82,8 +62,6 @@ get_space_rent = function(space_id,year,charge,psf,scenario) {
 }   
 
 
-
-
   get_lease_period = function(space,month,scenario) {
     var period = undefined
     if (space != undefined) {
@@ -105,7 +83,7 @@ get_space_rent = function(space_id,year,charge,psf,scenario) {
     return period
   }
 
-  get_extension_period = function(space,month,scenario) {
+  get_extension_period = function(space,month) {
     var period = undefined
     if (space == undefined || scenario == undefined) {
       //console.log("space=" + space.id + " scenario=" + scenario)
@@ -147,7 +125,7 @@ get_space_rent = function(space_id,year,charge,psf,scenario) {
   }
 
 
-  get_charge = function(space,month,charge,scenario=undefined) {
+  get_charge = function(space,month,charge) {
     
     if (space == undefined) {
       return 0
@@ -155,7 +133,7 @@ get_space_rent = function(space_id,year,charge,psf,scenario) {
     
     period = get_lease_period(space,month)
     if (period == undefined && scenario != undefined) {
-      period = get_extension_period(space,month,scenario)
+      period = get_extension_period(space,month)
     }
     if (period == undefined) {
       return 0
@@ -386,4 +364,16 @@ get_space_rent = function(space_id,year,charge,psf,scenario) {
     return v.length
   }   
 
+  check_lease_in_year = function (lease, year) {
+    start = new Date(lease.space['lease-start'])
+    end = new Date(lease.space['lease-end'])
+    ret = false
+    if (start.getFullYear() <= year) {
+      if (end.getFullYear() >= year) {
+        ret = true
+      }
+    }
+    //console.log(Date.now() + " year=" + year + " start=" + start.getFullYear() + " end=" + end.getFullYear() + " ret=" + ret)
+    return ret
+  }
 
