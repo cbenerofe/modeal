@@ -15,6 +15,7 @@ scenarios = scenario_data
 vacancies = vacancy_data
 scenario = undefined
 
+expirations = {}
 new_leases = {}
 
 retaxes = 600000
@@ -55,6 +56,22 @@ myApp.controller('modealController', ['$scope',function($scope) {
   }
     
   $scope.init = function() {
+    
+    Object.keys(expirations).forEach(function (prop) {
+      delete expirations[prop];
+    });
+
+    Object.keys($scope.expirations).forEach(function (prop) {
+      delete $scope.expirations[prop];
+    });    
+    
+    Object.keys(new_leases).forEach(function (prop) {
+      delete new_leases[prop];
+    });
+
+    Object.keys($scope.new_leases).forEach(function (prop) {
+      delete $scope.new_leases[prop];
+    });
     
     /*
     $.ajax({context: this, url: "http://localhost:3000/api/leases", 

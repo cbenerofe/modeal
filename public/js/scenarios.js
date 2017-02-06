@@ -70,34 +70,39 @@ get_new_leases = function(scenario) {
     l.space.id = e.space_id
     l.space.pro_rata = e.pro_rata
     l.space.sqft = e.sqft
-
+    l.space.periods = []
+    
     pieces = e.available.split("/")
     //console.log(pieces)
     start = new Date(parseInt(pieces[2]),parseInt(pieces[0]),parseInt(pieces[1]))
     start.setMonth(start.getMonth() + parseInt(scenario.down_months) -1)
     l.space['lease-start'] = start.getMonth() + "/" + start.getDate() + "/" + start.getFullYear()
     
-    end = new Date(start.valueOf())
-    end.setFullYear(end.getFullYear() + parseInt(scenario.new_lease.years))
+
     l.space['lease-end'] = end.getMonth() + "/" + end.getDate() + "/" + end.getFullYear()
     
-    p = {}
-    //p.start_date = start
-    p.start = start.getMonth() + "/" + start.getDate() + "/" + start.getFullYear()
+    for (i=0; i< parseInt(scenario.new_lease.years); i++) {
+      p = {}
+      //p.start_date = start
+      p.start = start.getMonth() + "/" + start.getDate() + "/" + start.getFullYear()
 
-    //p.end_date = end
-    p.end = end.getMonth() + "/" + end.getDate() + "/" + end.getFullYear()
+      end = new Date(start.valueOf())
+      end.setFullYear(end.getFullYear() + 1)
+      p.end = end.getMonth() + "/" + end.getDate() + "/" + end.getFullYear()
   
-    diff = start.getFullYear() - 2017
-    increase = diff * .035 * scenario.new_lease.base_rent
+      diff = start.getFullYear() - 2017
   
-    p.base_rent = parseInt(scenario.new_lease.base_rent) + increase
-    //console.log("diff=" + diff + " increase=" + increase + " new_rent=" + p.base_rent)
-    p.re_taxes = scenario.new_lease.re_taxes
-    p.cam = scenario.new_lease.cam
-    p.mgmt_fee = scenario.new_lease.mgmt_fee
-    l.space.periods = []
-    l.space.periods.push(p)
+      p.base_rent = calc_increase(parseFloat(scenario.new_lease.base_rent),diff,parseFloat(scenario.new_lease.increases))
+      //console.log("diff=" + diff + " increase=" + increase + " new_rent=" + p.base_rent)
+      p.re_taxes = scenario.new_lease.re_taxes
+      p.cam = scenario.new_lease.cam
+      p.mgmt_fee = scenario.new_lease.mgmt_fee
+
+      l.space.periods.push(p)
+      start = new Date(start.valueOf())
+      start.setFullYear(start.getFullYear() + 1)
+    }
+    
     if (new_leases[start.getFullYear()] == undefined) {
       new_leases[start.getFullYear()] =[]
     }
@@ -109,6 +114,16 @@ get_new_leases = function(scenario) {
   })
   // console.log(new_leases)
   return new_leases
+}
+
+
+calc_increase = function(base,years,rate) {
+  x = base
+  for (i=0; i<=years; i++) {
+    console.log(i+ " " + x)
+    x = x + x*rate
+  }
+  return x
 }
 
 

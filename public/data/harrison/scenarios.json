@@ -12,7 +12,8 @@ var scenario_data = [
       "cam":"net",
       "mgmt":"net",
       "ti_psf":"2",
-      "commision":".05"
+      "commision":".05",
+      "increases":".03"
     },
     "capex":"75000"
   },
