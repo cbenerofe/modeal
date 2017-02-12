@@ -35,7 +35,13 @@ app.get('/cashflow', function(req, res) {
   res.render('cashflow');
 });
 
+//console.log("hello " + JSON.stringify(process.env));
+//console.log("hello " + process.env.PORT);
+
+
 // Set server port
-app.listen(process.env.PORT,4000);
+app.listen(process.env.PORT || 4000, function () {
+  console.log(' app listening on port:' + app.get('PORT') )
+})
 //app.listen(4000);
-console.log('server is running');
+

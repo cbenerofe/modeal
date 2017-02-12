@@ -6,6 +6,7 @@ myApp.controller('dealsController', ['$scope',function($scope) {
   
   $scope.deals = []
   
+  /*
   $.ajax({context: this, url: "http://localhost:3000/api/deals", 
      success: function(result) { 
        console.log(JSON.stringify(result))
@@ -19,6 +20,6 @@ myApp.controller('dealsController', ['$scope',function($scope) {
        alert("error on deals")
      }
   }); 
-  
+  */
   
 }]);

@@ -14,6 +14,12 @@ html(ng-app="myApp")
   body
     .block(ng-controller="dealsController")
       div(ng-repeat="d in deals") {{ d }}
+      
+    .block
+      a(href='/cashflow') cashflow
+      
+    .block
+      a(href='/income') tenants
 
 
 
