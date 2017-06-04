@@ -1,0 +1,19 @@
+.block
+  .row
+    .col-xs-3
+      a(href="/cashflow") cashflow
+      br
+      a(href="/income") tenants
+    .col-xs-3
+      .btn(ng-click="toggle_psf()" )
+        span(ng-if="show_psf") hide psf
+        span(ng-if="!show_psf") show psf
+      .btn(ng-click="toggle_nets()" )
+        span(ng-if="show_nets") hide nets
+        span(ng-if="!show_nets") show nets
+    .col-xs-3
+      select(ng-model="scenario_id")
+        option(ng-repeat="s in scenarios" value="{{s.id}} ")
+          | {{ s.name }}
+    .col-xs-3
+      | {{ scenario_id }}

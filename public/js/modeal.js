@@ -1,18 +1,22 @@
 
 
 var myApp = angular.module('myApp', []);
+var api_server = "http://localhost:3050"
 
-
+spaces = []
 leases = []
 expenses = []
 scenarios = []
+vacancies = []
 
-
+/*
 spaces = space_data
 leases = lease_data
 expenses = expense_data
 scenarios = scenario_data
 vacancies = vacancy_data
+*/
+
 scenario = undefined
 
 expirations = {}
@@ -27,7 +31,10 @@ start_date = new Date (2017,1,1)
 hold_period = 7
 end_date = new Date (2023,12,31)
 
-myApp.controller('modealController', ['$scope',function($scope) {
+
+
+
+myApp.controller('modealController', function($scope, $window) {
   
   $scope.years = []
   $scope.spaces = spaces
@@ -36,7 +43,7 @@ myApp.controller('modealController', ['$scope',function($scope) {
   $scope.expenses = expenses
   $scope.scenarios = scenarios
   $scope.scenario = undefined
-  $scope.scenario_id = 1
+  //$scope.scenario_id = 1
   //$scope.scenario_id = $scope.scenarios[0].id
   $scope.expirations = {}
   $scope.new_leases = {}
@@ -54,6 +61,7 @@ myApp.controller('modealController', ['$scope',function($scope) {
   $scope.toggle_psf = function() {
     $scope.show_psf = !$scope.show_psf
   }
+  
     
   $scope.init = function() {
     
@@ -73,53 +81,6 @@ myApp.controller('modealController', ['$scope',function($scope) {
       delete $scope.new_leases[prop];
     });
     
-    /*
-    $.ajax({context: this, url: "http://localhost:3000/api/leases", 
-       success: function(result) { 
-         //console.log(JSON.stringify(result))
-         leases = result
-         $scope.leases = result
-         //console.log(JSON.stringify($scope.leases))
-         //alert("hey")
-         $scope.$apply();
-       }, 
-       error: function(result) {
-         //console.log(JSON.stringify(result));
-         alert("error on leases")
-       }
-    }); 
-    
-    $.ajax({context: this, url: "http://localhost:3000/api/expenses", 
-       success: function(result) { 
-         //console.log(JSON.stringify(result))
-         expenses = result
-         $scope.expenses = result
-         //console.log(JSON.stringify($scope.leases))
-         //alert("hey")
-         $scope.$apply();
-       }, 
-       error: function(result) {
-         //console.log(JSON.stringify(result));
-         alert("error on expenses")
-       }
-    }); 
-    
-    $.ajax({context: this, url: "http://localhost:3000/api/scenarios", 
-       success: function(result) { 
-         //console.log(JSON.stringify(result))
-         scenarios = result
-         $scope.scenarios = result
-         //console.log(JSON.stringify($scope.leases))
-         //alert("hey")
-         $scope.scenario = $scope.scenarios.filter(function(s) { return s.id == $scope.scenario_id; })[0];
-         $scope.$apply();
-       }, 
-       error: function(result) {
-         //console.log(JSON.stringify(result));
-         alert("error on scenarios")
-       }
-    });     
-    */
     
     scenario = $scope.scenarios.filter(function(s) { return s.id == $scope.scenario_id; })[0];
     $scope.scenario = scenario
@@ -153,5 +114,64 @@ myApp.controller('modealController', ['$scope',function($scope) {
   
   //$scope.init()    
     
+  load_data = function() {
+    url = api_server + "/api/leases"
+    $.ajax({context: this, url: url, 
+       success: function(result) { 
+         //console.log(JSON.stringify(result))
+         leases = result
+         $scope.leases = result
+         leases.forEach(function(element) {
+           spaces.push(element.space)
+           //console.log(element.space);
+           });
+         $scope.spaces = spaces;
+         //console.log(JSON.stringify($scope.leases))
+         //alert("hey")
+         $scope.$apply();
+       }, 
+       error: function(result) {
+         //console.log(JSON.stringify(result));
+         alert("error on leases")
+       }
+    }); 
+  
+    url = api_server + "/api/expenses"
+    $.ajax({context: this, url: url, 
+       success: function(result) { 
+         //console.log(JSON.stringify(result))
+         expenses = result
+         $scope.expenses = result
+         //console.log(JSON.stringify($scope.leases))
+         //alert("hey")
+         $scope.$apply();
+       }, 
+       error: function(result) {
+         //console.log(JSON.stringify(result));
+         alert("error on expenses")
+       }
+    }); 
+  
+    url = api_server + "/api/scenarios"
+    $.ajax({context: this, url: url, 
+       success: function(result) { 
+         //console.log(JSON.stringify(result))
+         scenarios = result
+         $scope.scenarios = result
+         //console.log(JSON.stringify($scope.leases))
+         //alert("hey")
+         //$scope.scenario = $scope.scenarios.filter(function(s) { return s.id == $scope.scenario_id; })[0];
+         $scope.scenario_id = $scope.scenarios[0].id
+         $scope.$apply();
+       }, 
+       error: function(result) {
+         //console.log(JSON.stringify(result));
+         alert("error on scenarios")
+       }
+    });    
+  }
+  
+  load_data();
     
-}]);
+    
+});

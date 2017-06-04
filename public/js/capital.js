@@ -36,14 +36,19 @@
     return parseInt(total)
   }  
 
-  get_capex = function(year,scenario) {
+  get_capex = function(year,psf) {
     if (scenario == undefined ) { return 0 }
     //find all leases
     total = 0
     if (scenario.capex != undefined) {
       total = scenario.capex
     }
-    return total
+
+    if (psf == true) {
+      return Math.round(total / sqft * 100) / 100
+    } else {
+      return total
+    }
   }  
  
 

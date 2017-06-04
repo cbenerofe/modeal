@@ -2,46 +2,10 @@ doctype html
 html(ng-app="myApp")
   head
     title modeal
-    #link(href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css", rel="stylesheet")
-    link(href="css/bootstrap.min.css", rel="stylesheet")
-    link(href="css/style.css", rel="stylesheet")
-    link(href="css/media.css", rel="stylesheet")
-    #script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js")
-    #script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js')
-    #script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js')
-    script(src='js/jquery.js')
-    script(src='js/bootstrap.min.js')
-    script(src='js/angular.js')
-    script(src="data/harrison/spaces.json")
-    script(src="data/harrison/leases.json")
-    script(src="data/harrison/expenses.json")
-    script(src="data/harrison/scenarios.json")
-    script(src="data/harrison/vacancies.json")
-    script(src="js/modeal.js")
-    script(src="js/scenarios.js")
-    script(src="js/leases.js")
-    script(src="js/expenses.js")
-    script(src="js/income.js")
-    script(src="js/capital.js")
-    script(src="js/cashflow.js")
+    include includes/scripts.jade
 
   body(ng-controller="modealController")
-    .block
-      .row
-        .col-xs-3
-          .btn(ng-click="toggle_nets()" )
-            span(ng-if="show_nets") hide nets
-            span(ng-if="!show_nets") show nets
-        .col-xs-3
-          .btn(ng-click="toggle_psf()" )
-            span(ng-if="show_psf") hide psf
-            span(ng-if="!show_psf") show psf
-        .col-xs-3
-          select(ng-model="scenario_id")
-            option(ng-repeat="s in scenarios" value="{{s.id}} ")
-              | {{ s.name }}
-        .col-xs-3
-          | {{ scenario_id }}
+    include includes/topnav.jade
 
     .block(ng-controller="cashflowController")          
       table.table
@@ -55,24 +19,21 @@ html(ng-app="myApp")
 
 
         tbody()
-          tr
-            th.white.key()
-              | base rent
-              
-            td(ng-repeat="year in years" ng-class="{white: ($index % 2) }")
-              .block(ng-if="!show_nets")
+          tr(ng-if="show_nets")
+            th.white.key() base rent
+              td(ng-repeat="year in years" ng-class="{white: ($index % 2) }")
                 | {{ get_years_total_rent(year.start_date.getFullYear(),'base') }}
 
-          tr()
+          tr(ng-if="show_nets")
             th.white.key re taxes
               td(ng-repeat="year in years" ng-class="{white: ($index % 2) }")
                 | {{ get_years_total_rent(year.start_date.getFullYear(),'retax') }}
-          tr()
+          tr(ng-if="show_nets")
             th.white.key cam 
               td(ng-repeat="year in years" ng-class="{white: ($index % 2) }")
                 | {{ get_years_total_rent(year.start_date.getFullYear(),'cam') }}
 
-          tr()
+          tr(style="border: 5px solid black;")
             th.white.key gross rent
               td(ng-repeat="year in years" ng-class="{white: ($index % 2) }")
                 | {{ get_years_total_rent(year.start_date.getFullYear(),'all') }}
@@ -97,7 +58,7 @@ html(ng-app="myApp")
           tr
             th.white.key net operating income
             th(ng-repeat="year in years" ng-class="{white: ($index % 2) }") 
-              | {{ get_noi(year.start_date.getFullYear(),show_psf) }}
+              | {{ get_noi(year.start_date.getFullYear()) }}
               
         tbody()
           tr
@@ -121,4 +82,4 @@ html(ng-app="myApp")
           tr
             th.white.key cash flow
             th(ng-repeat="year in years" ng-class="{white: ($index % 2) }") 
-              | {{ get_cash_flow(year.start_date.getFullYear(),show_psf) }}
+              | {{ get_cash_flow(year.start_date.getFullYear()) }}

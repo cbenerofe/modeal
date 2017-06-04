@@ -44,9 +44,12 @@ get_years_total_rent = function(year,charge,psf) {
   if (scenario == undefined ) { return 0 }
   //find all leases
   total = 0
-  orig = get_years_orig_rent(year,charge,psf)
-  newbys = get_years_new_rent(year,charge,psf)
-  total = orig + newbys
+  orig = get_years_orig_rent(year,charge,false)
+  //newbys = get_years_new_rent(year,charge,psf)
+  //total = orig + newbys
+  total = orig
+  
+  //console.log("sqft=" + sqft + " total=" + total + " psf=" + psf + " =" + Math.round(total/sqft))
   //console.log(year + " orig=" + orig + " newbys=" + newbys + " total=" + total)
 
   if (psf == true) {
@@ -55,6 +58,7 @@ get_years_total_rent = function(year,charge,psf) {
     return total
   }
 }   
+
 
 get_years_rent = function(year,charge,psf) {
   if (scenario == undefined ) { return 0 }
@@ -75,7 +79,7 @@ get_years_rent = function(year,charge,psf) {
 
 
 
-myApp.controller('incomeController', ['$scope',function($scope) {
+myApp.controller('incomeController', function($scope) {
   
   
   $scope.get_space_leases = function(space_id, year) {
@@ -93,7 +97,7 @@ myApp.controller('incomeController', ['$scope',function($scope) {
     return x
   } 
   
-}]);
+});
 
 
 

@@ -120,7 +120,7 @@ get_new_leases = function(scenario) {
 calc_increase = function(base,years,rate) {
   x = base
   for (i=0; i<=years; i++) {
-    console.log(i+ " " + x)
+   // console.log(i+ " " + x)
     x = x + x*rate
   }
   return x
