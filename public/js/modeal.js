@@ -63,6 +63,18 @@ myApp.controller('modealController', function($scope, $window) {
     $scope.show_psf = !$scope.show_psf
   }
   
+  $scope.show_tenants = false
+  $scope.toggle_tenants = function() {
+    $scope.show_tenants = !$scope.show_tenants
+  }
+  
+  $scope.colcol = function(index) {
+    s = {}
+    if (index % 2 && false) {
+      s['background-color'] = "white"
+    }
+    return s
+  }
     
   $scope.init = function() {
     

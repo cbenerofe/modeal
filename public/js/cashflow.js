@@ -2,11 +2,6 @@
 
 myApp.controller('cashflowController', ['$scope',function($scope) {
   
-  
-  $scope.show_tenants = false
-  $scope.toggle_tenants = function() {
-    $scope.show_tenants = !$scope.show_tenants
-  }
 
   $scope.show_vacancies = false
   $scope.toggle_vacancies = function() {
