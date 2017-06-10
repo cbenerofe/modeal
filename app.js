@@ -23,13 +23,9 @@ app.use(express.static('public'));
 
 // set routes
 app.get('/', function(req, res) {
-  res.render('index');
+  res.render('cashflow');
 });
 
-
-app.get('/income', function(req, res) {
-  res.render('income');
-});
 
 app.get('/cashflow', function(req, res) {
   res.render('cashflow');

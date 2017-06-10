@@ -49,17 +49,17 @@ html(ng-app="myApp")
 
         tbody()
           tr(ng-if="show_nets")
-            th.key() base rent
+            th.key() Base Rent
             td(ng-repeat="year in years" ng-style="colcol($index)")
               | {{ get_years_total_rent(year.start_date.getFullYear(),'base') }}
 
           tr(ng-if="show_nets")
-            th.key re taxes
+            th.key RE Taxes
             td(ng-repeat="year in years" ng-style="colcol($index)")
               | {{ get_years_total_rent(year.start_date.getFullYear(),'retax') }}
               
           tr(ng-if="show_nets")
-            th.key cam 
+            th.key CAM 
             td(ng-repeat="year in years" ng-style="colcol($index)")
               | {{ get_years_total_rent(year.start_date.getFullYear(),'cam') }}
 
@@ -118,6 +118,6 @@ html(ng-app="myApp")
 
         tbody()
           tr
-            th.key cash flow
+            th Cash Flow
             th(ng-repeat="year in years" ng-style="colcol($index)") 
               | {{ get_cash_flow(year.start_date.getFullYear()) }}

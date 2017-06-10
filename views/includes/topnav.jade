@@ -1,6 +1,6 @@
 .block
   .row
-    .col-xs-8
+    .col-xs-4
       .btn(ng-click="toggle_tenants()" )
         span(ng-if="show_tenants") hide tenants
         span(ng-if="!show_tenants") show tenants
@@ -10,7 +10,14 @@
       .btn(ng-click="toggle_nets()" )
         span(ng-if="show_nets") hide nets
         span(ng-if="!show_nets") show nets
-    .col-xs-3
+
+    .col-xs-4
+      {{building.street_address}}
+          
+    .col-xs-4
+      select(ng-model="deal_id")
+        option(ng-repeat="d in deals" value="{{d.id}} ")
+          | {{ d.name }}
       select(ng-model="scenario_id")
         option(ng-repeat="s in scenarios" value="{{s.id}} ")
           | {{ s.name }}
