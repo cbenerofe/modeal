@@ -1,8 +1,8 @@
 
 
 var myApp = angular.module('myApp', []);
-//var api_server = "http://localhost:3050"
-var api_server = "https://modeal-api.herokuapp.com"
+var api_server = "http://localhost:3050"
+//var api_server = "https://modeal-api.herokuapp.com"
 
 deals = []
 buildings = []
@@ -57,6 +57,7 @@ myApp.controller('modealController', function($scope, $window) {
   
   $scope.$watch('deal_id', function() {
     if ($scope.deal_id != undefined) {
+      $scope.clear()
       load_building()
     }
   });
@@ -88,7 +89,7 @@ myApp.controller('modealController', function($scope, $window) {
     return s
   }
     
-  $scope.init = function() {
+  $scope.clear = function() {
     
     Object.keys(expirations).forEach(function (prop) {
       delete expirations[prop];
@@ -105,7 +106,12 @@ myApp.controller('modealController', function($scope, $window) {
     Object.keys($scope.new_leases).forEach(function (prop) {
       delete $scope.new_leases[prop];
     });
+  
+  }  
     
+  $scope.init = function() {
+    
+    $scope.clear()
     
     scenario = $scope.scenarios.filter(function(s) { return s.id == $scope.scenario_id; })[0];
     $scope.scenario = scenario
@@ -161,6 +167,33 @@ myApp.controller('modealController', function($scope, $window) {
     });
      
   }
+  
+  load_scenarios = function() {
+    scenarios = []
+    $scope.scenarios = []
+    
+    url = api_server + "/api/deals/" + $scope.deal_id + "/scenarios"
+    $.ajax({context: this, url: url, 
+       success: function(result) { 
+         console.log(JSON.stringify(result))
+         scenarios = result
+         $scope.scenarios = result
+         //console.log(JSON.stringify($scope.leases))
+         //alert("hey")
+         //$scope.scenario = $scope.scenarios.filter(function(s) { return s.id == $scope.scenario_id; })[0];
+         if (result.length > 0) {
+           $scope.scenario_id = $scope.scenarios[0].id
+         }
+         $scope.$apply();
+         $scope.init();
+       }, 
+       error: function(result) {
+         //console.log(JSON.stringify(result));
+         //alert("error on scenarios")
+         console.log("error on scenarios")
+       }
+    });
+  }  
     
   load_building = function() {
     
@@ -170,6 +203,16 @@ myApp.controller('modealController', function($scope, $window) {
     expenses = []
     scenarios = []
     vacancies = []
+    $scope.years = []
+    $scope.buildings = buildings
+    $scope.building = undefined
+    $scope.spaces = spaces
+    $scope.leases = leases
+    $scope.vacancies = vacancies
+    $scope.expenses = expenses
+    $scope.scenarios = scenarios
+    $scope.scenario = undefined    
+    
     
     url = api_server + "/api/deals/" + $scope.deal_id + "/buildings"
     $.ajax({context: this, url: url, 
@@ -236,31 +279,13 @@ myApp.controller('modealController', function($scope, $window) {
        }
     }));
   
-    url = api_server + "/api/deals/" + $scope.deal_id + "/scenarios"
-    promises.push($.ajax({context: this, url: url, 
-       success: function(result) { 
-         console.log(JSON.stringify(result))
-         scenarios = result
-         $scope.scenarios = result
-         //console.log(JSON.stringify($scope.leases))
-         //alert("hey")
-         //$scope.scenario = $scope.scenarios.filter(function(s) { return s.id == $scope.scenario_id; })[0];
-         if (result.length > 0) {
-           $scope.scenario_id = $scope.scenarios[0].id
-         }
-         $scope.$apply();
-       }, 
-       error: function(result) {
-         //console.log(JSON.stringify(result));
-         //alert("error on scenarios")
-         console.log("error on scenarios")
-       }
-    }));
+
     
     $.when.apply($, promises).then(function() {
         // returned data is in arguments[0][0], arguments[1][0], ... arguments[9][0]
         // you can process it here
        //$scope.init()
+      load_scenarios()
     }, function() {
         // error occurred
     });
