@@ -78,7 +78,9 @@ get_new_leases = function(scenario) {
     start.setMonth(start.getMonth() + parseInt(scenario.down_months) -1)
     l.space['lease-start'] = start.getMonth() + "/" + start.getDate() + "/" + start.getFullYear()
     
-
+    end = new Date(start.valueOf())
+    end.setFullYear(end.getFullYear() + parseInt(scenario.new_lease.years))
+    
     l.space['lease-end'] = end.getMonth() + "/" + end.getDate() + "/" + end.getFullYear()
     
     for (i=0; i< parseInt(scenario.new_lease.years); i++) {
@@ -120,7 +122,7 @@ get_new_leases = function(scenario) {
 calc_increase = function(base,years,rate) {
   x = base
   for (i=0; i<=years; i++) {
-   // console.log(i+ " " + x)
+    //console.log(i+ " " + x)
     x = x + x*rate
   }
   return x

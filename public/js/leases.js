@@ -130,6 +130,7 @@ get_lease_rent = function(lease,year,charge,psf) {
     if (space == undefined) {
       return 0
     }
+
     
     period = get_lease_period(space,month)
     if (period == undefined && scenario != undefined) {
@@ -138,6 +139,7 @@ get_lease_rent = function(lease,year,charge,psf) {
     if (period == undefined) {
       return 0
     }
+    
     amount = 0
     yeardiff = month.getFullYear() - start_date.getFullYear()
     
@@ -153,11 +155,13 @@ get_lease_rent = function(lease,year,charge,psf) {
         if (period.re_taxes == 'net') {
           //console.log(lease.space.pro_rata * retaxes)
           taxinc = yeardiff * .02 * retaxes
-          
+
           curtaxes = retaxes + taxinc
-          //console.log(month.getFullYear() + " " + curtaxes)
           amount += Math.round((space.pro_rata * curtaxes)/12)
-                    
+          //if (space.id == "102" ) {
+          //  console.log("taxinc=" + taxinc + "retaxes=" + retaxes  + " curtaxes=" + curtaxes + " space_pro_rata= " + space.pro_rata + " amount=" + amount )
+            //}
+          
         }
         break;
       case 'cam':
@@ -227,9 +231,9 @@ get_lease_rent = function(lease,year,charge,psf) {
       }
       yearly += monthly
     }
-    
-    //console.log("lease=" + JSON.stringify(lease) + " year=" + year + " charge=" + charge + " yearly=" + yearly)
-    
+    if (lease.tenant == "new-102" && year == 2018 && charge == "retax") {
+      console.log("lease=" + lease.tenant + " year=" + year + " charge=" + charge + " yearly=" + yearly)
+    }
     
     if (psf == true) {
       return Math.round(yearly / lease.space.sqft * 100) / 100

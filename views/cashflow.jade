@@ -29,22 +29,21 @@ html(ng-app="myApp")
                 .col-xs-12 {{space.sqft}}
                 
             td(ng-repeat="year in years" ng-style="colcol($index)")
-              .block(ng-repeat="lease in get_space_leases(space.id, year.start_date.getFullYear())")
-                .row
-                  .col-xs-6 {{ lease.tenant }} 
-                  .col-xs-6 
-                    .block(ng-if="!show_nets")
-                      | {{ get_lease_rent(lease,year.start_date.getFullYear(),'all') }}
-                    .block(ng-if="show_nets")
-                      .row
-                        .col-xs-4 base
-                        .col-xs-8 {{ get_lease_rent(lease,year.start_date.getFullYear(),'base') }}
-                      .row
-                        .col-xs-4 tax
-                        .col-xs-8 {{ get_lease_rent(lease,year.start_date.getFullYear(),'retax') }}
-                      .row
-                        .col-xs-4 cam
-                        .col-xs-8 {{ get_lease_rent(lease,year.start_date.getFullYear(),'cam') }}
+              .block.clearfix(ng-repeat="lease in get_space_leases(space.id, year.start_date.getFullYear())" style="border: 1px solid black;")
+                div {{ lease.tenant }}
+                .pull-right
+                  .block(ng-if="!show_nets")
+                    | {{ get_lease_rent(lease,year.start_date.getFullYear(),'all') }}
+                  .block(ng-if="show_nets")
+                    .row
+                      .col-xs-4 base
+                      .col-xs-8 {{ get_lease_rent(lease,year.start_date.getFullYear(),'base') }}
+                    .row
+                      .col-xs-4 tax
+                      .col-xs-8 {{ get_lease_rent(lease,year.start_date.getFullYear(),'retax') }}
+                    .row
+                      .col-xs-4 cam
+                      .col-xs-8 {{ get_lease_rent(lease,year.start_date.getFullYear(),'cam') }}
 
 
         tbody()

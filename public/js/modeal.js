@@ -58,7 +58,7 @@ myApp.controller('modealController', function($scope, $window) {
   $scope.$watch('deal_id', function() {
     if ($scope.deal_id != undefined) {
       $scope.clear()
-      load_building()
+      load_buildings()
     }
   });
   
@@ -158,7 +158,7 @@ myApp.controller('modealController', function($scope, $window) {
          $scope.deals = result
          $scope.deal_id = $scope.deals[0].id
          $scope.$apply();
-         load_building()
+         load_buildings()
        }, 
        error: function(result) {
          //console.log(JSON.stringify(result));
@@ -175,7 +175,7 @@ myApp.controller('modealController', function($scope, $window) {
     url = api_server + "/api/deals/" + $scope.deal_id + "/scenarios"
     $.ajax({context: this, url: url, 
        success: function(result) { 
-         console.log(JSON.stringify(result))
+         //console.log(JSON.stringify(result))
          scenarios = result
          $scope.scenarios = result
          //console.log(JSON.stringify($scope.leases))
@@ -194,47 +194,8 @@ myApp.controller('modealController', function($scope, $window) {
        }
     });
   }  
-    
-  load_building = function() {
-    
-    buildings = []
-    spaces = []
-    leases = []
-    expenses = []
-    scenarios = []
-    vacancies = []
-    $scope.years = []
-    $scope.buildings = buildings
-    $scope.building = undefined
-    $scope.spaces = spaces
-    $scope.leases = leases
-    $scope.vacancies = vacancies
-    $scope.expenses = expenses
-    $scope.scenarios = scenarios
-    $scope.scenario = undefined    
-    
-    
-    url = api_server + "/api/deals/" + $scope.deal_id + "/buildings"
-    $.ajax({context: this, url: url, 
-       success: function(result) { 
-         
-         buildings = result
-         $scope.buildings = result
-         if (result.length > 0) {
-           //console.log(JSON.stringify(result))
-           $scope.building_id = $scope.buildings[0].id
-           $scope.building = $scope.buildings[0]
-           $scope.$apply();
-           load_data()
-         }
-       }, 
-       error: function(result) {
-         console.log(JSON.stringify(result));
-         //alert("error on buildings")
-       }
-    });  
-  }
-    
+
+
   load_data = function() {
     
     var promises = [];
@@ -278,8 +239,6 @@ myApp.controller('modealController', function($scope, $window) {
          console.log("error on expenses")
        }
     }));
-  
-
     
     $.when.apply($, promises).then(function() {
         // returned data is in arguments[0][0], arguments[1][0], ... arguments[9][0]
@@ -292,6 +251,49 @@ myApp.controller('modealController', function($scope, $window) {
     
      
   }
+
+    
+  load_buildings = function() {
+    
+    buildings = []
+    spaces = []
+    leases = []
+    expenses = []
+    scenarios = []
+    vacancies = []
+    $scope.years = []
+    $scope.buildings = buildings
+    $scope.building = undefined
+    $scope.spaces = spaces
+    $scope.leases = leases
+    $scope.vacancies = vacancies
+    $scope.expenses = expenses
+    $scope.scenarios = scenarios
+    $scope.scenario = undefined    
+    
+    
+    url = api_server + "/api/deals/" + $scope.deal_id + "/buildings"
+    $.ajax({context: this, url: url, 
+       success: function(result) { 
+         
+         buildings = result
+         $scope.buildings = result
+         if (result.length > 0) {
+           //console.log(JSON.stringify(result))
+           $scope.building_id = $scope.buildings[0].id
+           $scope.building = $scope.buildings[0]
+           $scope.$apply();
+           load_data()
+         }
+       }, 
+       error: function(result) {
+         console.log(JSON.stringify(result));
+         //alert("error on buildings")
+       }
+    });  
+  }
+    
+
   
   load_deals();
     

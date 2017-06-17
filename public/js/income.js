@@ -45,9 +45,9 @@ get_years_total_rent = function(year,charge,psf) {
   //find all leases
   total = 0
   orig = get_years_orig_rent(year,charge,false)
-  //newbys = get_years_new_rent(year,charge,psf)
-  //total = orig + newbys
-  total = orig
+  newbys = get_years_new_rent(year,charge,false)
+  total = parseInt(orig) + parseInt(newbys)
+  //total = orig
   
   //console.log("sqft=" + sqft + " total=" + total + " psf=" + psf + " =" + Math.round(total/sqft))
   //console.log(year + " orig=" + orig + " newbys=" + newbys + " total=" + total)
