@@ -11,24 +11,17 @@ leases = []
 expenses = []
 scenarios = []
 vacancies = []
+retaxes = 0
+cam = 0
+sqft = 0
+mgmt = 0
 
-/*
-spaces = space_data
-leases = lease_data
-expenses = expense_data
-scenarios = scenario_data
-vacancies = vacancy_data
-*/
 
 scenario = undefined
 
 expirations = {}
 new_leases = {}
 
-retaxes = 600000
-cam = 300000
-sqft = 643000
-mgmt = 100000
 
 start_date = new Date (2017,1,1)
 hold_period = 7
@@ -229,7 +222,29 @@ myApp.controller('modealController', function($scope, $window) {
          //console.log(JSON.stringify(result))
          expenses = result
          $scope.expenses = result
-         //console.log(JSON.stringify($scope.leases))
+          y = start_date.getFullYear()
+         
+         expenses.forEach(function(e) {
+            if (e.chargeback == 'retax') {
+              c = e.estimates.filter(function(s) { return s.year == y; })[0];
+              if (c != undefined) {
+                retaxes = retaxes + c.amount
+              }
+            }
+            if (e.chargeback == 'cam') {
+              c = e.estimates.filter(function(s) { return s.year == y; })[0];
+              if (c != undefined) {
+                cam = cam + c.amount
+              }
+            }
+            if (e.chargeback == 'mgmt') {
+              c = e.estimates.filter(function(s) { return s.year == y; })[0];
+              if (c != undefined) {
+                mgmt = mgmt + c.amount
+              }
+            }
+         });
+         //console.log("retaxes=" + retaxes + " cam=" + cam + " mgmt=" + mgmt)
          //alert("hey")
          $scope.$apply();
        }, 
@@ -282,6 +297,7 @@ myApp.controller('modealController', function($scope, $window) {
            //console.log(JSON.stringify(result))
            $scope.building_id = $scope.buildings[0].id
            $scope.building = $scope.buildings[0]
+           sqft = $scope.building.sqft
            $scope.$apply();
            load_data()
          }

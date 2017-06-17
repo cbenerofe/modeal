@@ -22,12 +22,17 @@ get_years_orig_rent = function(year,charge,psf) {
 get_years_new_rent = function(year,charge,psf) {
   //find all leases
   total = 0
+  //console.log(Date.now() + " " + new_leases)
   Object.keys(new_leases).forEach(function (key) { 
     if (new_leases[key] != undefined) {
+      //console.log(Date.now() + " " + key)
       new_leases[key].forEach(function(l) {
-        //console.log(JSON.stringify(l.id) + " " + year)
-        rent = get_new_tenants_rent(l,year,charge,false)
-        total += rent
+        if (l != undefined) {
+          rent = get_new_tenants_rent(l,year,charge,false)
+          total += rent
+        } else {
+          console.log("undefined:"  + JSON.stringify(new_leases[key]) + " " + key)
+        }
       })
     }
   })

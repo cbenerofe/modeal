@@ -71,6 +71,7 @@ get_new_leases = function(scenario) {
     l.space.pro_rata = e.pro_rata
     l.space.sqft = e.sqft
     l.space.periods = []
+    l.space.extensions = []
     
     pieces = e.available.split("/")
     //console.log(pieces)
@@ -98,7 +99,7 @@ get_new_leases = function(scenario) {
       //console.log("diff=" + diff + " increase=" + increase + " new_rent=" + p.base_rent)
       p.re_taxes = scenario.new_lease.re_taxes
       p.cam = scenario.new_lease.cam
-      p.mgmt_fee = scenario.new_lease.mgmt_fee
+      p.mgmt_fee = scenario.new_lease.mgmt
 
       l.space.periods.push(p)
       start = new Date(start.valueOf())
