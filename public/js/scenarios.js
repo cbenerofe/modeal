@@ -56,13 +56,43 @@ get_expirations = function(year,scenario) {
   return expirations
 } 
 
-get_new_leases = function(scenario) {
-  // for each expiration 
-  // create a new lease
-  // after waiting period
-  new_leases = {}
-  expirations = get_all_expirations(scenario)
-  expirations.forEach(function(e) {
+get_newlease_expirations = function(nleases,scenario) {
+  // loop all leases, find any that expire in range
+  // without extension, specify the space and date
+  new_expirations = []
+
+  Object.keys(nleases).forEach(function(x) {
+    nl = nleases[x]
+    nl.forEach(function(l) {
+    
+      p = get_lease_expiration(l.space,scenario)
+            
+      if (p != undefined) {
+        //console.log(p)
+        v = {}
+        v.space_id = l.space.id
+        v.sqft = l.space.sqft
+        v.pro_rata = l.space.pro_rata
+        v.available = p.end
+        v.old_tenant = l.tenant
+        pieces = p.end.split("/")
+        v.month = pieces[0] + "/" + pieces[1]
+        
+        new_expirations.push(v)
+      }
+    })
+  
+  })
+
+  //console.log(JSON.stringify(expirations))
+  return new_expirations
+}   
+
+
+
+
+create_new_lease = function(e, scenario) {
+  
     //console.log("exp=" + JSON.stringify(e))
     l = {}
     l.tenant = "new-" + e.space_id
@@ -74,7 +104,7 @@ get_new_leases = function(scenario) {
     l.space.extensions = []
     
     pieces = e.available.split("/")
-    //console.log(pieces)
+    
     start = new Date(parseInt(pieces[2]),parseInt(pieces[0]),parseInt(pieces[1]))
     start.setMonth(start.getMonth() + parseInt(scenario.down_months) -1)
     l.space['lease-start'] = start.getMonth() + "/" + start.getDate() + "/" + start.getFullYear()
@@ -84,14 +114,16 @@ get_new_leases = function(scenario) {
     
     l.space['lease-end'] = end.getMonth() + "/" + end.getDate() + "/" + end.getFullYear()
     
-    for (i=0; i< parseInt(scenario.new_lease.years); i++) {
+    for (z=0; z< parseInt(scenario.new_lease.years); z++) {
       p = {}
       //p.start_date = start
-      p.start = start.getMonth() + "/" + start.getDate() + "/" + start.getFullYear()
+      m = start.getMonth() + 1
+      p.start =  m + "/" + start.getDate() + "/" + start.getFullYear()
 
       end = new Date(start.valueOf())
       end.setFullYear(end.getFullYear() + 1)
-      p.end = end.getMonth() + "/" + end.getDate() + "/" + end.getFullYear()
+      m = end.getMonth() + 1
+      p.end =  m + "/" + end.getDate() + "/" + end.getFullYear()
   
       diff = start.getFullYear() - 2017
   
@@ -106,15 +138,55 @@ get_new_leases = function(scenario) {
       start.setFullYear(start.getFullYear() + 1)
     }
     
-    if (new_leases[start.getFullYear()] == undefined) {
-      new_leases[start.getFullYear()] =[]
-    }
+
     l.space.ti = scenario.new_lease.ti_psf * e.sqft
     l.space.lc = Math.round(scenario.new_lease.commision * e.sqft * scenario.new_lease.base_rent * scenario.new_lease.years)
     //console.log("newl=" + JSON.stringify(l))
-    new_leases[start.getFullYear()].push(l)
+  return l
+}
+
+get_new_leases = function(scenario) {
+  // for each expiration 
+  // create a new lease
+  // after waiting period
+ // console.log("get new leases: " + Date.now())
+  new_leases = {}
+  expirations = get_all_expirations(scenario)
+  expirations.forEach(function(e) {
+    //console.log("exp=" + JSON.stringify(e))
+    l = create_new_lease(e,scenario)
+    //console.log("new lease: " + JSON.stringify(l))
+ 
+    //console.log("new lease: " + l.tenant  + " " + l.space['lease-start'] + " - " + l.space['lease-end'])
+    s = new Date(l.space['lease-start'])
+    //console.log(s.getFullYear())
+ 
+    if (new_leases[s] == undefined) {
+      new_leases[s] =[]
+    }
+    new_leases[s].push(l)    
+    
     //console.log(l)
   })
+  
+  new_expirations = get_newlease_expirations(new_leases,scenario)
+  new_expirations.forEach(function(ne) {
+    //console.log("new exp=" + JSON.stringify(ne))
+    
+    l = create_new_lease(ne,scenario)
+
+    s = new Date(l.space['lease-start'])
+    //console.log(s.getFullYear())
+ 
+    if (new_leases[s] == undefined) {
+      new_leases[s] =[]
+    }
+    new_leases[s].push(l)    
+    
+    //console.log(l)
+  })  
+  
+  
   // console.log(new_leases)
   return new_leases
 }

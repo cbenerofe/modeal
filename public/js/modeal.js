@@ -1,8 +1,8 @@
 
 
 var myApp = angular.module('myApp', []);
-//var api_server = "http://localhost:3050"
-var api_server = "https://modeal-api.herokuapp.com"
+var api_server = "http://localhost:3050"
+//var api_server = "https://modeal-api.herokuapp.com"
 
 deals = []
 buildings = []
@@ -43,7 +43,7 @@ myApp.controller('modealController', function($scope, $window) {
   $scope.expenses = expenses
   $scope.scenarios = scenarios
   $scope.scenario = undefined
-  //$scope.scenario_id = 1
+  $scope.scenario_id = undefined
   //$scope.scenario_id = $scope.scenarios[0].id
   $scope.expirations = {}
   $scope.new_leases = {}
@@ -56,7 +56,10 @@ myApp.controller('modealController', function($scope, $window) {
   });
   
   $scope.$watch('scenario_id', function() {
-    $scope.init()
+    if ($scope.scenario_id != undefined) {
+      //console.log(Date.now())
+      $scope.init()
+    }
   });
 
   $scope.show_nets = false
@@ -103,7 +106,7 @@ myApp.controller('modealController', function($scope, $window) {
   }  
     
   $scope.init = function() {
-    
+    //console.log(Date.now())
     $scope.clear()
     
     scenario = $scope.scenarios.filter(function(s) { return s.id == $scope.scenario_id; })[0];
@@ -178,7 +181,7 @@ myApp.controller('modealController', function($scope, $window) {
            $scope.scenario_id = $scope.scenarios[0].id
          }
          $scope.$apply();
-         $scope.init();
+        // $scope.init();
        }, 
        error: function(result) {
          //console.log(JSON.stringify(result));

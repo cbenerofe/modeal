@@ -2,6 +2,7 @@
 get_space_leases = function(space_id,year) {  
   // find original leases for the space active during the year
   // find new leases for the space active during the year
+  //console.log("get space leases: " + space_id)
   
   found_leases = []
   leases.forEach(function(l) { 
@@ -15,6 +16,7 @@ get_space_leases = function(space_id,year) {
   Object.keys(new_leases).forEach(function (key) { 
     if (new_leases[key] != undefined) {
       new_leases[key].forEach(function(l) {
+        //console.log("checking: " + JSON.stringify(l))
         if (l.space.id == space_id) {
           if (check_lease_in_year(l,year) == true ) {
             found_leases.push(l)
@@ -318,7 +320,7 @@ get_lease_rent = function(lease,year,charge,psf) {
     if (space == undefined) {
       return undefined
     }
-  
+      
     latest_period = undefined
     if (space.periods != undefined) {
       // find latest period, 
@@ -326,6 +328,7 @@ get_lease_rent = function(lease,year,charge,psf) {
       latest_end = new Date(2000,01,01)
     
       space.periods.forEach(function(p) {
+                
         pieces = p.end.split("/")
         end = new Date(pieces[2],pieces[0],pieces[1])
         //console.log("year="+year + " end=" + end.getFullYear() )
@@ -334,7 +337,7 @@ get_lease_rent = function(lease,year,charge,psf) {
           latest_period = p
         }
       })
-    
+          
       if (space.extensions != undefined) {
         scenario.extensions.forEach(function(se) {  
           if (se.space_id == space.id) {
@@ -357,18 +360,26 @@ get_lease_rent = function(lease,year,charge,psf) {
     
       }
     
+    
     }
-  
-    //console.log(space.id + " "+ latest_period.end + " " +month.getMonth() +"/" + month.getFullYear())
+    
+    /* not sure if this is neede */
+    /*
     if (latest_period != undefined) {
       pieces = latest_period.end.split("/")
       end = new Date(pieces[2],pieces[0],pieces[1])
-      if ( end < end_date ) {
+      if ( end <= end_date ) {
         expiring_period = latest_period
       }
     }
-
-    return expiring_period
+    */
+    
+    /*
+    if (space.id == '225-106') {
+      console.log(space.id + " latest_period="+ latest_period.end  + " expiring_period=" + expiring_period)
+    }
+    */
+    return latest_period
   }
 
 
@@ -410,8 +421,9 @@ get_lease_rent = function(lease,year,charge,psf) {
         ret = true
       }
     }
-
-    //console.log(Date.now() + " year=" + year + " start=" + start.getFullYear() + " end=" + end.getFullYear() + " ret=" + ret)
+    if (lease.space.id == '225-106') {
+      //console.log(Date.now() + " year=" + year + " start=" + start.getFullYear() + " end=" + end.getFullYear() + " ret=" + ret)
+    }
     return ret
   }
 
