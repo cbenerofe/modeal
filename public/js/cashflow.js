@@ -23,19 +23,19 @@ myApp.controller('cashflowController', ['$scope',function($scope) {
     $scope.show_expenses = !$scope.show_expenses
   }
   
-
-  $scope.get_tenants_rent = function(lease_id,year,charge) {
-    x = get_tenants_rent(lease_id,year,charge,$scope.show_psf,$scope.scenario)
+  
+  $scope.get_space_leases = function(space_id, year) {
+    x = get_space_leases(space_id,year)
     return x
-  }   
+  } 
+  
+  $scope.get_lease_rent = function(lease, year,charge) {
+    x = get_lease_rent(lease,year,charge,$scope.show_psf)
+    return x
+  } 
   
   $scope.get_years_rent = function(year,charge) {
     x = get_years_rent(year,charge,$scope.show_psf,$scope.scenario)
-    return x
-  }  
-  
-  $scope.get_years_new_rent = function(year,charge) {
-    x = get_years_new_rent(year,charge,$scope.show_psf)
     return x
   }  
   
@@ -49,26 +49,6 @@ myApp.controller('cashflowController', ['$scope',function($scope) {
     return x
   } 
 
-  $scope.get_years_occupancy = function(year) {
-    x = get_years_occupancy(year,$scope.scenario)
-    return x
-  } 
-
-  $scope.get_years_vacancy = function(year) {
-    x = get_years_vacancy(year,$scope.scenario)
-    return x
-  }
-  
-  $scope.get_vacant_spaces = function(year) {
-    x = get_vacant_spaces(year,$scope.scenario)
-    return x
-  } 
-  
-  $scope.get_new_leases = function(year) {
-    x = get_expirations(year,$scope.scenario)
-    return x
-  } 
-  
   $scope.get_tenant_improvements = function(year) {
     x = get_tenant_improvements(year)
     return x
@@ -83,12 +63,7 @@ myApp.controller('cashflowController', ['$scope',function($scope) {
     x = get_capex(year, $scope.show_psf)
     return x
   } 
-  /*
-  $scope.get_years_expirations = function(year) {
-    x = get_expirations(year,$scope.scenario)
-    return x
-  } 
-  */
+
   
   $scope.get_noi = function (year) {
     i = get_years_total_rent(year,'all')
@@ -128,6 +103,42 @@ myApp.controller('cashflowController', ['$scope',function($scope) {
       return cf
     }
   } 
+
+
+
+/*
+  
+  $scope.get_years_occupancy = function(year) {
+    x = get_years_occupancy(year,$scope.scenario)
+    return x
+  } 
+
+  $scope.get_years_vacancy = function(year) {
+    x = get_years_vacancy(year,$scope.scenario)
+    return x
+  }
+  
+  $scope.get_vacant_spaces = function(year) {
+    x = get_vacant_spaces(year,$scope.scenario)
+    return x
+  } 
+  
+  $scope.get_new_leases = function(year) {
+    x = get_expirations(year,$scope.scenario)
+    return x
+  } 
+  
+  $scope.get_years_new_rent = function(year,charge) {
+    x = get_years_new_rent(year,charge,$scope.show_psf)
+    return x
+  }    
+  
+  $scope.get_years_expirations = function(year) {
+    x = get_expirations(year,$scope.scenario)
+    return x
+  }   
+  
+*/
 
 
   
