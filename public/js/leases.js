@@ -64,6 +64,7 @@ get_lease_rent = function(lease,year,charge,psf) {
 }   
 
 
+
   get_lease_period = function(space,month,scenario) {
     var period = undefined
     if (space != undefined) {
@@ -205,72 +206,7 @@ get_lease_rent = function(lease,year,charge,psf) {
   }
 
 
-  get_tenants_rent = function(lease_id,year,charge,psf,scenario) {
-    if (scenario == undefined ) { return 0 }
-    // charge = base, retax, cam, mgt,
-    //find lease
-    //console.log(JSON.stringify(lease_id) + " " + year)
-    lease = leases.filter(function(v) { return v.id === lease_id; })[0];
-    //console.log(JSON.stringify(lease))
-    yearly = 0;
-    
-    for (m=1;m<=12;m++) {
-      month = new Date(year,m,1)
-      monthly = 0;
-      if (charge == 'all') {
-        monthly += get_charge(lease.space,month,'base',scenario)
-        monthly += get_charge(lease.space,month,'retax',scenario)
-        monthly += get_charge(lease.space,month,'cam',scenario)
-        monthly += get_charge(lease.space,month,'mgmt',scenario)
-      } else {
-        monthly += get_charge(lease.space,month,charge,scenario)
-      }
-      yearly += monthly
-    }
-    
-    if (psf == true) {
-      return Math.round(yearly / lease.space.sqft * 100) / 100
-    } else {
-      return yearly
-    }
-  }   
-  
 
-  get_new_tenants_rent = function(lease,year,charge,psf) {
-    // charge = base, retax, cam, mgt,
-    //find lease
-    dt = Date.now()
-    //console.log(dt + " " + JSON.stringify(lease) + " " + year)
-    yearly = 0;
-    
-    for (m=1;m<=12;m++) {
-      month = new Date(year,m,1)
-      if (lease.tenant == "new-225-108") {
-        //console.log(month)
-      }
-      monthly = 0;
-      if (charge == 'all') {
-        monthly += get_charge(lease.space,month,'base')
-        monthly += get_charge(lease.space,month,'retax')
-        monthly += get_charge(lease.space,month,'cam')
-        monthly += get_charge(lease.space,month,'mgmt')
-      } else {
-        monthly += get_charge(lease.space,month,charge)
-      }
-      yearly += monthly
-    }
-    //console.log (dt + " done")
-    if (lease.tenant == "new-102" && year == 2018 && charge == "retax") {
-      //console.log("lease=" + lease.tenant + " year=" + year + " charge=" + charge + " yearly=" + yearly)
-    }
-    
-    if (psf == true) {
-      return Math.round(yearly / lease.space.sqft * 100) / 100
-    } else {
-      return yearly
-    }
-  }   
-  
 
 
   check_lease_expiration = function(space,month,scenario) {
@@ -363,22 +299,6 @@ get_lease_rent = function(lease,year,charge,psf) {
     
     }
     
-    /* not sure if this is neede */
-    /*
-    if (latest_period != undefined) {
-      pieces = latest_period.end.split("/")
-      end = new Date(pieces[2],pieces[0],pieces[1])
-      if ( end <= end_date ) {
-        expiring_period = latest_period
-      }
-    }
-    */
-    
-    /*
-    if (space.id == '225-106') {
-      console.log(space.id + " latest_period="+ latest_period.end  + " expiring_period=" + expiring_period)
-    }
-    */
     return latest_period
   }
 

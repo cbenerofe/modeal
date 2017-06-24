@@ -11,6 +11,8 @@ leases = []
 expenses = []
 scenarios = []
 vacancies = []
+
+
 retaxes = 0
 cam = 0
 sqft = 0
@@ -25,8 +27,6 @@ new_leases = {}
 
 start_date = new Date (2017,1,1)
 hold_period = 7
-end_date = new Date (2023,12,31)
-
 
 
 
@@ -44,7 +44,6 @@ myApp.controller('modealController', function($scope, $window) {
   $scope.scenarios = scenarios
   $scope.scenario = undefined
   $scope.scenario_id = undefined
-  //$scope.scenario_id = $scope.scenarios[0].id
   $scope.expirations = {}
   $scope.new_leases = {}
   
@@ -118,6 +117,11 @@ myApp.controller('modealController', function($scope, $window) {
     year = {}
     $scope.years = []
     year.start_date = new Date(start_date)
+    ed = new Date(start_date)
+    ed.setFullYear(ed.getFullYear() + 1)
+    ed.setDate(ed.getDate() -1)
+    year.end_date = ed
+    
     $scope.years.push(year)
 
     $scope.expirations[year.start_date.getFullYear()] = get_expirations(year.start_date.getFullYear(),$scope.scenario)

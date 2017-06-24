@@ -34,10 +34,6 @@ myApp.controller('cashflowController', ['$scope',function($scope) {
     return x
   } 
   
-  $scope.get_years_rent = function(year,charge) {
-    x = get_years_rent(year,charge,$scope.show_psf,$scope.scenario)
-    return x
-  }  
   
   $scope.get_years_total_rent = function(year,charge) {
     x = get_years_total_rent(year,charge,$scope.show_psf)
