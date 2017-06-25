@@ -2,12 +2,14 @@
 
   get_expense_period = function(periods,year) {
     var period = undefined
-    latest_year = 0;
+    
     periods.forEach(function(p) {
-      if (p.year == year) {
+      
+      if (p.year == year.start_date.getFullYear()) {
         period = p
       }
     })
+    
     return period
   }
 
@@ -18,7 +20,7 @@
       if (p.year > latest_year) { 
         period = p 
       }
-      if (p.year == year) {
+      if (p.year == year.start_date.getFullYear()) {
         return p
       }
     })
@@ -34,7 +36,7 @@
     // if can't find, check for latest actual
 
     amount = 0
-    years = year.toString()
+    //years = year.toString()
 
     if (expense_id == 'all') {
       //console.log("year: " + year)
@@ -48,7 +50,7 @@
           period = get_latest_expense_period(e.estimates,year)
           //console.log("latest:" + JSON.stringify(period))
           if (period != undefined ) {
-            diff = year - period.year 
+            diff = year.start_date.getFullYear() - period.year 
             increase = diff * .02 * period.amount
             tmp = Math.round(period.amount + increase)
           }

@@ -25,7 +25,7 @@ expirations = {}
 new_leases = {}
 
 
-start_date = new Date (2017,1,1)
+start_date = new Date (2017,8,1)
 hold_period = 7
 
 
@@ -94,13 +94,18 @@ myApp.controller('modealController', function($scope, $window) {
       delete $scope.expirations[prop];
     });    
     
-    Object.keys(new_leases).forEach(function (prop) {
-      delete new_leases[prop];
-    });
+    new_leases = []
+    
+    //Object.keys(new_leases).forEach(function (prop) {
+    //  delete new_leases[prop];
+    //});
 
-    Object.keys($scope.new_leases).forEach(function (prop) {
-      delete $scope.new_leases[prop];
-    });
+    $scope.new_leases = []
+    //Object.keys($scope.new_leases).forEach(function (prop) {
+    //  delete $scope.new_leases[prop];
+    //});
+    
+
   
   }  
     
@@ -124,21 +129,24 @@ myApp.controller('modealController', function($scope, $window) {
     
     $scope.years.push(year)
 
-    $scope.expirations[year.start_date.getFullYear()] = get_expirations(year.start_date.getFullYear(),$scope.scenario)
-    $scope.expirations[year.start_date.getFullYear()] = $scope.expirations[year.start_date.getFullYear()].concat(vacancies)
+    $scope.expirations[0] = get_expirations($scope.years[0],$scope.scenario)
+    $scope.expirations[0] = $scope.expirations[0].concat(vacancies)
 
     for (i=1; i<hold_period;i++) {
       year = {}
-      year.start_date = new Date(start_date)
-      yearnum = year.start_date.getFullYear() + i
-      year.start_date.setFullYear(yearnum)
+      sd = new Date(start_date)
+      sd.setFullYear(sd.getFullYear() + i)
+      year.start_date = sd
+      ed = new Date(sd)
+      ed.setFullYear(ed.getFullYear() + 1)
+      ed.setDate(ed.getDate() -1)
+      year.end_date = ed
       $scope.years.push(year)
-      //console.log(yearnum)
-      $scope.expirations[yearnum] = get_expirations(yearnum,$scope.scenario)
+      $scope.expirations[i] = get_expirations($scope.years[i],$scope.scenario)
     }
+    
     //console.log($scope.scenario)
     new_leases = get_new_leases($scope.scenario)
-    
     $scope.new_leases = new_leases
     
     //console.log("leases:" + JSON.stringify(leases))
@@ -222,6 +230,13 @@ myApp.controller('modealController', function($scope, $window) {
          console.log("error on leases")
        }
     }));
+  
+    
+    retaxes = 0
+    cam = 0
+    //sqft = 0
+    mgmt = 0
+    
   
     url = api_server + "/api/buildings/" + $scope.building_id + "/expenses"
     promises.push($.ajax({context: this, url: url, 

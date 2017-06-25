@@ -29,8 +29,25 @@ myApp.controller('cashflowController', ['$scope',function($scope) {
     return x
   } 
   
-  $scope.get_lease_rent = function(lease, year,charge) {
-    x = get_lease_rent(lease,year,charge,$scope.show_psf)
+
+  $scope.get_newlease_spaces = function(year) {
+    x = get_newlease_spaces(year)
+    return x
+  } 
+
+  $scope.get_lease_periods = function(space, year) {
+    x = get_lease_periods(space,year,scenario)
+    return x
+  }   
+  
+  $scope.period_months_in_year = function(period, year) {
+    x = period_months_in_year(period,year)
+    return x
+  }   
+  
+  
+  $scope.get_space_rent = function(space, year,charge) {
+    x = get_space_rent(space,year,charge,$scope.show_psf)
     return x
   } 
   
@@ -119,20 +136,12 @@ myApp.controller('cashflowController', ['$scope',function($scope) {
     return x
   } 
   
-  $scope.get_new_leases = function(year) {
-    x = get_expirations(year,$scope.scenario)
-    return x
-  } 
   
   $scope.get_years_new_rent = function(year,charge) {
     x = get_years_new_rent(year,charge,$scope.show_psf)
     return x
   }    
-  
-  $scope.get_years_expirations = function(year) {
-    x = get_expirations(year,$scope.scenario)
-    return x
-  }   
+   
   
 */
 

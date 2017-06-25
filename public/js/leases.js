@@ -1,4 +1,5 @@
 
+
 get_space_leases = function(space_id,year) {  
   // find original leases for the space active during the year
   // find new leases for the space active during the year
@@ -12,10 +13,10 @@ get_space_leases = function(space_id,year) {
       }
     }
   });
-  
-  Object.keys(new_leases).forEach(function (key) { 
-    if (new_leases[key] != undefined) {
-      new_leases[key].forEach(function(l) {
+  /*
+ // Object.keys(new_leases).forEach(function (key) { 
+  //  if (new_leases[key] != undefined) {
+      new_leases.forEach(function(l) {
         //console.log("checking: " + JSON.stringify(l))
         if (l.space.id == space_id) {
           if (check_lease_in_year(l,year) == true ) {
@@ -23,45 +24,190 @@ get_space_leases = function(space_id,year) {
           }
         }
       })
-    }
-  })
-
+//    }
+//  })
+*/
   return found_leases
   
 }   
 
 
+check_lease_in_year = function (lease, year) {
+  start = new Date(lease.space['lease-start'])
+  ending_period = get_lease_expiration(lease.space,scenario)
+  if (ending_period == undefined) {
+    end = new Date(lease.space['lease-end'])
+  } else {
+    end = new Date(ending_period.end)
+  }
+  
+  ret = false
+  if (start <= year.end_date && end >= year.start_date) {
+      ret = true
+  }
+  if (lease.space.id == '225-106') {
+    //console.log(Date.now() + " year=" + year + " start=" + start.getFullYear() + " end=" + end.getFullYear() + " ret=" + ret)
+  }
+  return ret
+}
 
-get_lease_rent = function(lease,year,charge,psf) {
+
+
+get_space_rent = function(space,year,charge,psf) {
 
   // charge = base, retax, cam, mgt,
   
-  if (lease == undefined ) {
+  if (space == undefined ) {
     return 0
   }
   yearly = 0
-  
-  for (m=1;m<=12;m++) {
-    month = new Date(year,m,1)
+  i = 0
+  while (i < 12 ) {
+    
+    month = new Date(year.start_date)
+    month.setMonth(month.getMonth()+ i)
     monthly = 0;
     if (charge == 'all') {
-      monthly += get_charge(lease.space,month,'base',scenario)
-      monthly += get_charge(lease.space,month,'retax',scenario)
-      monthly += get_charge(lease.space,month,'cam',scenario)
-      monthly += get_charge(lease.space,month,'mgmt',scenario)
+      monthly += get_charge(space,month,'base',scenario)
+      monthly += get_charge(space,month,'retax',scenario)
+      monthly += get_charge(space,month,'cam',scenario)
+      monthly += get_charge(space,month,'mgmt',scenario)
     } else {
-      monthly += get_charge(lease.space,month,charge,scenario)
+      monthly += get_charge(space,month,charge,scenario)
     }
     yearly += monthly
+    i++
   }
 
   if (psf == true) {
-    return Math.round(yearly / lease.space.sqft * 100) / 100
+    return Math.round(yearly / space.sqft * 100) / 100
   } else {
     return yearly
   }
   
 }   
+
+
+get_charge = function(space,month,charge) {
+  
+  if (space == undefined) {
+    return 0
+  }
+
+  dt = Date.now()
+  period = undefined
+  period = get_lease_period(space,month)
+  if (period == undefined && scenario != undefined) {
+    period = get_extension_period(space,month)
+    
+    if (space.id == "225-108" && month.getFullYear() == '2018' && month.getMonth() == 2) {
+      if (period == undefined) {
+      //  console.log(space)
+      } else {
+    //    console.log(dt + " period= " + JSON.stringify(period))
+      }
+    }
+  }
+  if (period == undefined) {
+    return 0
+  }
+  
+  amount = 0
+  yeardiff = month.getFullYear() - start_date.getFullYear()
+  
+  switch (charge) {
+    case 'base':
+      //console.log(period.base_rent)
+      if (period.base_rent != undefined) {
+        //console.log(period.base_rent)
+        amount += Math.round(space.sqft * (period.base_rent/12))
+      }
+      break;
+    case 'retax':
+      if (period.re_taxes == 'net') {
+        //console.log(lease.space.pro_rata * retaxes)
+        taxinc = yeardiff * .02 * retaxes
+
+        curtaxes = retaxes + taxinc
+        amount += Math.round((space.pro_rata * curtaxes)/12)
+        //if (space.id == "102" ) {
+        //  console.log("taxinc=" + taxinc + "retaxes=" + retaxes  + " curtaxes=" + curtaxes + " space_pro_rata= " + space.pro_rata + " amount=" + amount )
+          //}
+        
+      }
+      break;
+    case 'cam':
+      if (period.cam == 'net') {
+        caminc = yeardiff * .02 * cam
+        curcam = cam + caminc
+        amount += Math.round((space.pro_rata * curcam)/12)
+      }
+      break;
+    case 'mgmt':
+      if (period.mgmt == 'net') {
+        amount += Math.round((space.pro_rata * mgmt)/12)
+      }
+      break;
+  }
+  if (space.id == "225-108" && month.getFullYear() == '2018' && month.getMonth() == 2) {
+   // console.log(dt + " charge=" + charge + " amount= " + amount)
+  }
+  return amount
+}
+
+
+
+get_lease_periods = function(space,year,scenario) {
+  
+  if (space.id == '101') {
+    //console.log("ys=" + year.start_date + " ye=" + year.end_date)
+    //console.log(JSON.stringify(p))
+  }  
+  
+  var ret = []
+  if (space != undefined) {
+    if (space.periods != undefined) {  
+      space.periods.forEach(function(p) {
+        start = new Date(p.start)
+        end = new Date(p.end)
+
+        if (( start <= year.end_date) && ( end >= year.start_date)) {
+          if (space.id == '101') {
+           // console.log("ps=" + start + "pe=" + end)
+            //console.log(JSON.stringify(p))
+          }  
+          ret.push(p)
+        }
+      })
+    }
+    if (scenario.extensions != undefined ) {
+      scenario.extensions.forEach(function(se) {  
+        if (se.space_id == space.id) {
+          //console.log(se)
+          if (space.extensions == undefined ) {
+            //console.log ("no extensions:" + space.id)
+          } else {
+            space.extensions.forEach(function(e) {
+              if (se.extension_id == e.id) {
+                start = new Date(e.start)
+                end = new Date(e.end)
+                if (( start <= year.end_date) && ( end >= year.start_date)) {
+                  //console.log(e)
+                  ret.push(e)
+                }
+              }
+            })
+          }
+        }
+      })
+    }
+    
+    
+  }
+
+  return ret
+}
+
 
 
 
@@ -85,6 +231,8 @@ get_lease_rent = function(lease,year,charge,psf) {
     }
     return period
   }
+
+
 
   get_extension_period = function(space,month) {
     var period = undefined
@@ -137,73 +285,6 @@ get_lease_rent = function(lease,year,charge,psf) {
     return period
   }
 
-
-  get_charge = function(space,month,charge) {
-    
-    if (space == undefined) {
-      return 0
-    }
-
-    dt = Date.now()
-    period = undefined
-    period = get_lease_period(space,month)
-    if (period == undefined && scenario != undefined) {
-      period = get_extension_period(space,month)
-      
-      if (space.id == "225-108" && month.getFullYear() == '2018' && month.getMonth() == 2) {
-        if (period == undefined) {
-        //  console.log(space)
-        } else {
-      //    console.log(dt + " period= " + JSON.stringify(period))
-        }
-      }
-    }
-    if (period == undefined) {
-      return 0
-    }
-    
-    amount = 0
-    yeardiff = month.getFullYear() - start_date.getFullYear()
-    
-    switch (charge) {
-      case 'base':
-        //console.log(period.base_rent)
-        if (period.base_rent != undefined) {
-          //console.log(period.base_rent)
-          amount += Math.round(space.sqft * (period.base_rent/12))
-        }
-        break;
-      case 'retax':
-        if (period.re_taxes == 'net') {
-          //console.log(lease.space.pro_rata * retaxes)
-          taxinc = yeardiff * .02 * retaxes
-
-          curtaxes = retaxes + taxinc
-          amount += Math.round((space.pro_rata * curtaxes)/12)
-          //if (space.id == "102" ) {
-          //  console.log("taxinc=" + taxinc + "retaxes=" + retaxes  + " curtaxes=" + curtaxes + " space_pro_rata= " + space.pro_rata + " amount=" + amount )
-            //}
-          
-        }
-        break;
-      case 'cam':
-        if (period.cam == 'net') {
-          caminc = yeardiff * .02 * cam
-          curcam = cam + caminc
-          amount += Math.round((space.pro_rata * curcam)/12)
-        }
-        break;
-      case 'mgmt':
-        if (period.mgmt == 'net') {
-          amount += Math.round((space.pro_rata * mgmt)/12)
-        }
-        break;
-    }
-    if (space.id == "225-108" && month.getFullYear() == '2018' && month.getMonth() == 2) {
-     // console.log(dt + " charge=" + charge + " amount= " + amount)
-    }
-    return amount
-  }
 
 
 
@@ -326,24 +407,27 @@ get_lease_rent = function(lease,year,charge,psf) {
     return v.length
   }   
 
-  check_lease_in_year = function (lease, year) {
-    start = new Date(lease.space['lease-start'])
-    ending_period = get_lease_expiration(lease.space,scenario)
-    if (ending_period == undefined) {
-      end = new Date(lease.space['lease-end'])
-    } else {
-      end = new Date(ending_period.end)
-    }
+
+  period_months_in_year = function (period,year) {
+    // loop through months in period
+    // if in year, increase count
+    count = 0
+    m = 0
+    ys = new Date(year.start_date)
+    ye = new Date(year.end_date)
+    ps = new Date(period.start)
+    pe = new Date(period.end)
+    while (m < 12) {
+      d = new Date(ps)
+      d.setMonth(d.getMonth() + m)
     
-    ret = false
-    if (start.getFullYear() <= year) {
-      if (end.getFullYear() >= year) {
-        ret = true
-      }
+      if (d <= pe && d >= ys &&  d <= ye) {
+        count = count + 1
+      } 
+      m = m+1
     }
-    if (lease.space.id == '225-106') {
-      //console.log(Date.now() + " year=" + year + " start=" + start.getFullYear() + " end=" + end.getFullYear() + " ret=" + ret)
-    }
-    return ret
+    return count
   }
+
+
 

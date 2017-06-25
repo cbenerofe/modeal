@@ -29,6 +29,7 @@ get_all_expirations = function(scenario) {
 get_expirations = function(year,scenario) {
   // loop all leases, find any that expire in range
   // without extension, specify the space and date
+    
   expirations = []
   leases.forEach(function(l) {
     count = 0
@@ -37,7 +38,7 @@ get_expirations = function(year,scenario) {
     if (p != undefined) {
       pieces = p.end.split("/")
       end = new Date(pieces[2],pieces[0],pieces[1])
-      if (end.getFullYear() == year) {
+      if (end >= year.start_date && end <= year.end_date) {
         v = {}
         v.space_id = l.space.id
         v.sqft = l.space.sqft
@@ -61,9 +62,9 @@ get_newlease_expirations = function(nleases,scenario) {
   // without extension, specify the space and date
   new_expirations = []
 
-  Object.keys(nleases).forEach(function(x) {
-    nl = nleases[x]
-    nl.forEach(function(l) {
+  //Object.keys(nleases).forEach(function(x) {
+    //nl = nleases[x]
+    nleases.forEach(function(l) {
     
       p = get_lease_expiration(l.space,scenario)
             
@@ -82,7 +83,7 @@ get_newlease_expirations = function(nleases,scenario) {
       }
     })
   
-  })
+  //})
 
   //console.log(JSON.stringify(expirations))
   return new_expirations
@@ -91,26 +92,28 @@ get_newlease_expirations = function(nleases,scenario) {
 
 
 
-create_new_lease = function(e, scenario) {
+create_new_lease = function(e, scenario, cycle=1) {
   
     //console.log("exp=" + JSON.stringify(e))
     l = {}
-    l.tenant = "new-" + e.space_id
+    l.tenant = e.space_id + "(" + cycle + ")"
     l.space = {}
     l.space.id = e.space_id
+    l.space.tenant = l.tenant
     l.space.pro_rata = e.pro_rata
     l.space.sqft = e.sqft
     l.space.periods = []
     l.space.extensions = []
     
-    pieces = e.available.split("/")
-    
-    start = new Date(parseInt(pieces[2]),parseInt(pieces[0]),parseInt(pieces[1]))
+    //pieces = e.available.split("/")
+    //start = new Date(parseInt(pieces[2]),parseInt(pieces[0]),parseInt(pieces[1]))
+    start = new Date(e.available)
     start.setMonth(start.getMonth() + parseInt(scenario.down_months) -1)
     l.space['lease-start'] = start.getMonth() + "/" + start.getDate() + "/" + start.getFullYear()
     
     end = new Date(start.valueOf())
     end.setFullYear(end.getFullYear() + parseInt(scenario.new_lease.years))
+    end.setDate(end.getDate() -1)
     
     l.space['lease-end'] = end.getMonth() + "/" + end.getDate() + "/" + end.getFullYear()
     
@@ -122,6 +125,7 @@ create_new_lease = function(e, scenario) {
 
       end = new Date(start.valueOf())
       end.setFullYear(end.getFullYear() + 1)
+      end.setDate(end.getDate() -1)
       m = end.getMonth() + 1
       p.end =  m + "/" + end.getDate() + "/" + end.getFullYear()
   
@@ -150,7 +154,7 @@ get_new_leases = function(scenario) {
   // create a new lease
   // after waiting period
  // console.log("get new leases: " + Date.now())
-  new_leases = {}
+  new_leases = []
   expirations = get_all_expirations(scenario)
   expirations.forEach(function(e) {
     //console.log("exp=" + JSON.stringify(e))
@@ -158,14 +162,14 @@ get_new_leases = function(scenario) {
     //console.log("new lease: " + JSON.stringify(l))
  
     //console.log("new lease: " + l.tenant  + " " + l.space['lease-start'] + " - " + l.space['lease-end'])
-    s = new Date(l.space['lease-start'])
+    //i  = year_index_of_date(l.space['lease-start'])
     //console.log(s.getFullYear())
  
-    if (new_leases[s] == undefined) {
-      new_leases[s] =[]
-    }
-    new_leases[s].push(l)    
-    
+    //if (new_leases[i] == undefined) {
+    //  new_leases[i] =[]
+      //}
+    //new_leases[i].push(l)    
+    new_leases.push(l)
     //console.log(l)
   })
   
@@ -173,15 +177,16 @@ get_new_leases = function(scenario) {
   new_expirations.forEach(function(ne) {
     //console.log("new exp=" + JSON.stringify(ne))
     
-    l = create_new_lease(ne,scenario)
-
-    s = new Date(l.space['lease-start'])
+    l = create_new_lease(ne,scenario,2)
+    //i  = year_index_of_date(l.space['lease-start'])
+    //s = new Date(l.space['lease-start'])
     //console.log(s.getFullYear())
  
-    if (new_leases[s] == undefined) {
-      new_leases[s] =[]
-    }
-    new_leases[s].push(l)    
+    //if (new_leases[i] == undefined) {
+    //  new_leases[i] =[]
+      //}
+    //new_leases[s].push(l)    
+    new_leases.push(l) 
     
     //console.log(l)
   })  
@@ -190,6 +195,52 @@ get_new_leases = function(scenario) {
   // console.log(new_leases)
   return new_leases
 }
+
+
+get_newlease_spaces = function(year) {
+  //console.log("checking year: " + year.start_date + " - " + year.end_date)
+  var ret = []
+  new_leases.forEach(function(l) {
+    //console.log("space: " + l.space.id)
+    found = false
+    l.space.periods.forEach(function(p) {
+      start = new Date(p.start)
+      end = new Date(p.end)
+      if (found === false) {
+        if (( start <= year.end_date) && ( end >= year.start_date)) {
+          //console.log("matching period: " + p.start + " - " +  p.end)
+          ret.push(l.space)
+          found = true
+        }
+      }
+    })
+
+  })
+  return ret
+}
+
+
+
+get_newlease_periods = function(year) {
+  
+  var ret = []
+  new_leases.forEach(function(l) {
+    //console.log(JSON.stringify(l.space.periods[0]))
+    l.space.periods.forEach(function(p) {
+      start = new Date(p.start)
+      end = new Date(p.end)
+
+      if (( start <= year.end_date) && ( end >= year.start_date)) {
+
+        ret.push(p)
+      }
+    })
+
+  })
+
+  return ret
+}
+
 
 
 calc_increase = function(base,years,rate) {
@@ -273,3 +324,14 @@ get_years_vacancy = function(year,scenario) {
   return Math.round(vacancy * 100) / 100
 
 }   
+
+year_index_of_date = function (d) {
+  ret = -1
+  years.forEach(function(y,i) {
+    if (d >= y.start_date && d <= y.end_date) {
+      ret = i
+      break
+    }
+  })
+  return ret
+}
