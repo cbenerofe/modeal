@@ -21,7 +21,6 @@ mgmt = 0
 
 scenario = undefined
 
-expirations = {}
 new_leases = {}
 
 
@@ -44,7 +43,6 @@ myApp.controller('modealController', function($scope, $window) {
   $scope.scenarios = scenarios
   $scope.scenario = undefined
   $scope.scenario_id = undefined
-  $scope.expirations = {}
   $scope.new_leases = {}
   
   $scope.$watch('deal_id', function() {
@@ -86,28 +84,10 @@ myApp.controller('modealController', function($scope, $window) {
     
   $scope.clear = function() {
     
-    Object.keys(expirations).forEach(function (prop) {
-      delete expirations[prop];
-    });
-
-    Object.keys($scope.expirations).forEach(function (prop) {
-      delete $scope.expirations[prop];
-    });    
-    
     new_leases = []
-    
-    //Object.keys(new_leases).forEach(function (prop) {
-    //  delete new_leases[prop];
-    //});
-
     $scope.new_leases = []
-    //Object.keys($scope.new_leases).forEach(function (prop) {
-    //  delete $scope.new_leases[prop];
-    //});
-    
-
-  
   }  
+  
     
   $scope.init = function() {
     //console.log(Date.now())
@@ -129,8 +109,6 @@ myApp.controller('modealController', function($scope, $window) {
     
     $scope.years.push(year)
 
-    $scope.expirations[0] = get_expirations($scope.years[0],$scope.scenario)
-    $scope.expirations[0] = $scope.expirations[0].concat(vacancies)
 
     for (i=1; i<hold_period;i++) {
       year = {}
@@ -142,19 +120,26 @@ myApp.controller('modealController', function($scope, $window) {
       ed.setDate(ed.getDate() -1)
       year.end_date = ed
       $scope.years.push(year)
-      $scope.expirations[i] = get_expirations($scope.years[i],$scope.scenario)
     }
     
-    //console.log($scope.scenario)
-    new_leases = get_new_leases($scope.scenario)
-    $scope.new_leases = new_leases
     
-    //console.log("leases:" + JSON.stringify(leases))
-    //console.log("new_leases:" + JSON.stringify(new_leases))
+    url = api_server + "/api/scenarios/" + $scope.scenario.id + "/newLeases"
+    $.ajax({context: this, url: url, 
+       success: function(result) { 
+         //console.log(JSON.stringify(result.leases))
+         new_leases = result.leases
+         $scope.new_leases = new_leases
+         $scope.$apply();
+       }, 
+       error: function(result) {
+         //console.log(JSON.stringify(result));
+         alert("error on get new leases")
+       }
+    });    
+    
     
   } 
-  
-  //$scope.init()    
+   
   
   load_deals = function() {
     
@@ -215,11 +200,11 @@ myApp.controller('modealController', function($scope, $window) {
          //console.log(JSON.stringify(result))
          leases = result
          $scope.leases = result
-         leases.forEach(function(element) {
-           spaces.push(element.space)
+         //leases.forEach(function(element) {
+        //   spaces.push(element.space)
            //console.log(element.space);
-           });
-         $scope.spaces = spaces;
+        //   });
+         //$scope.spaces = spaces;
          //console.log(JSON.stringify($scope.leases))
          //alert("hey")
          $scope.$apply();
@@ -330,8 +315,7 @@ myApp.controller('modealController', function($scope, $window) {
        }
     });  
   }
-    
-
+  
   
   load_deals();
     

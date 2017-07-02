@@ -7,7 +7,7 @@ get_years_orig_rent = function(year,charge,psf) {
   total = 0
   leases.forEach(function(l) {
     //console.log(JSON.stringify(l.id) + " " + year)
-    rent = get_space_rent(l.space,year,charge,false,scenario)
+    rent = get_lease_rent(l,year,charge,false,scenario)
     total += rent
   })
 
@@ -28,7 +28,7 @@ get_years_new_rent = function(year,charge,psf) {
       //console.log(Date.now() + " " + key)
       new_leases.forEach(function(l) {
         if (l != undefined) {
-          rent = get_space_rent(l.space,year,charge,false)
+          rent = get_lease_rent(l,year,charge,false)
           total += rent
         }
       })
@@ -47,6 +47,8 @@ get_years_total_rent = function(year,charge,psf) {
   if (scenario == undefined ) { return 0 }
   //find all leases
   total = 0
+  orig = 0
+  newbys = 0
   orig = get_years_orig_rent(year,charge,false)
   newbys = get_years_new_rent(year,charge,false)
   total = parseInt(orig) + parseInt(newbys)

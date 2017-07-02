@@ -8,11 +8,6 @@ myApp.controller('cashflowController', ['$scope',function($scope) {
     $scope.show_vacancies = !$scope.show_vacancies
   }
 
-  $scope.show_expirations = false
-  $scope.toggle_expirations = function() {
-    $scope.show_expirations = !$scope.show_expirations
-  }
-
   $scope.show_new_leases = false
   $scope.toggle_new_leases = function() {
     $scope.show_new_leases = !$scope.show_new_leases
@@ -24,19 +19,15 @@ myApp.controller('cashflowController', ['$scope',function($scope) {
   }
   
   
-  $scope.get_space_leases = function(space_id, year) {
-    x = get_space_leases(space_id,year)
-    return x
-  } 
-  
 
-  $scope.get_newlease_spaces = function(year) {
-    x = get_newlease_spaces(year)
+  $scope.check_lease_in_year = function(lease,year) {
+    x = check_lease_in_year(lease,year)
     return x
   } 
 
-  $scope.get_lease_periods = function(space, year) {
-    x = get_lease_periods(space,year,scenario)
+
+  $scope.get_lease_periods = function(lease, year) {
+    x = get_lease_periods(lease,year,scenario)
     return x
   }   
   
@@ -46,8 +37,8 @@ myApp.controller('cashflowController', ['$scope',function($scope) {
   }   
   
   
-  $scope.get_space_rent = function(space, year,charge) {
-    x = get_space_rent(space,year,charge,$scope.show_psf)
+  $scope.get_lease_rent = function(lease, year,charge) {
+    x = get_lease_rent(lease,year,charge,$scope.show_psf)
     return x
   } 
   
@@ -116,35 +107,6 @@ myApp.controller('cashflowController', ['$scope',function($scope) {
       return cf
     }
   } 
-
-
-
-/*
-  
-  $scope.get_years_occupancy = function(year) {
-    x = get_years_occupancy(year,$scope.scenario)
-    return x
-  } 
-
-  $scope.get_years_vacancy = function(year) {
-    x = get_years_vacancy(year,$scope.scenario)
-    return x
-  }
-  
-  $scope.get_vacant_spaces = function(year) {
-    x = get_vacant_spaces(year,$scope.scenario)
-    return x
-  } 
-  
-  
-  $scope.get_years_new_rent = function(year,charge) {
-    x = get_years_new_rent(year,charge,$scope.show_psf)
-    return x
-  }    
-   
-  
-*/
-
 
   
 }]);

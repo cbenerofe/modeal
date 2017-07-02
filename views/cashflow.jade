@@ -22,56 +22,59 @@ html(ng-app="myApp")
             th Revenues
 
         tbody(ng-if="show_tenants" )
-          tr(ng-repeat="space in spaces")
+          tr(ng-repeat="lease in leases")
             td.key
               .row
                 // .col-xs-12 {{space.id}} 
                 //.col-xs-12 {{space.sqft}}
                 
             td(ng-repeat="year in years" ng-style="colcol($index)")
-              .block.clearfix(ng-repeat="lease in get_space_leases(space.id, year)" style="border: 1px solid black;")
+              .block.clearfix(ng-if="check_lease_in_year(lease, year)" style="border: 1px solid black;")
                 div {{ lease.tenant }}
-                div {{ space.sqft }} sqft
-                //.block(ng-repeat="period in get_lease_periods(space, year)" )
-                  //| months ( {{ period_months_in_year(period,year) }} )
-                  //| {{ period.start }} - {{ period.end }}
+                div {{ lease.space.sqft }} sqft
+                .block(ng-repeat="period in get_lease_periods(lease, year)" )
+                  | months ( {{ period_months_in_year(period,year) }} )
+                  | {{ period.start }} - {{ period.end }}
                    
                 .pull-right
                   .block(ng-if="!show_nets")
-                    | {{ get_space_rent(lease.space,year,'all') }}
+                    | {{ get_lease_rent(lease,year,'all') }}
                   .block(ng-if="show_nets")
                     .row
                       .col-xs-4 base
-                      .col-xs-8 {{ get_space_rent(lease.space,year,'base') }}
+                      .col-xs-8 {{ get_lease_rent(lease,year,'base') }}
                     .row
                       .col-xs-4 tax
-                      .col-xs-8 {{ get_space_rent(lease.space,year,'retax') }}
+                      .col-xs-8 {{ get_lease_rent(lease,year,'retax') }}
                     .row
                       .col-xs-4 cam
-                      .col-xs-8 {{ get_space_rent(lease.space,year,'cam') }}
+                      .col-xs-8 {{ get_lease_rent(lease,year,'cam') }}
 
-          tr()
+          tr(ng-repeat="lease in new_leases")
             td.key 
             td(ng-repeat="year in years" ng-style="colcol($index)")
-              .block.clearfix(ng-repeat="space in get_newlease_spaces(year) " )
-                .block {{ space.tenant}}
-                .block {{ space.sqft }} sqft
-                //.block(ng-repeat="period in get_lease_periods(space,year)" )
-                //  | months ( {{ period_months_in_year(period,year) }} )
-                //  | {{ period.start }} - {{ period.end }}
+              .block.clearfix(ng-if="check_lease_in_year(lease, year)" )
+                .block {{ lease.tenant}}
+                .block {{ lease.space.sqft }} sqft
+                .block(ng-repeat="period in get_lease_periods(lease,year)" )
+                  | months ( {{ period_months_in_year(period,year) }} )
+                  | {{ period.start }} - {{ period.end }}
                 .pull-right
                   .block(ng-if="!show_nets")
-                    | {{ get_space_rent(space,year,'all') }}
+                    | {{ get_lease_rent(lease,year,'all') }}
                   .block(ng-if="show_nets")
                     .row
                       .col-xs-4 base
-                      .col-xs-8 {{ get_space_rent(space,year,'base') }}
+                      .col-xs-8 {{ get_lease_rent(lease,year,'base') }}
                     .row
                       .col-xs-4 tax
-                      .col-xs-8 {{ get_space_rent(space,year,'retax') }}
+                      .col-xs-8 {{ get_lease_rent(lease,year,'retax') }}
                     .row
                       .col-xs-4 cam
-                      .col-xs-8 {{ get_space_rent(space,year,'cam') }}
+                      .col-xs-8 {{ get_lease_rent(lease,year,'cam') }}
+                      
+              //.block.clearfix(ng-if="!check_lease_in_year(lease, year)" style="border: 1px solid black;")
+                div {{ lease.tenant }}
         tbody()
           tr(ng-if="show_nets")
             th.key() Base Rent
