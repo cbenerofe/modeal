@@ -3,35 +3,38 @@ html(ng-app="myApp")
   head
     title modeal
     include includes/scripts.jade
-    script(src="/js/scenarios.js")
+    script(src="/js/modeal.js")
     script(src="/js/cashflow.js")
     script(src="/js/leases.js")
     script(src="/js/expenses.js")
     script(src="/js/income.js")
     script(src="/js/capital.js")
 
-
+    
     script(type='text/javascript').
-      var scenarioId = '!{scenarioId}'
+      var dealId = '!{dealId}'
 
-  body(ng-controller="scenarioController")
-    include includes/topnav.jade
-      
+  body(ng-controller="modealController")
+    include includes/dealnav.jade
+
     .block(ng-controller="cashflowController")          
       table.table
         thead
           tr
-            th.key
+            th.row()
+              .col-8
+                span(style="padding-left:5px;")
+                  | {{ building.sqft }} sf
+              .col-4()
+                .btn.btn-primary.pull-right.btn-sm(ng-click="toggle_psf()" ng-if="show_psf") psf
+                .btn.btn-secondary.pull-right.btn-sm(ng-click="toggle_psf()" ng-if="!show_psf") psf
 
             td(ng-repeat="year in years" ng-style="colcol($index)") 
               .btn
                 | {{year.end_date | date : "MMM yyyy" }}
 
-        tbody
-          tr
-            th Revenues
-
-        tbody(ng-if="show_tenants" )
+              
+        tbody( )
           tr(ng-repeat="lease in leases")
             td.key
               .row
@@ -85,77 +88,7 @@ html(ng-app="myApp")
                       
               //.block.clearfix(ng-if="!check_lease_in_year(lease, year)" style="border: 1px solid black;")
                 div {{ lease.tenant }}
-        tbody()
-          tr(ng-if="show_nets")
-            th.key() Base Rent
-            td(ng-repeat="year in years" ng-style="colcol($index)")
-              | {{ get_years_total_rent(year,'base') }}
-
-          tr(ng-if="show_nets")
-            th.key RE Taxes
-            td(ng-repeat="year in years" ng-style="colcol($index)")
-              | {{ get_years_total_rent(year,'retax') }}
-              
-          tr(ng-if="show_nets")
-            th.key CAM 
-            td(ng-repeat="year in years" ng-style="colcol($index)")
-              | {{ get_years_total_rent(year,'cam') }}
-
-          tr(style="")
-            th.key Total Income 
-            td(ng-repeat="year in years" ng-style="colcol($index)")
-              | {{ get_years_total_rent(year,'all') }}
+        
 
 
-        tbody
-          tr
-            th Expenses
-
-        tbody(ng-if="show_expenses")
-          tr(ng-repeat="expense in expenses")
-            th.key {{ expense.name }}
-            td(ng-repeat="year in years" ng-style="colcol($index)")
-              .block()
-                | {{ get_years_expense($parent.expense.id, year) }}
-
-        tbody
-          tr
-            th.key(ng-click="toggle_expenses()" )
-              | Total Expenses
-            th(ng-repeat="year in years" ng-style="colcol($index)") 
-              | {{ get_years_expense('all',year) }}
-
-
-        tbody()
-          tr
-            th Net Operating Income
-            th(ng-repeat="year in years" ng-style="colcol($index)") 
-              | {{ get_noi(year) }}
-
-        tbody
-          tr
-            th Capital
-
-        tbody()
-          tr
-            th.key Tenant Improvements
-            th(ng-repeat="year in years" ng-style="colcol($index)") 
-              | {{ get_tenant_improvements(year) }}
-
-        tbody()
-          tr
-            th.key Leasing Commisions
-            th(ng-repeat="year in years" ng-style="colcol($index)") 
-              | {{ get_leasing_commissions(year) }}
-
-        tbody()
-          tr
-            th.key Building Improvements
-            th(ng-repeat="year in years" ng-style="colcol($index)") 
-              | {{ get_capex(year) }}
-
-        tbody()
-          tr
-            th Cash Flow
-            th(ng-repeat="year in years" ng-style="colcol($index)") 
-              | {{ get_cash_flow(year) }}
+        

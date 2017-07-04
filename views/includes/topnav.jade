@@ -1,23 +1,7 @@
-.block
-  .row
-    .col-xs-4
-      .btn(ng-click="toggle_tenants()" )
-        span(ng-if="show_tenants") hide tenants
-        span(ng-if="!show_tenants") show tenants
-      .btn(ng-click="toggle_psf()" )
-        span(ng-if="show_psf") hide psf
-        span(ng-if="!show_psf") show psf
-      .btn(ng-click="toggle_nets()" )
-        span(ng-if="show_nets") hide nets
-        span(ng-if="!show_nets") show nets
+nav.navbar.navbar-toggleable-md.navbar-inverse.bg-primary
+  
+  .nav-brand()
+    img(src="/images/home_icon.png" height="20px")
 
-    .col-xs-4
-      | {{building.street_address}}
-          
-    .col-xs-4
-      select(ng-model="deal_id")
-        option(ng-repeat="d in deals" value="{{d.id}} ")
-          | {{ d.name }}
-      select(ng-model="scenario_id")
-        option(ng-repeat="s in scenarios" value="{{s.id}} ")
-          | {{ s.name }}
+  .navbar-text(style="padding-left:10px;") Modeals
+

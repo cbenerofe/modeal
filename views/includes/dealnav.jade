@@ -1,0 +1,18 @@
+nav.navbar.navbar-toggleable-md.navbar-inverse.bg-primary
+  
+  a.nav-brand(ng-href="/deals")
+    img(src="/images/home_icon.png" height="20px")
+
+  .navbar-text(style="padding-left:10px;") {{deal.name}}
+
+  .navbar-nav(style="padding-left:50px;")
+    a.nav-item.nav-link(ng-href="/deals/" + dealId + "/cashflow") cashflows
+    a.nav-item.nav-link(ng-href="/deals/" + dealId + "/tenants") tenants
+    
+    .nav-item.nav-link(style="padding-left:50px;")
+      select(ng-model="scenario_id" )
+        option(ng-repeat="s in scenarios" value="{{s.id}} ")
+          | {{ s.name }}
+          
+    //a.nav-item.nav-link(ng-click="load_scenario()") 
+    //  img(src="/images/refresh.png" height="20px")

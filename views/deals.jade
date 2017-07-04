@@ -1,0 +1,19 @@
+doctype html
+html(ng-app="dealsApp")
+  head
+    title modeals
+    include includes/scripts.jade
+    
+    script(src="/js/deals.js")
+
+  body(ng-controller="dealsController")
+    include includes/topnav.jade
+  
+    .container
+      div.card-deck(style="padding-top:25px;")
+        div.card(ng-repeat="deal in deals" style="width: 20rem;")
+          img.card-img-top
+          div.card-block
+            h4.card-title {{deal.name}}
+            p.card-text {{deal.seller}}
+            a.btn.btn-primary(ng-href="/deals/{{deal.id}}") Go

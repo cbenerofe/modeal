@@ -23,16 +23,31 @@ app.use(express.static('public'));
 
 // set routes
 app.get('/', function(req, res) {
-  res.render('cashflow');
+  res.render('deals');
 });
 
 
-app.get('/cashflow', function(req, res) {
-  res.render('cashflow');
+app.get('/deals', function(req, res) {
+  res.render('deals');
 });
 
-//console.log("hello " + JSON.stringify(process.env));
-//console.log("hello " + process.env.PORT);
+app.get('/deals/:id', function(req, res) {
+  res.render('deal',{ dealId: req.params['id']});
+});
+
+app.get('/deals/:id/cashflow', function(req, res) {
+  res.render('deal',{ dealId: req.params['id']});
+});
+
+app.get('/deals/:id/tenants', function(req, res) {
+  res.render('tenants',{ dealId: req.params['id']});
+});
+
+
+app.get('/scenarios/:id/cashflow', function(req, res) {
+  res.render('cashflow',{ scenarioId: req.params['id']});
+});
+
 
 port = process.env.PORT || 4000
 // Set server port

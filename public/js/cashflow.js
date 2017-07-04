@@ -17,14 +17,11 @@ myApp.controller('cashflowController', ['$scope',function($scope) {
   $scope.toggle_expenses = function() {
     $scope.show_expenses = !$scope.show_expenses
   }
-  
-  
 
   $scope.check_lease_in_year = function(lease,year) {
     x = check_lease_in_year(lease,year)
     return x
   } 
-
 
   $scope.get_lease_periods = function(lease, year) {
     x = get_lease_periods(lease,year,scenario)
@@ -36,12 +33,10 @@ myApp.controller('cashflowController', ['$scope',function($scope) {
     return x
   }   
   
-  
   $scope.get_lease_rent = function(lease, year,charge) {
     x = get_lease_rent(lease,year,charge,$scope.show_psf)
     return x
   } 
-  
   
   $scope.get_years_total_rent = function(year,charge) {
     x = get_years_total_rent(year,charge,$scope.show_psf)
