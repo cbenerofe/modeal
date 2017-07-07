@@ -1,5 +1,27 @@
 
 
+get_new_leases_in_year = function (year) {
+  ret = []
+  new_leases.forEach(function(l) {
+    lstart = new Date(l.space['lease-start'])
+    if (lstart >= year.start_date && lstart <= year.end_date) {
+      ret.push(l)
+    }
+  })
+  return ret
+}
+
+
+check_lease_start_in_year = function (lease, year) {
+  lstart = new Date(lease.space['lease-start'])
+  ret = false
+  if (lstart >= year.start_date && lstart <= year.end_date) {
+      ret = true
+  }
+  return ret
+}
+
+
 
 check_lease_in_year = function (lease, year) {
   start = new Date(lease.space['lease-start'])

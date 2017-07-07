@@ -4,7 +4,7 @@ html(ng-app="myApp")
     title modeal
     include includes/scripts.jade
     script(src="/js/modeal.js")
-    script(src="/js/cashflow.js")
+    script(src="/js/tenants.js")
     script(src="/js/leases.js")
     script(src="/js/expenses.js")
     script(src="/js/income.js")
@@ -17,74 +17,91 @@ html(ng-app="myApp")
   body(ng-controller="modealController")
     include includes/dealnav.jade
 
-    .block(ng-controller="cashflowController")          
+    .block(ng-controller="tenantsController")          
       table.table
         thead
           tr
-            th.row()
-              .col-8
-                span(style="padding-left:5px;")
-                  | {{ building.sqft }} sf
-              .col-4()
-                .btn.btn-primary.pull-right.btn-sm(ng-click="toggle_psf()" ng-if="show_psf") psf
-                .btn.btn-secondary.pull-right.btn-sm(ng-click="toggle_psf()" ng-if="!show_psf") psf
+            td.key
+              //| {{ building.sqft }} sf
 
             td(ng-repeat="year in years" ng-style="colcol($index)") 
               .btn
                 | {{year.end_date | date : "MMM yyyy" }}
 
-              
         tbody( )
           tr(ng-repeat="lease in leases")
             td.key
-              .row
-                // .col-xs-12 {{space.id}} 
-                //.col-xs-12 {{space.sqft}}
+              div {{ lease.tenant }}
+              div {{ lease.space.sqft }} sf 
                 
             td(ng-repeat="year in years" ng-style="colcol($index)")
-              .block.clearfix(ng-if="check_lease_in_year(lease, year)" style="border: 1px solid black;")
-                div {{ lease.tenant }}
-                div {{ lease.space.sqft }} sqft
-                .block(ng-repeat="period in get_lease_periods(lease, year)" )
-                  | months ( {{ period_months_in_year(period,year) }} )
-                  | {{ period.start }} - {{ period.end }}
+              .block.clearfix(ng-if="check_lease_in_year(lease, year)" style="")
+                //div {{ lease.tenant }}
+                //div {{ lease.space.sqft }} sqft
+                
+                //.block(ng-repeat="period in get_lease_periods(lease, year)" )
+                //  | months ( {{ period_months_in_year(period,year) }} )
+                //  | {{ period.start }} - {{ period.end }}
                    
-                .pull-right
-                  .block(ng-if="!show_nets")
-                    | {{ get_lease_rent(lease,year,'all') }}
-                  .block(ng-if="show_nets")
-                    .row
-                      .col-xs-4 base
-                      .col-xs-8 {{ get_lease_rent(lease,year,'base') }}
-                    .row
-                      .col-xs-4 tax
-                      .col-xs-8 {{ get_lease_rent(lease,year,'retax') }}
-                    .row
-                      .col-xs-4 cam
-                      .col-xs-8 {{ get_lease_rent(lease,year,'cam') }}
+                //.pull-right
+                .block(ng-if="!show_nets")
+                  | {{ get_lease_rent(lease,year,'all') }}
+                .block(ng-if="show_nets")
+                  .row
+                    .col-4 base
+                    .col-8(style="text-align:right;")
+                      | {{ get_lease_rent(lease,year,'base') }}
+                  .row
+                    .col-4 tax
+                    .col-8(style="text-align:right;")
+                      | {{ get_lease_rent(lease,year,'retax') }}
+                  .row
+                    .col-4 cam
+                    .col-8(style="text-align:right;") 
+                      | {{ get_lease_rent(lease,year,'cam') }}
 
-          tr(ng-repeat="lease in new_leases")
-            td.key 
+        tbody( ng-if="false"  )
+          tr
+            th.key
+              | New Leases
             td(ng-repeat="year in years" ng-style="colcol($index)")
+              .block(ng-repeat="nl in get_new_leases_in_year(year)")
+                //.block {{ nl.tenant }}
+                .block {{ nl.space.sqft }} sf
+                .block {{ nl.space['lease-start'] }} 
+
+
+        tbody( ng-if="true" )    
+          tr
+            th.key
+              | New Leases
+              
+          tr(ng-repeat="lease in new_leases" )
+            td.key 
+              //.block {{ lease.tenant }}
+              .block {{ lease.space['lease-start'] | date : "MMM yyyy" }} 
+              .block {{ lease.space.sqft }} sf
+            
+            td(ng-repeat="year in years" ng-style="colcol($index)")
+                
               .block.clearfix(ng-if="check_lease_in_year(lease, year)" )
-                .block {{ lease.tenant}}
-                .block {{ lease.space.sqft }} sqft
-                .block(ng-repeat="period in get_lease_periods(lease,year)" )
-                  | months ( {{ period_months_in_year(period,year) }} )
-                  | {{ period.start }} - {{ period.end }}
+
+                //.block(ng-repeat="period in get_lease_periods(lease,year)" )
+                //  | months ( {{ period_months_in_year(period,year) }} )
+                //  | {{ period.start }} - {{ period.end }}
                 .pull-right
                   .block(ng-if="!show_nets")
                     | {{ get_lease_rent(lease,year,'all') }}
                   .block(ng-if="show_nets")
                     .row
-                      .col-xs-4 base
-                      .col-xs-8 {{ get_lease_rent(lease,year,'base') }}
+                      .col-4 base
+                      .col-8 {{ get_lease_rent(lease,year,'base') }}
                     .row
-                      .col-xs-4 tax
-                      .col-xs-8 {{ get_lease_rent(lease,year,'retax') }}
+                      .col-4 tax
+                      .col-8 {{ get_lease_rent(lease,year,'retax') }}
                     .row
-                      .col-xs-4 cam
-                      .col-xs-8 {{ get_lease_rent(lease,year,'cam') }}
+                      .col-4 cam
+                      .col-8 {{ get_lease_rent(lease,year,'cam') }}
                       
               //.block.clearfix(ng-if="!check_lease_in_year(lease, year)" style="border: 1px solid black;")
                 div {{ lease.tenant }}

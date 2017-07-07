@@ -11,8 +11,10 @@ html(ng-app="dealsApp")
   
     .container
       div.card-deck(style="padding-top:25px;")
-        div.card(ng-repeat="deal in deals" style="width: 20rem;")
-          img.card-img-top
+        div.card(ng-repeat="deal in deals" style="max-width: 250px;")
+          div(style="width:250px;height:150px;")
+            img.card-img-top(ng-src="/images/{{deal.id}}.jpg" style="max-width:250px;object-fit:cover;" alt="Card image cap" )
+          //{{deal}}
           div.card-block
             h4.card-title {{deal.name}}
             p.card-text {{deal.seller}}

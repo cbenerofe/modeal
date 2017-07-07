@@ -1,8 +1,8 @@
 
 
 var myApp = angular.module('myApp', []);
-//var api_server = "http://localhost:3050"
-var api_server = "https://modeal-api.herokuapp.com"
+var api_server = "http://localhost:3050"
+//var api_server = "https://modeal-api.herokuapp.com"
 
 
 buildings = []
@@ -21,7 +21,7 @@ mgmt = 0
 
 scenario = undefined
 
-new_leases = {}
+new_leases = []
 
 
 start_date = new Date (2017,8,1)
@@ -44,7 +44,7 @@ myApp.controller('modealController', function($scope, $window) {
   $scope.scenario = undefined
   $scope.scenario_id = undefined
   
-  $scope.new_leases = {}
+  $scope.new_leases = []
   
 
   $scope.show_nets = false
@@ -79,7 +79,7 @@ myApp.controller('modealController', function($scope, $window) {
   });  
     
   $scope.load_scenario = function() {
-    console.log(Date.now() + "loading scenario_id" + $scope.scenario_id)
+    //console.log(Date.now() + "loading scenario_id" + $scope.scenario_id)
     new_leases = []
     $scope.new_leases = []
     
@@ -176,7 +176,7 @@ myApp.controller('modealController', function($scope, $window) {
     })); 
     
     $.when.apply($, promises).then(function() {
-      console.log("building_id=" + $scope.building_id)
+      //console.log("building_id=" + $scope.building_id)
       if ($scope.building_id != undefined) {
         $scope.load_scenario()
       }

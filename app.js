@@ -32,20 +32,15 @@ app.get('/deals', function(req, res) {
 });
 
 app.get('/deals/:id', function(req, res) {
-  res.render('deal',{ dealId: req.params['id']});
+  res.render('cashflow',{ dealId: req.params['id']});
 });
 
 app.get('/deals/:id/cashflow', function(req, res) {
-  res.render('deal',{ dealId: req.params['id']});
+  res.render('cashflow',{ dealId: req.params['id']});
 });
 
 app.get('/deals/:id/tenants', function(req, res) {
   res.render('tenants',{ dealId: req.params['id']});
-});
-
-
-app.get('/scenarios/:id/cashflow', function(req, res) {
-  res.render('cashflow',{ scenarioId: req.params['id']});
 });
 
 

@@ -3,40 +3,15 @@
 myApp.controller('cashflowController', ['$scope',function($scope) {
   
 
-  $scope.show_vacancies = false
-  $scope.toggle_vacancies = function() {
-    $scope.show_vacancies = !$scope.show_vacancies
-  }
-
-  $scope.show_new_leases = false
-  $scope.toggle_new_leases = function() {
-    $scope.show_new_leases = !$scope.show_new_leases
-  }
-
   $scope.show_expenses = false
   $scope.toggle_expenses = function() {
     $scope.show_expenses = !$scope.show_expenses
   }
 
-  $scope.check_lease_in_year = function(lease,year) {
-    x = check_lease_in_year(lease,year)
-    return x
-  } 
-
-  $scope.get_lease_periods = function(lease, year) {
-    x = get_lease_periods(lease,year,scenario)
-    return x
-  }   
-  
-  $scope.period_months_in_year = function(period, year) {
-    x = period_months_in_year(period,year)
-    return x
-  }   
-  
-  $scope.get_lease_rent = function(lease, year,charge) {
-    x = get_lease_rent(lease,year,charge,$scope.show_psf)
-    return x
-  } 
+  $scope.show_capital = false
+  $scope.toggle_capital = function() {
+    $scope.show_capital = !$scope.show_capital
+  }
   
   $scope.get_years_total_rent = function(year,charge) {
     x = get_years_total_rent(year,charge,$scope.show_psf)
@@ -46,6 +21,19 @@ myApp.controller('cashflowController', ['$scope',function($scope) {
   $scope.get_years_expense = function(expense_id,year) {
     x = get_years_expense(expense_id,year,$scope.show_psf)
     return x
+  } 
+
+  $scope.get_noi = function (year) {
+    i = get_years_total_rent(year,'all')
+    //console.log ("i=" + i)
+    x = get_years_expense('all',year)
+    //console.log ("x=" + x)
+    noi = i - x
+    if ($scope.show_psf == true) {
+      return Math.round(noi / sqft * 100) / 100
+    } else {
+      return noi
+    }
   } 
 
   $scope.get_tenant_improvements = function(year) {
@@ -63,19 +51,20 @@ myApp.controller('cashflowController', ['$scope',function($scope) {
     return x
   } 
 
-  
-  $scope.get_noi = function (year) {
-    i = get_years_total_rent(year,'all')
-    //console.log ("i=" + i)
-    x = get_years_expense('all',year)
-    //console.log ("x=" + x)
-    noi = i - x
+  $scope.get_total_capital = function (year) {
+    ti = get_tenant_improvements(year)
+    lc = get_leasing_commissions(year)
+    cx = get_capex(year)
+    tot = ti + lc + cx
     if ($scope.show_psf == true) {
-      return Math.round(noi / sqft * 100) / 100
+      return Math.round(tot / sqft * 100) / 100
     } else {
-      return noi
+      return tot
     }
   } 
+
+  
+
 
 
   $scope.get_cash_flow = function (year) {
