@@ -1,0 +1,30 @@
+doctype html
+html(ng-app="myApp")
+  head
+    title edit deal
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    include includes/scripts.jade
+        
+    script(type='text/javascript').
+      var dealId = '!{dealId}'
+
+  body(ng-controller="dealsController")
+    include includes/topnav.jade
+  
+    .container
+      div.card-deck(style="padding-top:25px;")
+        div.card(style="max-width: 250px;")
+          form(action='#' ng-submit="saveDeal()")
+            include includes/deal_form.jade
+          button.btn.btn-primary(ng-click="toggleCreateBuilding()" ng-if="!creatingBuilding") Add Building
+            
+        div.card(style="max-width: 250px;" ng-if="creatingBuilding == true")
+          form(action='#' ng-submit="createBuilding()")
+            include includes/building_form.jade
+          button.btn.btn-primary(ng-click="toggleCreateBuilding()") Cancel
+            
+        div.card(ng-repeat="building in buildings" style="max-width: 250px;")
+          form(action='#' ng-submit="saveBuilding()")
+            include includes/building_form.jade
+          a.btn.btn-primary(ng-href="/buildings/{{building.id}}/leases") Details
+            

@@ -1,0 +1,57 @@
+doctype html
+html(ng-app="myApp")
+  head
+    title Edit Lease 
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    include includes/scripts.jade
+    
+
+    
+    script(type='text/javascript').
+      var leaseId = '!{leaseId}'
+
+  body(ng-controller="leaseController")
+    include includes/topnav.jade
+  
+    .container
+      div.card-deck(style="padding-top:25px;")
+        div.card(style="max-width: 250px;")
+        
+          a.btn(ng-href="/deals/{{building.dealId}}/edit"  style="background-color:white;text-align:left;")
+            | {{ deal.name }}
+        
+          div
+            | {{ building.street_address }}
+            br
+            | {{ building.sqft }} sqft of {{ building.use }}
+          
+          a.btn.btn-primary(ng-href="/buildings/{{building.id}}/leases") Leases
+          a.btn.btn-primary(ng-href="/buildings/{{building.id}}/expenses") Expenses  
+            
+        div.card(style="max-width: 250px;" ng-if="creatingLease == true")
+          form(action='#' ng-submit="createLease()")
+            include includes/lease_form.jade
+          button.btn.btn-primary(ng-click="toggleCreateLease()") Cancel
+
+        div.card
+          div.list-group
+            a.list-group-item.row
+              span.col-2 Tenant
+              //th Unit
+              span.col-2  Sqft
+              span.col-2  Rent
+              //span.col-2  Terms
+              span.col-2  Begin
+              span.col-2  End
+              //tspan.col-2  Options
+            a.list-group-item.row
+              span.col-2  {{ lease.tenant }}
+              //td {{ lease.space.id }}
+              span.col-2  {{ lease.space.sqft }}
+              span.col-2  {{ lease.current_rent }}
+              //span.col-2  {{ lease.space.terms }}
+              span.col-2  {{ lease.space['lease-start']  }}
+              span.col-2  {{ lease.space['lease-end']  }}
+            
+
+            

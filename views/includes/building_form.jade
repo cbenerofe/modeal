@@ -1,0 +1,29 @@
+
+
+p.form-group
+  label(for='street_address') street address:
+  input#street_address.form-control(type='text', placeholder='' name='street_address' ng-model="building.street_address")
+  
+p.form-group
+  label(for='zipcode') zipcode:
+  input#zipcode.form-control(type='email', placeholder='' name='zipcode' ng-model="building.zipcode")
+
+div.row  
+  div.col-6.form-group
+    label(for='sqft') sqft:
+    input#sqft.form-control(type='text', placeholder='' name='sqft' ng-model="building.sqft") 
+
+  div.col-6.form-group
+    label(for='use') use:
+    input#listing_date.form-control(type='text', placeholder='' name='use' ng-model="building.use")
+ 
+  
+//p.form-group
+//  label(for='floors') floors:
+//  input#floors.form-control(type='text', placeholder='' name='floors' ng-model="building.floors")
+
+div.row(ng-if="buildingChanged" )
+  div.col-6(style="text-align:center;")
+    button.btn.btn-primary(type='submit') Save
+  div.col-6(style="text-align:center;")
+    a.btn.btn-primary(ng-href="/deals" ng-if="!creatingBuilding") Cancel

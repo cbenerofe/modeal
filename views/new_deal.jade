@@ -1,0 +1,18 @@
+doctype html
+html(ng-app="myApp")
+  head
+    title new deal
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    include includes/scripts.jade
+
+
+  body(ng-controller="dealsController")
+    include includes/topnav.jade
+  
+    .container
+      div.card-deck(style="padding-top:25px;")
+        div.card(style="max-width: 250px;")
+          form(action='#' ng-submit="createDeal()")
+            include includes/deal_form.jade
+            
+          button.btn.btn-primary(ng-click="createDeal()") Create Deal

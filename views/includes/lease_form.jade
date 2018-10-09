@@ -1,0 +1,16 @@
+
+
+div.form-group
+  label(for='tenant') tenant:
+  input#tenant.form-control(type='text', placeholder='' name='tenant' ng-model="lease.tenant")
+
+div.form-group
+  label(for='unit') unit:
+  input#unit.form-control(type='unit', placeholder='' name='unit' ng-model="lease.space.id")
+
+div.form-group
+  label(for='sqft') sqft:
+  input#sqft.form-control(type='text', placeholder='' name='sqft' ng-model="lease.space.sqft")
+
+button.btn.btn-primary(type='submit') Save
+a.btn.btn-primary(ng-href="/deals") Cancel

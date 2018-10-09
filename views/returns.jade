@@ -1,0 +1,40 @@
+doctype html
+html(ng-app="myApp")
+  head
+    title modeal
+    include includes/scripts.jade
+
+
+    
+    script(type='text/javascript').
+      var dealId = '!{dealId}'
+
+  body(ng-controller="modealController")
+    include includes/dealnav.jade
+
+    .block(ng-controller="returnsController")          
+      table.table
+        thead
+          tr
+            th.key
+              | {{ building.sqft }} sf
+
+            td
+              | {{ day_one | date : "MMM yyyy" }}
+              
+            td(ng-repeat="year in years" ng-style="colcol($index)" style="text-align:right;") 
+              .btn
+                | {{year.end_date | date : "MMM yyyy" }}
+
+        tbody()
+          tr
+            th Purchase
+              td
+                | {{ scenario.purchase_price }}
+        
+        
+          tr
+            th Cash Flow
+            td
+            td(ng-repeat="year in years" ng-style="colcol($index)" style="text-align:right;") 
+              | {{ get_cash_flow(year) }}

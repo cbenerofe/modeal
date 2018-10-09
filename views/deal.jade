@@ -1,0 +1,105 @@
+doctype html
+html(ng-app="myApp")
+  head
+    title deal
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    include includes/scripts.jade
+    
+    script(type='text/javascript').
+      var dealId = '!{dealId}'
+
+  body(ng-controller="modealController")
+    include includes/topnav.jade
+  
+    .container-fluid(ng-controller="buildingController")
+    
+      .d-flex.flex-row(style="padding-top:15px;")
+        div(style="margin-right:20px;")
+          .card(style="max-width:250px;")
+            div(style="width:250px;height:150px;")
+              img.card-img-top(checkimage ng-src="/images/{{deal.id}}.jpg" style="max-width:250px;object-fit:cover;" alt="Card image cap" )
+            //{{deal}}
+            div.card-block
+              h4.card-title {{deal.name}}
+              //p.card-text {{deal.seller}}
+              //p.card-text {{deal.listing_date | date : "MMM yyyy"}}
+              div(ng-repeat="building in buildings" style="")
+                a.card-title(ng-href="/buildings/{{building.id}}/leases") {{building.street_address}}
+                p.card-text {{ building.sqft }} SF of {{ building.use }}
+
+            button.btn.btn-primary(ng-click="setShowing('leases')") Tenants
+            button.btn.btn-primary(ng-click="setShowing('expenses')") Expenses
+            button.btn.btn-primary(ng-click="setShowing('cashflow')") Cashflow
+            button.btn.btn-primary(ng-click="setShowing('returns')") Returns
+
+            //
+              div.card-block(ng-if="creatingBuilding == true")
+                form(action='#' ng-submit="createBuilding()")
+                  include includes/building_form.jade
+                button.btn.btn-primary(ng-click="toggleCreateBuilding()") Cancel
+              button.btn.btn-primary(ng-click="toggleCreateBuilding()" ng-if="!creatingBuilding") Add Building
+          
+        div(style="margin-left:20px;width:100%;")
+          div.card(ng-if="showing == 'expenses'")
+            table
+              tr
+                th Name
+                th Chargeback
+                th Amount
+                //th Year
+              tr(ng-repeat="expense in expenses" style="max-width: 250px;")
+                td {{ expense.name }}
+                td {{ expense.chargeback }}
+                //td {{ expense.amount }}
+                //td {{ expense.year }}  
+          
+
+          div.card(ng-if="showing == 'leases'")
+            div.list-group
+              a.list-group-item.row
+                span.col-2 Tenant
+                //th Unit
+                span.col-2  Sqft
+                span.col-2  Rent
+                //span.col-2  Terms
+                span.col-2  Begin
+                span.col-2  End
+                //tspan.col-2  Options
+              a.list-group-item.list-group-item-action.row(ng-repeat="lease in leases" ng-href="/leases/{{lease.id}}/edit" style="")
+                span.col-2  {{ lease.tenant }}
+                //td {{ lease.space.id }}
+                span.col-2  {{ lease.space.sqft }}
+                span.col-2  {{ lease.current_rent }}
+                //span.col-2  {{ lease.space.terms }}
+                span.col-2  {{ lease.space['lease-start']  }}
+                span.col-2  {{ lease.space['lease-end']  }}
+                
+          div.card(ng-if="showing == 'cashflow'")
+            include includes/cashflow.jade
+            
+          div.card(ng-if="showing == 'returns'")
+            .block(ng-controller="returnsController")          
+              table.table
+                thead
+                  tr
+                    th.key
+                      //| {{ building.sqft }} sf
+
+                    td
+                      | {{ day_one | date : "MMM yyyy" }}
+              
+                    td(ng-repeat="year in years" ng-style="colcol($index)" style="text-align:right;") 
+                      .btn
+                        | {{year.end_date | date : "MMM yyyy" }}
+
+                tbody()
+                  tr
+                    th Purchase
+                      td
+                        | {{ scenario.purchase_price }}
+        
+                  tr
+                    th Cash Flow
+                    td
+                    td(ng-repeat="year in years" ng-style="colcol($index)" style="text-align:right;") 
+                      | {{ get_cash_flow(year) }}

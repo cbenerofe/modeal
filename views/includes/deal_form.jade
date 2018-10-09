@@ -1,0 +1,20 @@
+
+
+div.form-group
+  label(for='name') Name:
+  input#name.form-control(type='text', placeholder='deal name' name='name' ng-model="deal.name")
+  
+div.form-group
+  label(for='seller') Seller:
+  input#seller.form-control(type='text', placeholder='cbre' name='seller' ng-model="deal.seller")
+  
+div.form-group
+  label(for='listing date') Listing Date:
+  input#listing_date.form-control(type='text', placeholder='' name='listing_date' ng-model="deal.listing_date")
+
+div.row(ng-if="dealChanged" style="")
+  div.col-6(style="text-align:center;padding:0px;")  
+    button.btn.btn-primary(type='submit' ) Save
+  div.col-6(style="text-align:center;") 
+    a.btn.btn-primary(ng-href="/deals") Cancel
+

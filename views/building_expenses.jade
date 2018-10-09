@@ -1,0 +1,51 @@
+doctype html
+html(ng-app="myApp")
+  head
+    title Edit Building 
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    include includes/scripts.jade
+    
+
+    
+    script(type='text/javascript').
+      var buildingId = '!{buildingId}'
+
+  body(ng-controller="buildingController")
+    include includes/topnav.jade
+  
+    .container
+      div.card-deck(style="padding-top:25px;")
+        div.card(style="max-width: 250px;")
+          
+          a.btn(ng-href="/deals/{{building.dealId}}"  style="background-color:white;text-align:left;")
+            | {{ deal.name }}
+          
+          div
+            | {{ building.street_address }}
+            br
+            | {{ building.sqft }} sqft of {{ building.use }}
+            
+          a.btn.btn-primary(ng-href="/buildings/{{building.id}}/leases") Leases
+          a.btn.btn-primary(ng-href="/buildings/{{building.id}}/expenses") Expenses 
+          
+        div.card(style="max-width: 250px;" ng-if="creatingLease == true")
+          form(action='#' ng-submit="createLease()")
+            include includes/lease_form.jade
+          button.btn.btn-primary(ng-click="toggleCreateLease()") Cancel
+
+        div.card
+          table
+            tr
+              th Name
+              th Chargeback
+              th Amount
+              //th Year
+            tr(ng-repeat="expense in expenses" style="max-width: 250px;")
+              td {{ expense.name }}
+              td {{ expense.chargeback }}
+              //td {{ expense.amount }}
+              //td {{ expense.year }}
+            
+
+
+            
