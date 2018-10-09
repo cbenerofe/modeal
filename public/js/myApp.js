@@ -3,8 +3,8 @@
 
 var myApp = angular.module('myApp', ['ngRoute']);
 
-var api_server = "http://localhost:3050"
-//var api_server = "https://modeal-api.herokuapp.com"
+//var api_server = "http://localhost:3050"
+var api_server = "https://modeal-api.herokuapp.com"
 
 
 buildings = []
