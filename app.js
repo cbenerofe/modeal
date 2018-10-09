@@ -31,8 +31,20 @@ app.get('/deals', function(req, res) {
   res.render('deals');
 });
 
+app.get('/deals/new', function(req, res) {
+  res.render('new_deal');
+});
+
 app.get('/deals/:id', function(req, res) {
-  res.render('cashflow',{ dealId: req.params['id']});
+  res.render('deal',{ dealId: req.params['id']});
+});
+
+app.get('/deals/:id/edit', function(req, res) {
+  res.render('edit_deal',{ dealId: req.params['id']});
+});
+
+app.get('/deals/:id/returns', function(req, res) {
+  res.render('returns',{ dealId: req.params['id']});
 });
 
 app.get('/deals/:id/cashflow', function(req, res) {
@@ -43,6 +55,18 @@ app.get('/deals/:id/tenants', function(req, res) {
   res.render('tenants',{ dealId: req.params['id']});
 });
 
+app.get('/buildings/:id/leases', function(req, res) {
+  res.render('building_leases',{ buildingId: req.params['id']});
+});
+
+app.get('/buildings/:id/expenses', function(req, res) {
+  res.render('building_expenses',{ buildingId: req.params['id']});
+});
+
+app.get('/leases/:id/edit', function(req, res) {
+  res.render('edit_lease',{ leaseId: req.params['id']});
+});
+
 
 port = process.env.PORT || 4000
 // Set server port
@@ -50,4 +74,5 @@ app.listen(port, function () {
   console.log(' app listening on port:' + port )
 })
 //app.listen(4000);
+
 

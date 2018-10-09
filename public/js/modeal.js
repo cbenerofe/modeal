@@ -1,31 +1,6 @@
 
 
-var myApp = angular.module('myApp', []);
-//var api_server = "http://localhost:3050"
-var api_server = "https://modeal-api.herokuapp.com"
 
-
-buildings = []
-spaces = []
-leases = []
-expenses = []
-scenarios = []
-vacancies = []
-
-
-retaxes = 0
-cam = 0
-sqft = 0
-mgmt = 0
-
-
-scenario = undefined
-
-new_leases = []
-
-
-start_date = new Date (2017,8,1)
-hold_period = 7
 
 
 
@@ -46,6 +21,17 @@ myApp.controller('modealController', function($scope, $window) {
   
   $scope.new_leases = []
   
+  $scope.deal = undefined
+  $scope.creatingBuilding = false
+  $scope.today = new Date()
+  
+  $scope.showing = "returns"
+  
+  $scope.setShowing = function(param) {
+    $scope.showing = param;
+   // $scope.$broadcast('renit', {});
+  }
+  
 
   $scope.show_nets = false
   $scope.toggle_nets = function() {
@@ -64,6 +50,10 @@ myApp.controller('modealController', function($scope, $window) {
       s['background-color'] = "white"
     }
     return s
+  }
+  
+  $scope.toggleCreateBuilding = function() {
+    $scope.creatingBuilding = !$scope.creatingBuilding
   }
 
 
@@ -86,9 +76,13 @@ myApp.controller('modealController', function($scope, $window) {
     scenario = $scope.scenarios.filter(function(s) { return s.id == $scope.scenario_id; })[0];
     $scope.scenario = scenario
      
+    d =new Date(start_date) 
+    $scope.day_one = d.setMonth(d.getMonth() - 1) 
+     
     year = {}
     $scope.years = []
-    year.start_date = new Date(start_date)
+    year.start_date = new Date(start_date) 
+   
     ed = new Date(start_date)
     ed.setFullYear(ed.getFullYear() + 1)
     ed.setDate(ed.getDate() -1)
@@ -111,83 +105,6 @@ myApp.controller('modealController', function($scope, $window) {
     load_data()
    
   } 
-
-  
-  $scope.init = function() {
-    
-    var promises = [];
-    
-    scenarios = []
-    $scope.scenarios = []
-
-    url = api_server + "/api/deals/" + dealId 
-    promises.push($.ajax({context: this, url: url, 
-       success: function(result) { 
-
-         $scope.deal = result
-         
-         $scope.$apply();
-       }, 
-       error: function(result) {
-
-         console.log("error loading deal")
-       }
-    }));
-    
-    url = api_server + "/api/deals/" + dealId + "/scenarios"
-    promises.push($.ajax({context: this, url: url, 
-       success: function(result) { 
-
-         scenarios = result
-         $scope.scenarios = result
-         if (result.length > 0) {
-           $scope.scenario_id = $scope.scenarios[0].id
-         }
-         
-         $scope.$apply();
-       }, 
-       error: function(result) {
-
-         console.log("error on scenarios")
-       }
-    }));
-    
-    buildings = []
-    $scope.buildings = buildings
-    $scope.building = undefined    
-    
-    url = api_server + "/api/deals/" + dealId + "/buildings"
-    promises.push($.ajax({context: this, url: url, 
-       success: function(result) { 
-         
-         buildings = result
-         $scope.buildings = result
-         if (result.length > 0) {
-           //console.log(JSON.stringify(result))
-           $scope.building_id = $scope.buildings[0].id
-           $scope.building = $scope.buildings[0]
-           sqft = $scope.building.sqft
-         }
-       }, 
-       error: function(result) {
-         //console.log(JSON.stringify(result));
-         alert("error on buildings")
-       }
-    })); 
-    
-    $.when.apply($, promises).then(function() {
-      //console.log("building_id=" + $scope.building_id)
-      if ($scope.building_id != undefined) {
-        $scope.load_scenario()
-      }
-    }, function() {
-        // error occurred
-    });    
-    
-  }  
-
-  
-  $scope.init()
 
 
   load_data = function() {
@@ -272,5 +189,81 @@ myApp.controller('modealController', function($scope, $window) {
     
   }
     
+
+  $scope.init = function() {
+    
+    var promises = [];
+    
+    scenarios = []
+    $scope.scenarios = []
+
+    url = api_server + "/api/deals/" + dealId 
+    promises.push($.ajax({context: this, url: url, 
+       success: function(result) { 
+
+         $scope.deal = result
+         
+         $scope.$apply();
+       }, 
+       error: function(result) {
+
+         console.log("error loading deal")
+       }
+    }));
+    
+    url = api_server + "/api/deals/" + dealId + "/scenarios"
+    promises.push($.ajax({context: this, url: url, 
+       success: function(result) { 
+
+         scenarios = result
+         $scope.scenarios = result
+         if (result.length > 0) {
+           $scope.scenario_id = $scope.scenarios[0].id
+         }
+         
+         $scope.$apply();
+       }, 
+       error: function(result) {
+
+         console.log("error on scenarios")
+       }
+    }));
+    
+    buildings = []
+    $scope.buildings = buildings
+    $scope.building = undefined    
+    
+    url = api_server + "/api/deals/" + dealId + "/buildings"
+    promises.push($.ajax({context: this, url: url, 
+       success: function(result) { 
+         
+         buildings = result
+         $scope.buildings = result
+         if (result.length > 0) {
+           //console.log(JSON.stringify(result))
+           $scope.building_id = $scope.buildings[0].id
+           $scope.building = $scope.buildings[0]
+           sqft = $scope.building.sqft
+         }
+       }, 
+       error: function(result) {
+         //console.log(JSON.stringify(result));
+         alert("error on buildings")
+       }
+    })); 
+    
+    $.when.apply($, promises).then(function() {
+      //console.log("building_id=" + $scope.building_id)
+      if ($scope.building_id != undefined) {
+        $scope.load_scenario()
+      }
+    }, function() {
+        // error occurred
+    });    
+    
+  }  
+
+  
+  $scope.init()
     
 });

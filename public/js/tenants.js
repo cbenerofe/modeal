@@ -2,6 +2,10 @@
 
 myApp.controller('tenantsController', ['$scope',function($scope) {
   
+  $scope.get_years_new_sqft = function(year) {
+    x = get_years_new_sqft(year)
+    return x
+  } 
 
   $scope.get_new_leases_in_year = function(year) {
     x = get_new_leases_in_year(year)

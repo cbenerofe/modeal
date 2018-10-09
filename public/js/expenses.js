@@ -63,9 +63,9 @@
 
       expense = expenses.filter(function(x) { return x.id === expense_id; })[0];
       if (expense != undefined ) {
-        //console.log("expense:" + JSON.stringify(expense))
+        console.log("expense:" + JSON.stringify(expense))
         period = get_expense_period(expense.estimates,year)
-        //console.log("actual:" + JSON.stringify(period))
+        console.log("actual:" + JSON.stringify(period))
         if (period != undefined ) {
           amount = period.amount
         } else {

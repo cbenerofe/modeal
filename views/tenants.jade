@@ -3,12 +3,7 @@ html(ng-app="myApp")
   head
     title modeal
     include includes/scripts.jade
-    script(src="/js/modeal.js")
-    script(src="/js/tenants.js")
-    script(src="/js/leases.js")
-    script(src="/js/expenses.js")
-    script(src="/js/income.js")
-    script(src="/js/capital.js")
+
 
     
     script(type='text/javascript').
@@ -60,21 +55,20 @@ html(ng-app="myApp")
                     .col-8(style="text-align:right;") 
                       | {{ get_lease_rent(lease,year,'cam') }}
 
-        tbody( ng-if="false"  )
+        tbody( ng-if="true"  )
           tr
             th.key
               | New Leases
             td(ng-repeat="year in years" ng-style="colcol($index)")
-              .block(ng-repeat="nl in get_new_leases_in_year(year)")
-                //.block {{ nl.tenant }}
-                .block {{ nl.space.sqft }} sf
-                .block {{ nl.space['lease-start'] }} 
+              .block()
+                .block {{ get_years_new_sqft(year).sqft }} sf
+                .block {{ get_years_new_sqft(year).tenants }} tenants
 
 
         tbody( ng-if="true" )    
           tr
             th.key
-              | New Leases
+              | New Income
               
           tr(ng-repeat="lease in new_leases" )
             td.key 

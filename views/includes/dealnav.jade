@@ -1,12 +1,14 @@
 .row.bg-primary
-  .col-md-3.col-xs-12
+  .col-md-4.col-xs-12
     span(style="padding-left:45px;")
       a(ng-href="/deals")
         img(src="/images/home_icon.png" height="20px")
 
       .navbar-text(style="padding-left:10px;") {{deal.name}}
 
-  .col-md-3.col-xs-12(style="")
+  .col-md-4.col-xs-12(style="")
+    span(style="padding-left:10px;")
+      a(ng-href="/deals/" + dealId + "/returns" style="color:white;") returns
     span(style="padding-left:10px;")
       a(ng-href="/deals/" + dealId + "/cashflow" style="color:white;") cashflows
     span(style="padding-left:10px;")

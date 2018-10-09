@@ -1,21 +1,33 @@
 doctype html
-html(ng-app="dealsApp")
+html(ng-app="myApp")
   head
     title modeals
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
     include includes/scripts.jade
     
-    script(src="/js/deals.js")
+    script(type='text/javascript').
+      var dealId = undefined
 
   body(ng-controller="dealsController")
     include includes/topnav.jade
   
     .container
       div.card-deck(style="padding-top:25px;")
+        div.card(style="max-width: 250px;")
+          div(style="width:250px;height:150px;")
+            img.card-img-top(ng-src="/images/warehouse-b.jpg" style="max-width:250px;object-fit:cover;" alt="Card image cap" )
+          div.card-block
+            h4.card-title New Deal
+            p.card-text Seller
+            p.card-text {{ today | date : "MMM yyyy"}}
+            a.btn.btn-primary(ng-href="/deals/new") Create
+      
         div.card(ng-repeat="deal in deals" style="max-width: 250px;")
           div(style="width:250px;height:150px;")
-            img.card-img-top(ng-src="/images/{{deal.id}}.jpg" style="max-width:250px;object-fit:cover;" alt="Card image cap" )
+            img.card-img-top(checkimage ng-src="/images/{{deal.id}}.jpg" style="max-width:250px;object-fit:cover;" alt="Card image cap" )
           //{{deal}}
           div.card-block
             h4.card-title {{deal.name}}
             p.card-text {{deal.seller}}
+            p.card-text {{deal.listing_date | date : "MMM yyyy"}}
             a.btn.btn-primary(ng-href="/deals/{{deal.id}}") Go
